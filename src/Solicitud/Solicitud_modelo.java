@@ -24,7 +24,7 @@ public class Solicitud_modelo {
         
     }
     public Solicitud_modelo(String tipoSolicitud, String lugar, String actividad, 
-            int idUsuario,int idProducto, String pernoctado, Date fechaSalida) {   
+        int idUsuario,int idProducto, String pernoctado, Date fechaSalida) {   
         this.tipoSolicitud=tipoSolicitud;
         this.lugar=lugar;
         this.actividad=actividad;

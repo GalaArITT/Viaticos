@@ -19,8 +19,7 @@ import javax.swing.JOptionPane;
 
 public class Conexion {
     Connection conexion = null;
-    Statement comando = null;
-    ResultSet registro;
+    
 
     public Connection getConexion() {
 
