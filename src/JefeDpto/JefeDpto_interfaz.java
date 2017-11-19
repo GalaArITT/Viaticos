@@ -5,18 +5,43 @@
  */
 package JefeDpto;
 
+import java.util.ArrayList;
+import javax.swing.DefaultListModel;
+import javax.swing.JList;
+import javax.swing.JOptionPane;
+import javax.swing.ListModel;
+
 /**
  *
  * @author oliver
  */
 public class JefeDpto_interfaz extends javax.swing.JFrame {
+DefaultListModel <String> modeloResponsables=new DefaultListModel <>();
 
     /**
      * Creates new form JefeDpto_interfaz
      */
     public JefeDpto_interfaz() {
         initComponents();
+       cargaElementosListasNuevaSolicitud();
     }
+    
+    public void cargaElementosListasNuevaSolicitud()
+    {
+        nuevaSolicitud pantallaSolicitud=new nuevaSolicitud();
+        String arregloResponsables[][]=pantallaSolicitud.traerResponsableALista();
+        
+        
+        for(int i=0;i<arregloResponsables.length;i++)
+        {
+            modeloResponsables.addElement(arregloResponsables[i][0]);
+        }
+       
+        listaEncargado.setModel(modeloResponsables);
+        
+         modeloResponsables.addElement("Fernando Enriquez Hernandez");
+         listaEncargado.setModel(modeloResponsables);
+     }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -97,6 +122,14 @@ public class JefeDpto_interfaz extends javax.swing.JFrame {
                 txtResponsableActionPerformed(evt);
             }
         });
+        txtResponsable.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtResponsableKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtResponsableKeyReleased(evt);
+            }
+        });
 
         listaVehiculo.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -123,6 +156,11 @@ public class JefeDpto_interfaz extends javax.swing.JFrame {
         rbNoPernoctado.setText("No pernoctado");
 
         btnEnviar.setText("Enviar");
+        btnEnviar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEnviarActionPerformed(evt);
+            }
+        });
 
         jLabel7.setText("Fecha de salida");
 
@@ -199,20 +237,20 @@ public class JefeDpto_interfaz extends javax.swing.JFrame {
                             .addComponent(txtLugar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(77, 77, 77)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(txtResponsable, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
                             .addComponent(txtVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
-                .addGap(55, 55, 55)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(txtResponsable, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(rbPernoctado)
                     .addComponent(rbNoPernoctado)
@@ -259,6 +297,36 @@ public class JefeDpto_interfaz extends javax.swing.JFrame {
     private void rbPernoctadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbPernoctadoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_rbPernoctadoActionPerformed
+
+    private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
+     nuevaSolicitud objetoSolicitud =new nuevaSolicitud();
+     String tipoSolicitud=cbTipoSolicitud.getSelectedItem().toString();
+     String lugar=txtLugar.getText();
+     String actividad=txtActividad.getText();
+     String responsable=txtResponsable.getText();
+     
+     //objetoSolicitud.insertaSolicitud();
+    }//GEN-LAST:event_btnEnviarActionPerformed
+
+    private void txtResponsableKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtResponsableKeyPressed
+    
+     
+    }//GEN-LAST:event_txtResponsableKeyPressed
+   //EVENTO CUANDO SE ESCRIBE EN CAMPO DE TEXTO DE RESPONSABLE
+    private void txtResponsableKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtResponsableKeyReleased
+     String CadenaTxtResponsable=txtResponsable.getText();
+     DefaultListModel<String> resultadosBusqueda=new  DefaultListModel<String>();
+     if(CadenaTxtResponsable.matches("[a-zA-Z]+"))
+     {
+     nuevaSolicitud pantallaSolicitud=new nuevaSolicitud();
+     resultadosBusqueda=pantallaSolicitud.busquedaListaResponsables(CadenaTxtResponsable,modeloResponsables);
+     listaEncargado.setModel(resultadosBusqueda);
+     }
+     else
+     {
+       listaEncargado.setModel(modeloResponsables);
+     }
+    }//GEN-LAST:event_txtResponsableKeyReleased
 
     /**
      * @param args the command line arguments
@@ -321,4 +389,8 @@ public class JefeDpto_interfaz extends javax.swing.JFrame {
     private javax.swing.JTextField txtResponsable;
     private javax.swing.JTextField txtVehiculo;
     // End of variables declaration//GEN-END:variables
+
+//    private DefaultListModel<String> busquedaListaResponsables(String CadenaTxtResponsable, DefaultListModel<String> modeloResponsables) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
 }

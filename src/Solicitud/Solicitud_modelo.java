@@ -62,6 +62,7 @@ public class Solicitud_modelo {
             pst.setInt(5,idProducto);
             pst.setString(6,pernoctado);
             pst.setDate(7,fechaSalida);
+            pst.executeUpdate();
        }
 
 
