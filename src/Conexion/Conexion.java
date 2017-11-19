@@ -18,7 +18,7 @@ import javax.swing.JOptionPane;
  */
 
 public class Conexion {
-    Connection conexion =  null;
+    Connection conexion = null;
     
 
     public Connection getConexion() {
