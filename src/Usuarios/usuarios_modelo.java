@@ -65,7 +65,7 @@ public class usuarios_modelo {
             Connection conn=con.getConexion();
             Statement stm=conn.createStatement();
             
-             String sql="select count(*) as cantidad from empleado";
+             String sql="select count(*) as cantidad from Empleado";
             
              ResultSet resul=stm.executeQuery(sql);
              
