@@ -16,11 +16,11 @@ import javax.swing.DefaultListModel;
  * @author fernando
  */
 public class nuevaSolicitud {
-   public void insertaSolicitud(String tipoSolicitud, String lugar, String actividad, 
-        int idUsuario,int idProducto, String pernoctado, Date fechaSalida)
+   public void insertaSolicitud(Date fechaSalida,String personalViatico, int diasViatico,String lugarViatico,String actividadViatico,
+                                String pernoctado,String statusViatico,int idUsuario,int idVehiculo)
    {
       Solicitud_controlador objetoSolicitud=new Solicitud_controlador();
-      objetoSolicitud.insertarSolicitud(tipoSolicitud, lugar, actividad, idUsuario, idProducto, pernoctado, fechaSalida);
+      objetoSolicitud.insertarSolicitud(fechaSalida,personalViatico,diasViatico,lugarViatico,actividadViatico,pernoctado,statusViatico,idUsuario,idVehiculo);
    }
    
    public String[][] traerResponsableALista()
