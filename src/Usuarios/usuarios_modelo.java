@@ -33,9 +33,9 @@ public class usuarios_modelo {
             Connection conn=con.getConexion();
             Statement stm=conn.createStatement();
             
-             String sql="SELECT CONCAT(Nombre_Per,\" \",Ape_Pat_Per,\" \",Ape_Mat_Per,\" \") as 'responsable' ,idUsuario  FROM Persona\n" +
-                    "INNER JOIN Empleado ON Empleado.Persona_idPersona = Persona.idPersona\n" +
-                    "INNER JOIN Usuario ON Usuario.Empleado_RFC_Emp=Empleado.RFC_Emp";
+             String sql="SELECT CONCAT(Nombre_Per,\" \",Ape_Pat_Per,\" \",Ape_Mat_Per,\" \") as 'responsable' ,idUsuario  FROM persona\n" +
+                    "INNER JOIN empleado ON empleado.Persona_idPersona = persona.idPersona\n" +
+                    "INNER JOIN usuario ON usuario.Empleado_RFC_Emp=empleado.RFC_Emp";
             
              ResultSet resul=stm.executeQuery(sql);
              
@@ -65,7 +65,7 @@ public class usuarios_modelo {
             Connection conn=con.getConexion();
             Statement stm=conn.createStatement();
             
-             String sql="select count(*) as cantidad from Empleado";
+             String sql="select count(*) as cantidad from empleado";
             
              ResultSet resul=stm.executeQuery(sql);
              

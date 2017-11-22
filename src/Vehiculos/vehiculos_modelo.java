@@ -30,9 +30,9 @@ public class vehiculos_modelo {
             Connection conn=con.getConexion();
             Statement stm=conn.createStatement();
             
-             String sql="select Nom_Prod as vehiculo, idProductos from Productos "
-                     + "inner join Clasificacion on (Productos.Clasificacion_idClasificacion=Clasificacion.idClasificacion) "
-                     + "where Productos.Estado_idEstado=7 AND Clasificacion.Nom_Clas=\"Equipo de transporte\"";
+             String sql="select Nom_Prod as vehiculo, idProductos from productos "
+                     + "inner join clasificacion on (productos.Clasificacion_idClasificacion=clasificacion.idClasificacion) "
+                     + "where productos.Estado_idEstado=7 AND clasificacion.Nom_Clas=\"Equipo de transporte\"";
             
              ResultSet resul=stm.executeQuery(sql);
              
@@ -62,8 +62,8 @@ public class vehiculos_modelo {
             Connection conn=con.getConexion();
             Statement stm=conn.createStatement();
             
-             String sql="select COUNT(p.Nom_Prod) as vehiculo from Productos as p "
-                     + "inner join Clasificacion as cl on (p.Clasificacion_idClasificacion=cl.idClasificacion) "
+             String sql="select COUNT(p.Nom_Prod) as vehiculo from productos as p "
+                     + "inner join clasificacion as cl on (p.Clasificacion_idClasificacion=cl.idClasificacion) "
                      + "where p.Estado_idEstado=7 AND cl.Nom_Clas=\"Equipo de transporte\"";
             
              ResultSet resul=stm.executeQuery(sql);

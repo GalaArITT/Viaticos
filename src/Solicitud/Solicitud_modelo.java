@@ -57,7 +57,7 @@ public class Solicitud_modelo {
     {
         try
         {
-            String sqlSolicitud="insert into Solicitudes(tipoSolicitud,lugar,actividad,idUsuario,idProducto,"
+            String sqlSolicitud="insert into solicitudes(tipoSolicitud,lugar,actividad,idUsuario,idProducto,"
              + "pernoctado,fechaSalida,Status_Sol,Fecha_Sol)"
                     + "values(?,?,?,?,?,?,?,'Pendiente',now())";
             
