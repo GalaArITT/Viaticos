@@ -162,6 +162,11 @@ DefaultListModel <String> modeloVehiculos=new DefaultListModel <>();
                 txtVehiculoActionPerformed(evt);
             }
         });
+        txtVehiculo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtVehiculoKeyReleased(evt);
+            }
+        });
 
         rbPernoctado.setText("Pernoctado");
         rbPernoctado.addActionListener(new java.awt.event.ActionListener() {
@@ -344,6 +349,18 @@ DefaultListModel <String> modeloVehiculos=new DefaultListModel <>();
        listaEncargado.setModel(modeloResponsables);
      }
     }//GEN-LAST:event_txtResponsableKeyReleased
+
+    private void txtVehiculoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtVehiculoKeyReleased
+        String CadenaTxtVehiculo = txtVehiculo.getText();
+        DefaultListModel<String> resultadosBusqueda=new  DefaultListModel<String>();
+        if(CadenaTxtVehiculo.matches("[a-zA-Z]+")){
+            nuevaSolicitud pantallaSolicitud = new nuevaSolicitud();
+            resultadosBusqueda = pantallaSolicitud.busquedaListaResponsables(CadenaTxtVehiculo, modeloVehiculos);
+            listaVehiculo.setModel(resultadosBusqueda);
+        }else{
+            listaVehiculo.setModel(modeloVehiculos);
+        }
+    }//GEN-LAST:event_txtVehiculoKeyReleased
 
     /**
      * @param args the command line arguments
