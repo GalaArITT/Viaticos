@@ -17,6 +17,7 @@ import javax.swing.ListModel;
  */
 public class JefeDpto_interfaz extends javax.swing.JFrame {
 DefaultListModel <String> modeloResponsables=new DefaultListModel <>();
+DefaultListModel <String> modeloVehiculos=new DefaultListModel <>();
 
     /**
      * Creates new form JefeDpto_interfaz
@@ -24,6 +25,7 @@ DefaultListModel <String> modeloResponsables=new DefaultListModel <>();
     public JefeDpto_interfaz() {
         initComponents();
        cargaElementosListasNuevaSolicitud();
+       cargarElementosListasNuevoVehiculo();
     }
     
     public void cargaElementosListasNuevaSolicitud()
@@ -42,6 +44,21 @@ DefaultListModel <String> modeloResponsables=new DefaultListModel <>();
          modeloResponsables.addElement("Fernando Enriquez Hernandez");
          listaEncargado.setModel(modeloResponsables);
      }
+    public void cargarElementosListasNuevoVehiculo(){
+        nuevaSolicitud pantallaSolicitud=new nuevaSolicitud();
+        String arregloVehiculos[][]=pantallaSolicitud.traerVehiculoALista();
+     
+        
+        for(int i=0;i<arregloVehiculos.length;i++)
+        {
+            modeloVehiculos.addElement(arregloVehiculos[i][0]);
+        }
+       
+        listaVehiculo.setModel(modeloVehiculos);
+        
+         modeloVehiculos.addElement("Cherokee");
+         listaVehiculo.setModel(modeloVehiculos);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -237,13 +254,13 @@ DefaultListModel <String> modeloResponsables=new DefaultListModel <>();
                             .addComponent(txtLugar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(77, 77, 77)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
                             .addComponent(txtVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)

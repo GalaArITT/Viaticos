@@ -8,6 +8,7 @@ package JefeDpto;
 import java.util.Date;
 import Solicitud.Solicitud_controlador;
 import Usuarios.usuarios_controlador;
+import Vehiculos.vehiculos_controlador;
 import javax.swing.DefaultListModel;
 
 /**
@@ -27,6 +28,12 @@ public class nuevaSolicitud {
        usuarios_controlador objUsuario=new usuarios_controlador();
        String arregloEmpleados[][]=objUsuario.traerUsuarioTipoEmpleado();
        return arregloEmpleados;
+   }
+   public String[][] traerVehiculoALista(){
+       
+       vehiculos_controlador objVehiculos= new vehiculos_controlador();
+       String arregloVehiculos[][]=objVehiculos.traerProductoTipoVehiculo();
+       return arregloVehiculos;
    }
    
    public DefaultListModel<String> busquedaListaResponsables(String cadenaEntrada,DefaultListModel<String> modeloResponsables)

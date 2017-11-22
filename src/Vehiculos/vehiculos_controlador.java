@@ -5,10 +5,18 @@
  */
 package Vehiculos;
 
+import Usuarios.usuarios_modelo;
+
 /**
  *
  * @author oliver
  */
 public class vehiculos_controlador {
+    public String [][] traerProductoTipoVehiculo()
+    {
+      vehiculos_modelo objVehiculos=new vehiculos_modelo ();
+      String arregloVehiculos[][]=objVehiculos.traerProductoTipoVehiculo();
+      return arregloVehiculos;
+    }
     
 }
