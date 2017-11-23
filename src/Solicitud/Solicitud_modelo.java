@@ -6,10 +6,17 @@
 package Solicitud;
 
 import Conexion.Conexion;
+import Usuarios.usuarios_modelo;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 
@@ -99,6 +106,87 @@ public class Solicitud_modelo {
         {
             JOptionPane.showMessageDialog(null,"Solicitud enviada para su revisión");
         }
+    }
+    
+    
+     public String [][] traerSolicitudesViaticos()
+    {
+       int filas=obtenerCantidadSolicitudes();
+        String arregloSolicitudes[][]=new String[filas][12];
+        try {
+            Conexion con=new Conexion();
+            Connection conn=con.getConexion();
+            Statement stm=conn.createStatement();
+            
+             String sql="select idSolViatico,folViatico,fechaSalidaViatico,personalViatico,"
+                     + "diasViatico,lugarViatico,actividadViatico,pernoctado,statusViatico,"
+                     + "idUsuario,nom_prod,idVehiculo "
+                     + "from solicitudes_viaticos "
+                     + "inner join productos ON productos.idProductos=solicitudes_viaticos.idVehiculo";
+            
+             ResultSet resul=stm.executeQuery(sql);
+             DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+
+               while(resul.next())
+      {        
+               int fila=resul.getRow()-1;
+               int idSolViatico=resul.getInt("idSolViatico");
+               int folViatico=resul.getInt("folViatico");
+               Date fechaSalidaViatico=resul.getDate("fechaSalidaViatico");
+               String personalViatico=resul.getString("personalViatico");
+               int diasViatico=resul.getInt("diasViatico");
+               String lugarViatico=resul.getString("lugarViatico");
+               String actividadViatico=resul.getString("actividadViatico");
+               String pernoctado=resul.getString("pernoctado");
+               String statusViatico=resul.getString("statusViatico");
+               int idUsuario=resul.getInt("idUsuario");
+               String nom_prod=resul.getString("nom_prod");
+               int idVehiculo=resul.getInt("idVehiculo");
+          
+         
+               arregloSolicitudes[fila][0]=String.valueOf(idSolViatico);
+               arregloSolicitudes[fila][1]=String.valueOf(folViatico);
+               arregloSolicitudes[fila][2]=df.format(fechaSalidaViatico);
+               arregloSolicitudes[fila][3]=personalViatico;
+               arregloSolicitudes[fila][4]=String.valueOf(diasViatico);
+               arregloSolicitudes[fila][5]=lugarViatico;
+               arregloSolicitudes[fila][6]=actividadViatico;
+               arregloSolicitudes[fila][7]=pernoctado;
+               arregloSolicitudes[fila][8]=statusViatico;
+               arregloSolicitudes[fila][9]=String.valueOf(idUsuario);
+               arregloSolicitudes[fila][10]=nom_prod;
+               arregloSolicitudes[fila][11]=String.valueOf(idVehiculo);
+            
+      }
+           
+        } catch (SQLException ex) {
+            Logger.getLogger(usuarios_modelo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+      return arregloSolicitudes;
+    }
+    
+    public int obtenerCantidadSolicitudes()
+    {
+       int cantidadSol=0;
+       try {
+            Conexion con=new Conexion();
+            Connection conn=con.getConexion();
+            Statement stm=conn.createStatement();
+            
+             String sql="select count(*) as cantidad from solicitudes_viaticos";
+            
+             ResultSet resul=stm.executeQuery(sql);
+             
+               while(resul.next())
+      {
+         cantidadSol=resul.getInt("cantidad");
+      }
+           
+        } catch (SQLException ex) {
+            Logger.getLogger(usuarios_modelo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       return cantidadSol;
     }
     
 }

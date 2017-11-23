@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package Solicitud;
-
 import java.util.Date;
 
 /**
@@ -19,4 +18,11 @@ public void insertarSolicitud(Date fechaSalida,String personalViatico, int diasV
                                                           pernoctado,statusViatico,idUsuario,idVehiculo);
     objetoSolicitud.insertaSolicitud();
 }
+
+ public String [][] traerSolicitudes()
+    {
+      Solicitud_modelo objUsuarios=new Solicitud_modelo();
+      String arregloSolicitudes[][]=objUsuarios.traerSolicitudesViaticos();
+      return arregloSolicitudes;
+    }
 }
