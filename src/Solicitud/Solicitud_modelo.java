@@ -131,7 +131,7 @@ public class Solicitud_modelo {
       {        
                int fila=resul.getRow()-1;
                int idSolViatico=resul.getInt("idSolViatico");
-               int folViatico=resul.getInt("folViatico");
+               String folViatico=resul.getString("folViatico");
                Date fechaSalidaViatico=resul.getDate("fechaSalidaViatico");
                String personalViatico=resul.getString("personalViatico");
                int diasViatico=resul.getInt("diasViatico");
