@@ -41,14 +41,13 @@ public class usuarios_modelo {
              
                while(resul.next())
       {
-          
-          for(int fila=0;fila<arregloResponsables.length;fila++)
-          {
+            int fila=resul.getRow()-1;
+         
               String responsable=resul.getString("responsable");
               String idResposable=String.valueOf(resul.getInt("idUsuario"));
                arregloResponsables[fila][0]=responsable;
                arregloResponsables[fila][1]=idResposable;
-          }
+          
       }
            
         } catch (SQLException ex) {

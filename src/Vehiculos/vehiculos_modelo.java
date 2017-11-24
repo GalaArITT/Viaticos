@@ -39,14 +39,14 @@ public class vehiculos_modelo {
                while(resul.next())
       {
           
-          for(int fila=0;fila<arregloVehiculos.length;fila++)
-          {
+          int fila=resul.getRow()-1;
+         
               String vehiculo=resul.getString("vehiculo");
               //me dice que Column 'idProductos' not found.
               String idProductos=String.valueOf(resul.getInt("idProductos"));
                arregloVehiculos[fila][0]=vehiculo;
                arregloVehiculos[fila][1]=idProductos;
-          }
+          
       }
            
         } catch (SQLException ex) {
