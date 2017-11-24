@@ -127,15 +127,15 @@ public class Solicitud_modelo {
         try
         {
             
-            String sqlModSol="update solicitudes_viaticos set"
+            String sqlModSol="update solicitudes_viaticos set "
                     + "lugarViatico=?,"
                     + "actividadViatico=?,"
                     + "idVehiculo=?,"
                     + "pernoctado=?,"
-                    + "fechaSalida=?,"
+                    + "fechaSalidaViatico=?,"
                     + "personalViatico=?,"
                     + "diasViatico=?"
-                    + "where idSolViatico=?";
+                    + " where idSolViatico=?";
             
             PreparedStatement pst = conn.prepareStatement(sqlModSol); 
             
