@@ -35,6 +35,7 @@ public class Solicitud_modelo {
      private String statusViatico;
      private int idUsuario;
      private int idVehiculo;
+     private int idSolicitud;
      
      
     
@@ -60,14 +61,27 @@ public class Solicitud_modelo {
         
     }
     
+    public Solicitud_modelo(int idSolicitud,Date fechaSalida,String personalViatico, int diasViatico,String lugarViatico,String actividadViatico,
+                            String pernoctado,String statusViatico,int idUsuario,int idVehiculo) 
+    {   
+        this.idSolicitud=idSolicitud;
+        this.fechaSalida = new java.sql.Date(fechaSalida.getTime());
+        this.personalViatico=personalViatico;
+        this.diasViatico=diasViatico;
+        this.lugarViatico=lugarViatico;
+        this.actividadViatico=actividadViatico;
+        this.pernoctado=pernoctado;
+        this.statusViatico=statusViatico;
+        this.idUsuario=idUsuario;
+        this.idVehiculo=idVehiculo;
+        
+        
+    }
+    
     public void insertaSolicitud()
     {
         try
         {
-            String sqlSolicitud="insert into solicitudes(tipoSolicitud,lugar,actividad,idUsuario,idProducto,"
-             + "pernoctado,fechaSalida,Status_Sol,Fecha_Sol)"
-                    + "values(?,?,?,?,?,?,?,'Pendiente',now())";
-            
             String sqlSol="insert into solicitudes_viaticos("
                     + "fechaSolViatico,"
                     + "fechaSalidaViatico,"
@@ -105,6 +119,46 @@ public class Solicitud_modelo {
         finally 
         {
             JOptionPane.showMessageDialog(null,"Solicitud enviada para su revisión");
+        }
+    }
+    
+        public void modificaSolicitud()
+    {
+        try
+        {
+            
+            String sqlModSol="update solicitudes_viaticos set"
+                    + "lugarViatico=?,"
+                    + "actividadViatico=?,"
+                    + "idVehiculo=?,"
+                    + "pernoctado=?,"
+                    + "fechaSalida=?,"
+                    + "personalViatico=?,"
+                    + "diasViatico=?"
+                    + "where idSolViatico=?";
+            
+            PreparedStatement pst = conn.prepareStatement(sqlModSol); 
+            
+            pst.setString(1,lugarViatico);
+            pst.setString(2,actividadViatico);
+            pst.setInt(3,idVehiculo);
+            pst.setString(4,pernoctado);
+            pst.setDate(5,fechaSalida);
+            pst.setString(6,personalViatico);
+             pst.setInt(7,diasViatico);
+            pst.setInt(8,idSolicitud);
+            
+            pst.executeUpdate();
+       }
+
+        catch (SQLException ex) 
+        {
+            JOptionPane.showMessageDialog(null,ex);
+        } 
+
+        finally 
+        {
+            JOptionPane.showMessageDialog(null,"Solicitud modificada exitosamente");
         }
     }
     

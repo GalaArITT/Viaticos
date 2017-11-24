@@ -23,6 +23,13 @@ public class nuevaSolicitud {
       objetoSolicitud.insertarSolicitud(fechaSalida,personalViatico,diasViatico,lugarViatico,actividadViatico,pernoctado,statusViatico,idUsuario,idVehiculo);
    }
    
+   public void modificaSolicitud(int idFolio,Date fechaSalida,String personalViatico, int diasViatico,String lugarViatico,String actividadViatico,
+                                String pernoctado,String statusViatico,int idUsuario,int idVehiculo)
+   {
+      Solicitud_controlador objetoSolicitud=new Solicitud_controlador();
+      objetoSolicitud.modificaSolicitud(idFolio,fechaSalida,personalViatico,diasViatico,lugarViatico,actividadViatico,pernoctado,statusViatico,idUsuario,idVehiculo);
+   }
+   
    public String[][] traerResponsableALista()
    {
        usuarios_controlador objUsuario=new usuarios_controlador();

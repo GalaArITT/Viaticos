@@ -5,8 +5,12 @@
  */
 package JefeDpto;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
@@ -29,8 +33,14 @@ DefaultListModel <String> modeloVehiculos=new DefaultListModel <>();
  int idVehiculo=0;
  String lugar="";
  String actividad="";
-  String[][] arregloSolicitudes;
- 
+ String dias="";
+ String responsable="";
+ String vehiculo="";
+ String pernoctado="";
+ String[][] arregloSolicitudes;
+ String fecha="";
+ boolean modificandoSol=false;
+ String idFolio;
 
     /**
      * Creates new form JefeDpto_interfaz
@@ -47,16 +57,7 @@ DefaultListModel <String> modeloVehiculos=new DefaultListModel <>();
         
          traerSolicitudes();
          
-           tablaSolicitudes.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
-        public void valueChanged(ListSelectionEvent event) {
-            // do some actions here, for example
-            // print first column value from selected row
-            cargaInfoAdicionalTabla(tablaSolicitudes.getValueAt(tablaSolicitudes.getSelectedRow(), 0).toString());
-//            System.out.println(tablaSolicitudes.getValueAt(tablaSolicitudes.getSelectedRow(), 2).toString());
-        }
-    });
-       
-    }
+}
     
     
     //FUNCIONES PARA LA PANTALLA DE NUEVA SOLICITUD
@@ -101,7 +102,7 @@ DefaultListModel <String> modeloVehiculos=new DefaultListModel <>();
         label1 = new java.awt.Label();
         tbNuevaSolicitud = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        lblTituloSol = new javax.swing.JLabel();
         cbTipoSolicitud = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -152,8 +153,14 @@ DefaultListModel <String> modeloVehiculos=new DefaultListModel <>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel1.setText("Ingresa una nueva solicitud");
+        tbNuevaSolicitud.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbNuevaSolicitudMouseClicked(evt);
+            }
+        });
+
+        lblTituloSol.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        lblTituloSol.setText("Ingresa una nueva solicitud");
 
         cbTipoSolicitud.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Viatico", "Vehicular" }));
         cbTipoSolicitud.addActionListener(new java.awt.event.ActionListener() {
@@ -250,7 +257,12 @@ DefaultListModel <String> modeloVehiculos=new DefaultListModel <>();
 
         jLabel7.setText("Fecha de salida");
 
-        btnLimpiar.setText("Limpiar");
+        btnLimpiar.setText("Cancelar");
+        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiarActionPerformed(evt);
+            }
+        });
 
         jLabel8.setText("Duracion en dias");
 
@@ -275,7 +287,7 @@ DefaultListModel <String> modeloVehiculos=new DefaultListModel <>();
                                 .addComponent(jScrollPane2)
                                 .addComponent(txtResponsable, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
+                        .addComponent(lblTituloSol)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -307,7 +319,7 @@ DefaultListModel <String> modeloVehiculos=new DefaultListModel <>();
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addComponent(jLabel1)
+                .addComponent(lblTituloSol)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -564,8 +576,21 @@ DefaultListModel <String> modeloVehiculos=new DefaultListModel <>();
     {
          pernoctado="no";
     }
-        
-    objetoSolicitud.insertaSolicitud(fechaSalida,personalViatico,diasDuracion,lugar,actividad,pernoctado,statusViatico,idUsuarioJefeDpto,idVehiculo);
+     
+     if(modificandoSol==false)
+     {
+           objetoSolicitud.insertaSolicitud(fechaSalida,personalViatico,diasDuracion,lugar,actividad,pernoctado,statusViatico,idUsuarioJefeDpto,idVehiculo);  
+            traerSolicitudes();
+            limpiarCampos();
+     }
+     
+      if(modificandoSol==true)
+     {
+           objetoSolicitud.modificaSolicitud(Integer.parseInt(idFolio),fechaSalida,personalViatico,diasDuracion,lugar,actividad,pernoctado,statusViatico,idUsuarioJefeDpto,idVehiculo);  
+           traerSolicitudes();
+           limpiarCampos();
+            tbNuevaSolicitud.setSelectedIndex(1);
+     }
     }//GEN-LAST:event_btnEnviarActionPerformed
 
     private void txtResponsableKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtResponsableKeyPressed
@@ -654,10 +679,51 @@ DefaultListModel <String> modeloVehiculos=new DefaultListModel <>();
     }//GEN-LAST:event_tablaSolicitudesMouseClicked
 
     private void btnEditaSolicitudActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditaSolicitudActionPerformed
-       txtLugar.setText(lugar);
+        modificandoSol=true;
+        txtLugar.setText(lugar);
         txtActividad.setText(actividad);
         tbNuevaSolicitud.setSelectedIndex(0);
+        txtDias.setValue(Integer.parseInt(dias));
+        txtResponsable.setText(responsable);
+        txtVehiculo.setText(vehiculo);
+        rbPernoctado.setSelected(pernoctado.equals("si"));
+        rbNoPernoctado.setSelected(pernoctado.equals("no"));
+        lblTituloSol.setText("Modifica la solicitud (Folio "+idFolio+")");
+    try {
+       
+        String[] fechaSplit=fecha.split("/");
+        String fechaSalida=fechaSplit[1]+"/"+fechaSplit[0]+"/"+fechaSplit[2];
+       
+        java.text.SimpleDateFormat formato = new java.text.SimpleDateFormat("dd/MM/yyyy"); 
+        java.util.Date fechaDate = formato.parse(fechaSalida); 
+        txtFechaSalida.setDate(fechaDate); 
+         
+         
+    } catch (Exception ex) {
+        Logger.getLogger(JefeDpto_interfaz.class.getName()).log(Level.SEVERE, null, ex);
+    }
+       
     }//GEN-LAST:event_btnEditaSolicitudActionPerformed
+
+    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
+      limpiarCampos();
+    }//GEN-LAST:event_btnLimpiarActionPerformed
+
+    public void limpiarCampos()
+    {
+        modificandoSol=false;
+      lblTituloSol.setText("Ingresa una nueva solicitud");
+        txtLugar.setText("");
+         txtActividad.setText("");
+         txtDias.setValue(Integer.parseInt("0"));
+         txtResponsable.setText("");
+         txtVehiculo.setText("");
+         rbPernoctado.setSelected(true);
+         rbNoPernoctado.setSelected(false);
+    }
+    private void tbNuevaSolicitudMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbNuevaSolicitudMouseClicked
+       
+    }//GEN-LAST:event_tbNuevaSolicitudMouseClicked
     
     
   
@@ -671,8 +737,26 @@ DefaultListModel <String> modeloVehiculos=new DefaultListModel <>();
     
     public void cargaTabla(String [][] arregloSolicitudes )
     {
+      ListSelectionListener eventoClic=new ListSelectionListener(){
+      public void valueChanged(ListSelectionEvent event) {
+          // do some actions here, for example
+          // print first column value from selected row
+          try
+          {
+               cargaInfoAdicionalTabla(tablaSolicitudes.getValueAt(tablaSolicitudes.getSelectedRow(), 0).toString());
+          }
+          
+          catch(Exception e)
+          {
+            //JOptionPane.showMessageDialog(null, e);
+          }
+      
+    //            System.out.println(tablaSolicitudes.getValueAt(tablaSolicitudes.getSelectedRow(), 2).toString());
+      }
+    };
      DefaultTableModel model=(DefaultTableModel) tablaSolicitudes.getModel();
-     model.setRowCount(0);
+    tablaSolicitudes.getSelectionModel().removeListSelectionListener(eventoClic);
+     borrarDatoaTabla(model);
      for(int i=0;i<arregloSolicitudes.length;i++)
      {
          String folio=arregloSolicitudes[i][0];
@@ -681,7 +765,15 @@ DefaultListModel <String> modeloVehiculos=new DefaultListModel <>();
          String status=arregloSolicitudes[i][8];
          model.addRow(new Object[]{folio,fechsSalida,responsable,status}); 
      }
+   
+    tablaSolicitudes.getSelectionModel().addListSelectionListener(eventoClic);
    }
+    
+   public  void borrarDatoaTabla(final DefaultTableModel model) {
+    for( int i = model.getRowCount() - 1; i >= 0; i-- ) {
+        model.removeRow(i);
+    }
+}
     
     public void cargaInfoAdicionalTabla(String folio)
     {
@@ -697,6 +789,14 @@ DefaultListModel <String> modeloVehiculos=new DefaultListModel <>();
           
           lugar=arregloSolicitudes[i][5];
           actividad=arregloSolicitudes[i][6];
+          dias=arregloSolicitudes[i][4];
+          responsable=arregloSolicitudes[i][3];
+          vehiculo=arregloSolicitudes[i][10];
+          pernoctado=arregloSolicitudes[i][7];
+          fecha=arregloSolicitudes[i][2];
+          idFolio=arregloSolicitudes[i][0];
+          idVehiculo=Integer.parseInt(arregloSolicitudes[i][11]);
+
          }
      }
     }
@@ -743,7 +843,6 @@ DefaultListModel <String> modeloVehiculos=new DefaultListModel <>();
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JComboBox<String> cbTipoSolicitud;
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -773,6 +872,7 @@ DefaultListModel <String> modeloVehiculos=new DefaultListModel <>();
     private javax.swing.JLabel lbLugar;
     private javax.swing.JLabel lbPernoctado;
     private javax.swing.JLabel lbTransporte;
+    private javax.swing.JLabel lblTituloSol;
     private javax.swing.JList<String> listaEncargado;
     private javax.swing.JList<String> listaVehiculo;
     private javax.swing.JPanel panelMasDetalles;

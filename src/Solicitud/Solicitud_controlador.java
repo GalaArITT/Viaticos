@@ -19,6 +19,14 @@ public void insertarSolicitud(Date fechaSalida,String personalViatico, int diasV
     objetoSolicitud.insertaSolicitud();
 }
 
+public void modificaSolicitud(int idFolio,Date fechaSalida,String personalViatico, int diasViatico,String lugarViatico,String actividadViatico,
+                              String pernoctado,String statusViatico,int idUsuario,int idVehiculo)
+{
+    Solicitud_modelo objetoSolicitud=new Solicitud_modelo(idFolio,fechaSalida,personalViatico,diasViatico,lugarViatico,actividadViatico,
+                                                          pernoctado,statusViatico,idUsuario,idVehiculo);
+    objetoSolicitud.modificaSolicitud();
+}
+
  public String [][] traerSolicitudes()
     {
       Solicitud_modelo objUsuarios=new Solicitud_modelo();
