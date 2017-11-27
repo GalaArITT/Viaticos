@@ -3,25 +3,50 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Secretaria;
+package JefeDpto;
 
 import Solicitud.Solicitud_controlador;
+import java.awt.Component;
+import java.awt.Container;
+import java.awt.Dialog;
+import java.awt.Window;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.util.ArrayList;
+import java.util.Arrays;
+import javax.swing.JDialog;
+import static javax.swing.JFrame.EXIT_ON_CLOSE;
+import javax.swing.JOptionPane;
+import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author oliver
+ * @author fernando
  */
-public class Secretaria_interfaz extends javax.swing.JFrame {
-String[][] arregloSolicitudes;
+public class SolicitudRegistros extends javax.swing.JPanel {
+ String[][] arregloSolicitudes;
+ 
+ int idResponsable=0;
+ int idVehiculo=0;
+ String lugar="";
+ String actividad="";
+ String dias="";
+ String responsable="";
+ String vehiculo="";
+ String pernoctado="";
+ String fecha="";
+ String idFolio;
     /**
-     * Creates new form Secretaria_interfaz
+     * Creates new form SolicitudRegistros
      */
-    public Secretaria_interfaz() {
+    public SolicitudRegistros() {
         initComponents();
-         traerSolicitudes();
+        traerSolicitudes();
     }
 
     /**
@@ -42,6 +67,7 @@ String[][] arregloSolicitudes;
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        btnEditaSolicitud = new javax.swing.JButton();
         panelMasDetalles = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
@@ -55,10 +81,8 @@ String[][] arregloSolicitudes;
         jLabel22 = new javax.swing.JLabel();
         lbPernoctado = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
         jLabel9.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel9.setText("Solicitudes recibidas");
+        jLabel9.setText("Solicitudes que has realizado");
 
         txtBusquedaSolicitud.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -73,10 +97,13 @@ String[][] arregloSolicitudes;
             new String [] {
                 "Folio", "Fecha de salida", "Responsable", "Status"
             }
-        ));
-        tablaSolicitudes.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tablaSolicitudesMouseClicked(evt);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         jScrollPane4.setViewportView(tablaSolicitudes);
@@ -86,6 +113,14 @@ String[][] arregloSolicitudes;
         jLabel12.setText("Selecciona una solicitud de la tabla para editar o imprimir PDF");
 
         jButton1.setText("PDF");
+
+        btnEditaSolicitud.setText("Editar");
+        btnEditaSolicitud.setAutoscrolls(true);
+        btnEditaSolicitud.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditaSolicitudActionPerformed(evt);
+            }
+        });
 
         jLabel13.setText("Mas detalles...");
 
@@ -163,16 +198,19 @@ String[][] arregloSolicitudes;
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane4)
-                    .addComponent(panelMasDetalles, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel9)
                             .addComponent(txtBusquedaSolicitud, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel12)
                             .addComponent(jLabel11)
-                            .addComponent(jLabel10)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(btnEditaSolicitud, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel10))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(panelMasDetalles, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -189,7 +227,9 @@ String[][] arregloSolicitudes;
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnEditaSolicitud)
+                    .addComponent(jButton1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelMasDetalles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -197,8 +237,8 @@ String[][] arregloSolicitudes;
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 811, Short.MAX_VALUE)
@@ -217,12 +257,80 @@ String[][] arregloSolicitudes;
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
-
-        pack();
     }// </editor-fold>//GEN-END:initComponents
     
+    public void traerSolicitudes()
+    {
+       Solicitud_controlador objUsuario=new Solicitud_controlador();
+       arregloSolicitudes=objUsuario.traerSolicitudes(); 
+       cargaTabla(arregloSolicitudes);
+    }
     
-      public String[][] busquedaEnTabla(String cadenaEntrada)
+    public void cargaTabla(String [][] arregloSolicitudes )
+    {
+      ListSelectionListener eventoClic=new ListSelectionListener(){
+      public void valueChanged(ListSelectionEvent event) 
+      {
+          try
+          {
+               cargaInfoAdicionalTabla(tablaSolicitudes.getValueAt(tablaSolicitudes.getSelectedRow(), 0).toString());
+          }
+          
+          catch(Exception e)
+          {
+            
+          }
+      }
+    };
+     DefaultTableModel model=(DefaultTableModel) tablaSolicitudes.getModel();
+    tablaSolicitudes.getSelectionModel().removeListSelectionListener(eventoClic);
+     borrarDatoaTabla(model);
+     for(int i=0;i<arregloSolicitudes.length;i++)
+     {
+         String folio=arregloSolicitudes[i][0];
+         String fechsSalida=arregloSolicitudes[i][2];
+         String responsable=arregloSolicitudes[i][3];
+         String status=arregloSolicitudes[i][8];
+         model.addRow(new Object[]{folio,fechsSalida,responsable,status}); 
+     }
+   
+    tablaSolicitudes.getSelectionModel().addListSelectionListener(eventoClic);
+   }
+    
+   public  void borrarDatoaTabla(final DefaultTableModel model) 
+   {
+        for( int i = model.getRowCount() - 1; i >= 0; i-- ) 
+        {
+            model.removeRow(i);
+        }
+    }
+   
+    public void cargaInfoAdicionalTabla(String folio)
+    {
+     for(int i=0;i<arregloSolicitudes.length;i++)
+     {
+         if(arregloSolicitudes[i][0].equals(folio))
+         {
+          lbLugar.setText(arregloSolicitudes[i][5]);
+          lbActividad.setText(arregloSolicitudes[i][6]);
+          lbDias.setText(arregloSolicitudes[i][4]);
+          lbTransporte.setText(arregloSolicitudes[i][10]);
+          lbPernoctado.setText(arregloSolicitudes[i][7]);
+          
+          lugar=arregloSolicitudes[i][5];
+          actividad=arregloSolicitudes[i][6];
+          dias=arregloSolicitudes[i][4];
+          responsable=arregloSolicitudes[i][3];
+          vehiculo=arregloSolicitudes[i][10];
+          pernoctado=arregloSolicitudes[i][7];
+          fecha=arregloSolicitudes[i][2];
+          idFolio=arregloSolicitudes[i][0];
+          idVehiculo=Integer.parseInt(arregloSolicitudes[i][11]);
+          }
+     }
+    }
+    
+  public String[][] busquedaEnTabla(String cadenaEntrada)
    {
     String [][] resultadoBusqueda=new String[1][12];
     
@@ -246,7 +354,7 @@ String[][] arregloSolicitudes;
     }
     return resultadoBusqueda;
    }
-      
+       
     private void txtBusquedaSolicitudKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBusquedaSolicitudKeyReleased
         String cadenaEntrada=txtBusquedaSolicitud.getText();
         if(!cadenaEntrada.equals(""))
@@ -261,107 +369,65 @@ String[][] arregloSolicitudes;
         }
     }//GEN-LAST:event_txtBusquedaSolicitudKeyReleased
 
-    private void tablaSolicitudesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaSolicitudesMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tablaSolicitudesMouseClicked
+   private Component[] getComponents(Component container) {
+        ArrayList<Component> list = null;
 
-    public void traerSolicitudes()
-    {
-       Solicitud_controlador pantallaRegSolicitud=new Solicitud_controlador();
-       arregloSolicitudes=pantallaRegSolicitud.traerSolicitudes(); 
-       cargaTabla(arregloSolicitudes);
-    }
-    
-    public void cargaTabla(String [][] arregloSolicitudes )
-    {
-      ListSelectionListener eventoClic=new ListSelectionListener(){
-      public void valueChanged(ListSelectionEvent event) {
-          // do some actions here, for example
-          // print first column value from selected row
-          try
-          {
-               cargaInfoAdicionalTabla(tablaSolicitudes.getValueAt(tablaSolicitudes.getSelectedRow(), 0).toString());
-          }
-          
-          catch(Exception e)
-          {
-            //JOptionPane.showMessageDialog(null, e);
-          }
-      
-    //            System.out.println(tablaSolicitudes.getValueAt(tablaSolicitudes.getSelectedRow(), 2).toString());
-      }
-    };
-     DefaultTableModel model=(DefaultTableModel) tablaSolicitudes.getModel();
-    tablaSolicitudes.getSelectionModel().removeListSelectionListener(eventoClic);
-     borrarDatoaTabla(model);
-     for(int i=0;i<arregloSolicitudes.length;i++)
-     {
-         String folio=arregloSolicitudes[i][0];
-         String fechsSalida=arregloSolicitudes[i][2];
-         String responsable=arregloSolicitudes[i][3];
-         String status=arregloSolicitudes[i][8];
-         model.addRow(new Object[]{folio,fechsSalida,responsable,status}); 
-     }
-   
-    tablaSolicitudes.getSelectionModel().addListSelectionListener(eventoClic);
-   }
-    
-       public  void borrarDatoaTabla(final DefaultTableModel model) {
-    for( int i = model.getRowCount() - 1; i >= 0; i-- ) {
-        model.removeRow(i);
-    }
-}
-       
-           public void cargaInfoAdicionalTabla(String folio)
-    {
-     for(int i=0;i<arregloSolicitudes.length;i++)
-     {
-         if(arregloSolicitudes[i][0].equals(folio))
-         {
-          lbLugar.setText(arregloSolicitudes[i][5]);
-          lbActividad.setText(arregloSolicitudes[i][6]);
-          lbDias.setText(arregloSolicitudes[i][4]);
-          lbTransporte.setText(arregloSolicitudes[i][10]);
-          lbPernoctado.setText(arregloSolicitudes[i][7]);
-          }
-     }
-    }
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
+            list = new ArrayList<Component>(Arrays.asList(
+                  ((Container) container).getComponents()));
+            for (int index = 0; index < list.size(); index++) {
+                for (Component currentComponent : getComponents(list.get(index))) {
+                    list.add(currentComponent);
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Secretaria_interfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Secretaria_interfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Secretaria_interfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Secretaria_interfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (ClassCastException e) {
+            list = new ArrayList<Component>();
         }
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Secretaria_interfaz().setVisible(true);
+        return list.toArray(new Component[list.size()]);
+        }
+    
+public void reactivarVentana()
+{
+    for(Component component : getComponents(this)) 
+      {
+        component.setEnabled(true);
+      }
+}
+     
+    private void btnEditaSolicitudActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditaSolicitudActionPerformed
+        JDialog jdModificarSol=new JDialog();
+        jdModificarSol.setSize(820,491);
+        ModificarSolicitud ventanaMod=new ModificarSolicitud();
+        ventanaMod.cargarCamposModificar(lugar, actividad, dias, responsable, vehiculo, pernoctado, idFolio, fecha,idVehiculo);
+        jdModificarSol.add(ventanaMod);
+        jdModificarSol.setVisible(true); 
+        jdModificarSol.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        
+         ventanaMod.btnLimpiar.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                jdModificarSol.dispose();
             }
         });
+          
+        for(Component component : getComponents(this)) 
+        {
+          component.setEnabled(false);
+        }
+        
+        jdModificarSol.addWindowListener(new WindowAdapter() {
+        @Override
+        public void windowClosed(WindowEvent e) {
+       reactivarVentana();
     }
+}); 
+            
+    }//GEN-LAST:event_btnEditaSolicitudActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JButton btnEditaSolicitud;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

@@ -5,91 +5,41 @@
  */
 package JefeDpto;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.ButtonGroup;
-import javax.swing.DefaultListModel;
-import javax.swing.JList;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import javax.swing.JOptionPane;
-import javax.swing.ListModel;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author oliver
  */
-public class JefeDpto_interfaz extends javax.swing.JFrame {
-DefaultListModel <String> modeloResponsables=new DefaultListModel <>();
-DefaultListModel <String> modeloVehiculos=new DefaultListModel <>();
- String arregloResponsables[][];
- String arregloVehiculos[][];
- int idResponsable=0;
- int idVehiculo=0;
- String lugar="";
- String actividad="";
- String dias="";
- String responsable="";
- String vehiculo="";
- String pernoctado="";
- String[][] arregloSolicitudes;
- String fecha="";
- boolean modificandoSol=false;
- String idFolio;
-
-    /**
+public class JefeDpto_interfaz extends javax.swing.JFrame { /**
      * Creates new form JefeDpto_interfaz
      */
-    public JefeDpto_interfaz() {
-        initComponents();
-       cargaElementosListaResponsables();
-       cargarElementosListaVehiculo();
-       listaEncargado.setVisible(false);
-       listaVehiculo.setVisible(false);
-        ButtonGroup group = new ButtonGroup();
-        group.add(rbPernoctado);
-        group.add(rbNoPernoctado);
-        
-         traerSolicitudes();
-         
-}
     
-    
-    //FUNCIONES PARA LA PANTALLA DE NUEVA SOLICITUD
-    public void cargaElementosListaResponsables()
+    public void cambiarPestana(int indice)
     {
-        nuevaSolicitud pantallaSolicitud=new nuevaSolicitud();
-        arregloResponsables=pantallaSolicitud.traerResponsableALista();
-        
-        
-        for(int i=0;i<arregloResponsables.length;i++)
-        {
-            
-            modeloResponsables.addElement(arregloResponsables[i][0]);
-        }
-       
-        listaEncargado.setModel(modeloResponsables);
-        
-     }
-    
-    public void cargarElementosListaVehiculo()
-    {
-        nuevaSolicitud pantallaSolicitud=new nuevaSolicitud();
-        arregloVehiculos=pantallaSolicitud.traerVehiculoALista();
-     
-        for(int i=0;i<arregloVehiculos.length;i++)
-        {
-            modeloVehiculos.addElement(arregloVehiculos[i][0]);
-        }
-       
-        listaVehiculo.setModel(modeloVehiculos);
+        tbNuevaSolicitud.setSelectedIndex(0);
     }
-
+    public JefeDpto_interfaz() {
+        initComponents();       
+        
+        SolicitudNueva pantallaNuevaSolicitud= new SolicitudNueva();
+        pantallaNuevaSolicitud.setVisible(true);
+        tbNuevaSolicitud.add("Nueva Solicitud",pantallaNuevaSolicitud);  
+        
+        SolicitudRegistros pantallaRegistrosSolicitud= new SolicitudRegistros();
+        pantallaRegistrosSolicitud.setVisible(true);
+        tbNuevaSolicitud.add("Solicitudes Elaboradas",pantallaRegistrosSolicitud);  
+        
+        
+       
+        }
+    
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -101,429 +51,23 @@ DefaultListModel <String> modeloVehiculos=new DefaultListModel <>();
 
         label1 = new java.awt.Label();
         tbNuevaSolicitud = new javax.swing.JTabbedPane();
-        jPanel1 = new javax.swing.JPanel();
-        lblTituloSol = new javax.swing.JLabel();
-        cbTipoSolicitud = new javax.swing.JComboBox<>();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        txtLugar = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        txtActividad = new javax.swing.JTextArea();
-        jLabel5 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        listaEncargado = new javax.swing.JList<>();
-        txtResponsable = new javax.swing.JTextField();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        listaVehiculo = new javax.swing.JList<>();
-        jLabel6 = new javax.swing.JLabel();
-        txtVehiculo = new javax.swing.JTextField();
-        rbPernoctado = new javax.swing.JRadioButton();
-        rbNoPernoctado = new javax.swing.JRadioButton();
-        btnEnviar = new javax.swing.JButton();
-        jLabel7 = new javax.swing.JLabel();
-        btnLimpiar = new javax.swing.JButton();
-        txtFechaSalida = new com.toedter.calendar.JDateChooser();
-        jLabel8 = new javax.swing.JLabel();
-        txtDias = new javax.swing.JSpinner();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel9 = new javax.swing.JLabel();
-        txtBusquedaSolicitud = new javax.swing.JTextField();
-        jLabel10 = new javax.swing.JLabel();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        tablaSolicitudes = new javax.swing.JTable();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        btnEditaSolicitud = new javax.swing.JButton();
-        panelMasDetalles = new javax.swing.JPanel();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        lbLugar = new javax.swing.JLabel();
-        lbActividad = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
-        lbDias = new javax.swing.JLabel();
-        jLabel20 = new javax.swing.JLabel();
-        lbTransporte = new javax.swing.JLabel();
-        jLabel22 = new javax.swing.JLabel();
-        lbPernoctado = new javax.swing.JLabel();
 
         label1.setText("label1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        tbNuevaSolicitud.setPreferredSize(new java.awt.Dimension(820, 495));
         tbNuevaSolicitud.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbNuevaSolicitudMouseClicked(evt);
             }
         });
 
-        lblTituloSol.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        lblTituloSol.setText("Ingresa una nueva solicitud");
-
-        cbTipoSolicitud.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Viatico", "Vehicular" }));
-        cbTipoSolicitud.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbTipoSolicitudActionPerformed(evt);
-            }
-        });
-
-        jLabel2.setText("Tipo de solicitud");
-
-        jLabel3.setText("Lugar");
-
-        txtLugar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtLugarActionPerformed(evt);
-            }
-        });
-
-        jLabel4.setText("Actividad");
-
-        txtActividad.setColumns(20);
-        txtActividad.setRows(5);
-        jScrollPane1.setViewportView(txtActividad);
-
-        jLabel5.setText("Responsable");
-
-        listaEncargado.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        listaEncargado.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                listaEncargadoMouseClicked(evt);
-            }
-        });
-        jScrollPane2.setViewportView(listaEncargado);
-
-        txtResponsable.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtResponsableActionPerformed(evt);
-            }
-        });
-        txtResponsable.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtResponsableKeyPressed(evt);
-            }
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtResponsableKeyReleased(evt);
-            }
-        });
-
-        listaVehiculo.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        listaVehiculo.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                listaVehiculoMouseClicked(evt);
-            }
-        });
-        jScrollPane3.setViewportView(listaVehiculo);
-
-        jLabel6.setText("Vehiculo");
-
-        txtVehiculo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtVehiculoActionPerformed(evt);
-            }
-        });
-        txtVehiculo.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtVehiculoKeyReleased(evt);
-            }
-        });
-
-        rbPernoctado.setSelected(true);
-        rbPernoctado.setText("Pernoctado");
-        rbPernoctado.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rbPernoctadoActionPerformed(evt);
-            }
-        });
-
-        rbNoPernoctado.setText("No pernoctado");
-
-        btnEnviar.setText("Enviar");
-        btnEnviar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEnviarActionPerformed(evt);
-            }
-        });
-
-        jLabel7.setText("Fecha de salida");
-
-        btnLimpiar.setText("Cancelar");
-        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLimpiarActionPerformed(evt);
-            }
-        });
-
-        jLabel8.setText("Duracion en dias");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(cbTipoSolicitud, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(txtLugar, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jScrollPane2)
-                                .addComponent(txtResponsable, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(lblTituloSol)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel8))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(txtDias, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
-                                .addGap(430, 430, 430)))
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel7)
-                            .addComponent(txtFechaSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(rbPernoctado)
-                        .addGap(29, 29, 29)
-                        .addComponent(rbNoPernoctado)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnEnviar)
-                        .addGap(23, 23, 23)
-                        .addComponent(btnLimpiar)))
-                .addContainerGap())
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(lblTituloSol)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbTipoSolicitud, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtLugar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel8)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtDias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtResponsable, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtFechaSalida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnEnviar)
-                    .addComponent(btnLimpiar)
-                    .addComponent(rbPernoctado)
-                    .addComponent(rbNoPernoctado))
-                .addContainerGap())
-        );
-
-        tbNuevaSolicitud.addTab("Nueva Solicitud", jPanel1);
-
-        jLabel9.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel9.setText("Solicitudes que has realizado");
-
-        txtBusquedaSolicitud.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtBusquedaSolicitudKeyReleased(evt);
-            }
-        });
-
-        tablaSolicitudes.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Folio", "Fecha de salida", "Responsable", "Status"
-            }
-        ));
-        tablaSolicitudes.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tablaSolicitudesMouseClicked(evt);
-            }
-        });
-        jScrollPane4.setViewportView(tablaSolicitudes);
-
-        jLabel11.setText("Busca una solicitud");
-
-        jLabel12.setText("Selecciona una solicitud de la tabla para editar o imprimir PDF");
-
-        jButton1.setText("PDF");
-
-        btnEditaSolicitud.setText("Editar");
-        btnEditaSolicitud.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditaSolicitudActionPerformed(evt);
-            }
-        });
-
-        jLabel13.setText("Mas detalles...");
-
-        jLabel14.setText("Lugar:");
-
-        jLabel17.setText("Actividad:");
-
-        jLabel18.setText("Dias:");
-
-        jLabel20.setText("Transporte:");
-
-        jLabel22.setText("Pernoctado:");
-
-        javax.swing.GroupLayout panelMasDetallesLayout = new javax.swing.GroupLayout(panelMasDetalles);
-        panelMasDetalles.setLayout(panelMasDetallesLayout);
-        panelMasDetallesLayout.setHorizontalGroup(
-            panelMasDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelMasDetallesLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panelMasDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(panelMasDetallesLayout.createSequentialGroup()
-                        .addComponent(jLabel20)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lbTransporte, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelMasDetallesLayout.createSequentialGroup()
-                        .addGroup(panelMasDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel17)
-                            .addComponent(jLabel14)
-                            .addComponent(jLabel18))
-                        .addGap(24, 24, 24)
-                        .addGroup(panelMasDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbLugar, javax.swing.GroupLayout.PREFERRED_SIZE, 533, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbActividad, javax.swing.GroupLayout.PREFERRED_SIZE, 533, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbDias, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(panelMasDetallesLayout.createSequentialGroup()
-                        .addComponent(jLabel22)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lbPernoctado, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(185, Short.MAX_VALUE))
-        );
-        panelMasDetallesLayout.setVerticalGroup(
-            panelMasDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelMasDetallesLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel13)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelMasDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel14)
-                    .addComponent(lbLugar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelMasDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel17)
-                    .addComponent(lbActividad))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelMasDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel18)
-                    .addComponent(lbDias))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelMasDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel20)
-                    .addComponent(lbTransporte))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelMasDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel22)
-                    .addComponent(lbPernoctado))
-                .addContainerGap(9, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane4)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel9)
-                            .addComponent(txtBusquedaSolicitud, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel12)
-                            .addComponent(jLabel11)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(btnEditaSolicitud, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel10))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(panelMasDetalles, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel9)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel11)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtBusquedaSolicitud, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(7, 7, 7)
-                .addComponent(jLabel12)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnEditaSolicitud)
-                    .addComponent(jButton1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panelMasDetalles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel10)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        tbNuevaSolicitud.addTab("Mostrar Solicitudes", jPanel2);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tbNuevaSolicitud)
+            .addComponent(tbNuevaSolicitud, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -535,274 +79,17 @@ DefaultListModel <String> modeloVehiculos=new DefaultListModel <>();
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cbTipoSolicitudActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoSolicitudActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbTipoSolicitudActionPerformed
-
-    private void txtLugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLugarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtLugarActionPerformed
-
-    private void txtResponsableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtResponsableActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtResponsableActionPerformed
-
-    private void txtVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtVehiculoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtVehiculoActionPerformed
-
-    private void rbPernoctadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbPernoctadoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rbPernoctadoActionPerformed
-
-    private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
-     nuevaSolicitud objetoSolicitud =new nuevaSolicitud();
-     
-     String pernoctado="";
-     String tipoSolicitud=cbTipoSolicitud.getSelectedItem().toString();
-     String lugar=txtLugar.getText();
-     Date fechaSalida= txtFechaSalida.getDate();
-     String actividad=txtActividad.getText();
-     String personalViatico=txtResponsable.getText();
-     String statusViatico="Solicitado";
-     int idUsuarioJefeDpto=1;
-     int diasDuracion=(Integer)txtDias.getValue();
-     if(rbPernoctado.isSelected())
-    {
-        pernoctado="si";
-    }
-     
-    else if(rbNoPernoctado.isSelected())
-    {
-         pernoctado="no";
-    }
-     
-     if(modificandoSol==false)
-     {
-           objetoSolicitud.insertaSolicitud(fechaSalida,personalViatico,diasDuracion,lugar,actividad,pernoctado,statusViatico,idUsuarioJefeDpto,idVehiculo);  
-            traerSolicitudes();
-            limpiarCampos();
-     }
-     
-      if(modificandoSol==true)
-     {
-           objetoSolicitud.modificaSolicitud(Integer.parseInt(idFolio),fechaSalida,personalViatico,diasDuracion,lugar,actividad,pernoctado,statusViatico,idUsuarioJefeDpto,idVehiculo);  
-           traerSolicitudes();
-           limpiarCampos();
-            tbNuevaSolicitud.setSelectedIndex(1);
-     }
-    }//GEN-LAST:event_btnEnviarActionPerformed
-
-    private void txtResponsableKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtResponsableKeyPressed
-    
-     
-    }//GEN-LAST:event_txtResponsableKeyPressed
-   //EVENTO CUANDO SE ESCRIBE EN CAMPO DE TEXTO DE RESPONSABLE
-    private void txtResponsableKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtResponsableKeyReleased
-     String CadenaTxtResponsable=txtResponsable.getText();
-     DefaultListModel<String> resultadosBusqueda=new  DefaultListModel<String>();
-     if(CadenaTxtResponsable.matches("[a-zA-Z]+"))
-     {
-     nuevaSolicitud pantallaSolicitud=new nuevaSolicitud();
-     resultadosBusqueda=pantallaSolicitud.busquedaListaResponsables(CadenaTxtResponsable,modeloResponsables);
-     listaEncargado.setModel(resultadosBusqueda);
-      listaEncargado.setVisible(true);
-     }
-     else
-     {
-       listaEncargado.setModel(modeloResponsables);
-        listaEncargado.setVisible(false);
-     }
-    
-    }//GEN-LAST:event_txtResponsableKeyReleased
-
-    private void txtVehiculoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtVehiculoKeyReleased
-        String CadenaTxtVehiculo = txtVehiculo.getText();
-        DefaultListModel<String> resultadosBusqueda=new  DefaultListModel<String>();
-        if(CadenaTxtVehiculo.matches("[a-zA-Z]+")){
-            nuevaSolicitud pantallaSolicitud = new nuevaSolicitud();
-            resultadosBusqueda = pantallaSolicitud.busquedaListaResponsables(CadenaTxtVehiculo, modeloVehiculos);
-            listaVehiculo.setModel(resultadosBusqueda);
-             listaVehiculo.setVisible(true);
-        }
-        else
-        {
-            listaVehiculo.setModel(modeloVehiculos);
-             listaVehiculo.setVisible(false);
-        }
-        
-    }//GEN-LAST:event_txtVehiculoKeyReleased
-
-    private void listaEncargadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaEncargadoMouseClicked
-    String valorSeleccionado=listaEncargado.getSelectedValue();
-        for(int i=0;i<arregloResponsables.length;i++)
-        {
-            if(valorSeleccionado.equals(arregloResponsables[i][0]))
-            {
-                idResponsable=Integer.parseInt(arregloResponsables[i][1]);
-            }
-        }
-        listaEncargado.setVisible(false);
-        txtResponsable.setText(valorSeleccionado);
-    }//GEN-LAST:event_listaEncargadoMouseClicked
-
-    private void listaVehiculoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaVehiculoMouseClicked
-    String valorSeleccionado=listaVehiculo.getSelectedValue();
-        for(int i=0;i<arregloVehiculos.length;i++)
-        {
-            if(valorSeleccionado.equals(arregloVehiculos[i][0]))
-            {
-                idVehiculo=Integer.parseInt(arregloVehiculos[i][1]);
-            }
-        }
-        listaVehiculo.setVisible(false);
-        txtVehiculo.setText(valorSeleccionado);
-    }//GEN-LAST:event_listaVehiculoMouseClicked
-
-    private void txtBusquedaSolicitudKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBusquedaSolicitudKeyReleased
-       String cadenaEntrada=txtBusquedaSolicitud.getText();
-      if(!cadenaEntrada.equals(""))
-     {
-        registrosSolicitud pantallaRegSolicitud=new registrosSolicitud();
-        String resultadosBusqueda[][]=pantallaRegSolicitud.busquedaEnTabla(cadenaEntrada,arregloSolicitudes);
-        cargaTabla(resultadosBusqueda);
-     }
-      
-      else
-      {
-          cargaTabla(arregloSolicitudes); 
-      }
-    }//GEN-LAST:event_txtBusquedaSolicitudKeyReleased
-
-    private void tablaSolicitudesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaSolicitudesMouseClicked
-              // TODO add your handling code here:
-    }//GEN-LAST:event_tablaSolicitudesMouseClicked
-
-    private void btnEditaSolicitudActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditaSolicitudActionPerformed
-        modificandoSol=true;
-        txtLugar.setText(lugar);
-        txtActividad.setText(actividad);
-        tbNuevaSolicitud.setSelectedIndex(0);
-        txtDias.setValue(Integer.parseInt(dias));
-        txtResponsable.setText(responsable);
-        txtVehiculo.setText(vehiculo);
-        rbPernoctado.setSelected(pernoctado.equals("si"));
-        rbNoPernoctado.setSelected(pernoctado.equals("no"));
-        lblTituloSol.setText("Modifica la solicitud (Folio "+idFolio+")");
-    try {
-       
-        String[] fechaSplit=fecha.split("/");
-        String fechaSalida=fechaSplit[1]+"/"+fechaSplit[0]+"/"+fechaSplit[2];
-       
-        java.text.SimpleDateFormat formato = new java.text.SimpleDateFormat("dd/MM/yyyy"); 
-        java.util.Date fechaDate = formato.parse(fechaSalida); 
-        txtFechaSalida.setDate(fechaDate); 
-         
-         
-    } catch (Exception ex) {
-        Logger.getLogger(JefeDpto_interfaz.class.getName()).log(Level.SEVERE, null, ex);
-    }
-       
-    }//GEN-LAST:event_btnEditaSolicitudActionPerformed
-
-    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
-      limpiarCampos();
-    }//GEN-LAST:event_btnLimpiarActionPerformed
-
-    public void limpiarCampos()
-    {
-        modificandoSol=false;
-      lblTituloSol.setText("Ingresa una nueva solicitud");
-        txtLugar.setText("");
-         txtActividad.setText("");
-         txtDias.setValue(Integer.parseInt("0"));
-         txtResponsable.setText("");
-         txtVehiculo.setText("");
-         rbPernoctado.setSelected(true);
-         rbNoPernoctado.setSelected(false);
-    }
     private void tbNuevaSolicitudMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbNuevaSolicitudMouseClicked
        
     }//GEN-LAST:event_tbNuevaSolicitudMouseClicked
-    
-    
-  
-    
-    public void traerSolicitudes()
-    {
-       registrosSolicitud pantallaRegSolicitud=new registrosSolicitud();
-       arregloSolicitudes=pantallaRegSolicitud.traerSolicitudes(); 
-       cargaTabla(arregloSolicitudes);
-    }
-    
-    public void cargaTabla(String [][] arregloSolicitudes )
-    {
-      ListSelectionListener eventoClic=new ListSelectionListener(){
-      public void valueChanged(ListSelectionEvent event) {
-          // do some actions here, for example
-          // print first column value from selected row
-          try
-          {
-               cargaInfoAdicionalTabla(tablaSolicitudes.getValueAt(tablaSolicitudes.getSelectedRow(), 0).toString());
-          }
-          
-          catch(Exception e)
-          {
-            //JOptionPane.showMessageDialog(null, e);
-          }
-      
-    //            System.out.println(tablaSolicitudes.getValueAt(tablaSolicitudes.getSelectedRow(), 2).toString());
-      }
-    };
-     DefaultTableModel model=(DefaultTableModel) tablaSolicitudes.getModel();
-    tablaSolicitudes.getSelectionModel().removeListSelectionListener(eventoClic);
-     borrarDatoaTabla(model);
-     for(int i=0;i<arregloSolicitudes.length;i++)
-     {
-         String folio=arregloSolicitudes[i][0];
-         String fechsSalida=arregloSolicitudes[i][2];
-         String responsable=arregloSolicitudes[i][3];
-         String status=arregloSolicitudes[i][8];
-         model.addRow(new Object[]{folio,fechsSalida,responsable,status}); 
-     }
-   
-    tablaSolicitudes.getSelectionModel().addListSelectionListener(eventoClic);
-   }
-    
-   public  void borrarDatoaTabla(final DefaultTableModel model) {
-    for( int i = model.getRowCount() - 1; i >= 0; i-- ) {
-        model.removeRow(i);
-    }
-}
-    
-    public void cargaInfoAdicionalTabla(String folio)
-    {
-     for(int i=0;i<arregloSolicitudes.length;i++)
-     {
-         if(arregloSolicitudes[i][0].equals(folio))
-         {
-          lbLugar.setText(arregloSolicitudes[i][5]);
-          lbActividad.setText(arregloSolicitudes[i][6]);
-          lbDias.setText(arregloSolicitudes[i][4]);
-          lbTransporte.setText(arregloSolicitudes[i][10]);
-          lbPernoctado.setText(arregloSolicitudes[i][7]);
-          
-          lugar=arregloSolicitudes[i][5];
-          actividad=arregloSolicitudes[i][6];
-          dias=arregloSolicitudes[i][4];
-          responsable=arregloSolicitudes[i][3];
-          vehiculo=arregloSolicitudes[i][10];
-          pernoctado=arregloSolicitudes[i][7];
-          fecha=arregloSolicitudes[i][2];
-          idFolio=arregloSolicitudes[i][0];
-          idVehiculo=Integer.parseInt(arregloSolicitudes[i][11]);
-
-         }
-     }
-    }
-    /**
+     /**
      * @param args the command line arguments
      */
+    
+    public void listen()
+    {
+        JOptionPane.showMessageDialog(null,"ha cambiado algo");
+    }
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -838,55 +125,8 @@ DefaultListModel <String> modeloVehiculos=new DefaultListModel <>();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnEditaSolicitud;
-    private javax.swing.JButton btnEnviar;
-    private javax.swing.JButton btnLimpiar;
-    private javax.swing.JComboBox<String> cbTipoSolicitud;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
     private java.awt.Label label1;
-    private javax.swing.JLabel lbActividad;
-    private javax.swing.JLabel lbDias;
-    private javax.swing.JLabel lbLugar;
-    private javax.swing.JLabel lbPernoctado;
-    private javax.swing.JLabel lbTransporte;
-    private javax.swing.JLabel lblTituloSol;
-    private javax.swing.JList<String> listaEncargado;
-    private javax.swing.JList<String> listaVehiculo;
-    private javax.swing.JPanel panelMasDetalles;
-    private javax.swing.JRadioButton rbNoPernoctado;
-    private javax.swing.JRadioButton rbPernoctado;
-    private javax.swing.JTable tablaSolicitudes;
     private javax.swing.JTabbedPane tbNuevaSolicitud;
-    private javax.swing.JTextArea txtActividad;
-    private javax.swing.JTextField txtBusquedaSolicitud;
-    private javax.swing.JSpinner txtDias;
-    private com.toedter.calendar.JDateChooser txtFechaSalida;
-    private javax.swing.JTextField txtLugar;
-    private javax.swing.JTextField txtResponsable;
-    private javax.swing.JTextField txtVehiculo;
     // End of variables declaration//GEN-END:variables
 
 //    private DefaultListModel<String> busquedaListaResponsables(String CadenaTxtResponsable, DefaultListModel<String> modeloResponsables) {
