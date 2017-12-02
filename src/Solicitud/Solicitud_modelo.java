@@ -42,9 +42,14 @@ public class Solicitud_modelo {
     Conexion con = new Conexion();
     Connection conn = con.getConexion();
     
-    public Solicitud_modelo() {
-        
-    }
+    public Solicitud_modelo() {}
+    
+     public Solicitud_modelo(int idFolio,String statusViatico) 
+     {
+      this.idSolicitud=idFolio;
+        this.statusViatico=statusViatico;
+     }
+     
     public Solicitud_modelo(Date fechaSalida,String personalViatico, int diasViatico,String lugarViatico,String actividadViatico,
                             String pernoctado,String statusViatico,int idUsuario,int idVehiculo) 
     {   
@@ -78,36 +83,128 @@ public class Solicitud_modelo {
         
     }
     
+    public int comprobarExistenciaSolicitudes()
+    {
+        int totalRegistros=0;
+      
+        try 
+        {
+             Conexion con=new Conexion();
+             Connection conn=con.getConexion();
+             Statement stm=conn.createStatement();
+
+              String sqlBusca="SELECT count(idViaticos) as 'total' FROM solicitud_viaticos";
+
+              ResultSet resul=stm.executeQuery(sqlBusca);
+
+                while(resul.next())
+                {
+                  totalRegistros=resul.getInt("total");
+                }
+         } 
+
+         catch (SQLException ex) 
+         {
+             Logger.getLogger(usuarios_modelo.class.getName()).log(Level.SEVERE, null, ex);
+         }
+        
+        return totalRegistros;
+    }
+    
+    
+    public String generaFolio()
+    {
+        String folio="";
+        int folioInt=0;
+         try 
+         {
+             Conexion con=new Conexion();
+             Connection conn=con.getConexion();
+             Statement stm=conn.createStatement();
+
+              String sql="select fol_viatico_int from Solicitud_Viaticos order by FehaSol_Viat desc limit 1";
+
+              ResultSet resul=stm.executeQuery(sql);
+
+                while(resul.next())
+                {
+                  folioInt=resul.getInt("fol_viatico_int");
+                }
+                
+                if(folioInt==100)
+                {
+                   folio="0001"; 
+                   folioInt=0;
+                }
+
+                else
+                {
+                    if(folioInt+1<=9)
+                    {
+                       folio="000"+String.valueOf(folioInt+1);
+                    }
+
+                    if(folioInt+1>=10 && folioInt+1<=99)
+                    {
+                       folio="00"+String.valueOf(folioInt+1);
+                    }
+                }
+         } 
+
+         catch (SQLException ex) 
+         {
+             Logger.getLogger(usuarios_modelo.class.getName()).log(Level.SEVERE, null, ex);
+         }
+        return folio+"-"+String.valueOf(folioInt+1);
+    }
+    
     public void insertaSolicitud()
     {
+        String folioString="";
+        int folioInt=0;
+        if(comprobarExistenciaSolicitudes()==0)
+        {
+            folioString="0001";
+            folioInt=1;
+        }
+        
+        else
+        {
+            String[] folios=generaFolio().split("-");
+            folioString=folios[0];
+            folioInt=Integer.parseInt(folios[1]);
+        }
+        
         try
         {
-            String sqlSol="insert into solicitudes_viaticos("
-                    + "fechaSolViatico,"
-                    + "fechaSalidaViatico,"
-                    + "personalViatico,"
-                    + "diasViatico,"
-                    + "lugarViatico,"
-                    + "actividadViatico,"
-                    + "pernoctado,"
-                    + "statusViatico,"
-                    + "idUsuario,"
-                    + "idVehiculo"
+            String sqlSol="insert into Solicitud_Viaticos("
+                    + "Fol_Viat,"
+                    + "fol_viatico_int,"
+                    + "FehaSol_Viat,"
+                    + "FechaSal_Viat,"
+                    + "Personal_Viat,"
+                    + "Lugar_Viat,"
+                    + "Act_Viat,"
+                    + "Status_Viat,"
+                    + "idVehiculo_Viat,"
+                    + "Permotado_Viat,"
+                    + "Dias_Viat"
                     + ")"
-                    + "values(now(),?,?,?,?,?,?,?,?,?)";
-
+                    + "values(?,?,now(),?,?,?,?,?,?,?,?)";
+            
             PreparedStatement pst = conn.prepareStatement(sqlSol); 
             
-            pst.setDate(1,fechaSalida);
-            pst.setString(2,personalViatico);
-            pst.setInt(3,diasViatico);
-            pst.setString(4,lugarViatico);
-            pst.setString(5,actividadViatico);
-            pst.setString(6,pernoctado);
-            pst.setString(7,statusViatico);
-            pst.setInt(8,idUsuario);
-            pst.setInt(9,idVehiculo);
-            
+            pst.setString(1,folioString);
+            pst.setInt(2,folioInt);
+            pst.setDate(3,fechaSalida);
+            pst.setString(4,personalViatico);
+            pst.setString(5,lugarViatico);
+            pst.setString(6,actividadViatico);
+            pst.setString(7,"Solicitada");
+            pst.setInt(8,idVehiculo);
+            pst.setString(9,pernoctado);
+            pst.setInt(10,diasViatico);
+             
             pst.executeUpdate();
        }
 
@@ -118,24 +215,27 @@ public class Solicitud_modelo {
 
         finally 
         {
+            insertaUsuarioViatico();
+            insertarSolicitudDetalles();
+            insertarUsuarioDetalle();
             JOptionPane.showMessageDialog(null,"Solicitud enviada para su revisión");
         }
     }
     
-        public void modificaSolicitud()
+    public void modificaSolicitud()
     {
         try
         {
             
-            String sqlModSol="update solicitudes_viaticos set "
-                    + "lugarViatico=?,"
-                    + "actividadViatico=?,"
-                    + "idVehiculo=?,"
-                    + "pernoctado=?,"
-                    + "fechaSalidaViatico=?,"
-                    + "personalViatico=?,"
-                    + "diasViatico=?"
-                    + " where idSolViatico=?";
+            String sqlModSol="update Solicitud_Viaticos set "
+                    + "Lugar_Viat=?,"
+                    + "Act_Viat=?,"
+                    + "idVehiculo_Viat=?,"
+                    + "Permotado_Viat=?,"
+                    + "FechaSal_Viat=?,"
+                    + "Personal_Viat=?,"
+                    + "Dias_Viat=?"
+                    + " where idViaticos=?";
             
             PreparedStatement pst = conn.prepareStatement(sqlModSol); 
             
@@ -162,40 +262,221 @@ public class Solicitud_modelo {
         }
     }
     
-    
-     public String [][] traerSolicitudesViaticos()
+    public void modificaStatusSolicitud()
     {
-       int filas=obtenerCantidadSolicitudes();
+        try
+        {
+            
+            String sqlModSol="update Solicitud_Viaticos set "
+                    + "Status_Viat=?"
+                    + " where idViaticos=?";
+            
+            PreparedStatement pst = conn.prepareStatement(sqlModSol); 
+            
+            pst.setString(1,statusViatico);
+            pst.setInt(2,idSolicitud);
+            pst.executeUpdate();
+       }
+
+        catch (SQLException ex) 
+        {
+            JOptionPane.showMessageDialog(null,ex);
+        } 
+
+        finally 
+        {
+            JOptionPane.showMessageDialog(null,"Solicitud cancelada");
+        }
+    }
+    
+        
+    public void insertarSolicitudDetalles()
+    {
+        try
+        {
+            String sqlSol="insert into Solicitudes("
+                    + "Status_Sol,"
+                    + "Fecha_Sol,"
+                    + "Tipo_Sol,"
+                    + "idUsuario_Sol,"
+                    + "Descripcion_Sol"
+                    + ")"
+                    + "values(?,now(),?,?,?)";
+            
+            PreparedStatement pst = conn.prepareStatement(sqlSol); 
+            
+            pst.setString(1,"Solicitada");
+            pst.setString(2,"Viatico");
+            pst.setInt(3,idUsuario);
+            pst.setString(4,lugarViatico+" "+actividadViatico);
+           
+             
+            pst.executeUpdate();
+       }
+
+        catch (SQLException ex) 
+        {
+            JOptionPane.showMessageDialog(null,ex);
+        } 
+
+        finally 
+        {
+          
+        }
+    }
+    
+    public void insertarUsuarioDetalle()
+    {
+        try
+        {
+            int idSolicitud=obtenIdSolicitud();
+            String sqlSol="insert into Usr_Solc("
+                    + "Solicitudes_idSolicitudes,"
+                    + "Usuario_idUsuario"
+                    + ")"
+                    + "values(?,?)";
+            
+            PreparedStatement pst = conn.prepareStatement(sqlSol); 
+            
+            pst.setInt(1,idSolicitud);
+            pst.setInt(2,idUsuario);
+           
+            pst.executeUpdate();
+       }
+
+        catch (SQLException ex) 
+        {
+            JOptionPane.showMessageDialog(null,ex);
+        } 
+
+        finally 
+        {
+         
+        }
+    }
+    
+     public void insertaUsuarioViatico()
+    {
+        try
+        {
+            int idViatico=obtenIdViatico();
+          
+            String sqlSol="insert into usr_viaticos("
+                    + "Usuario_idUsuario,"
+                    + "Solicitud_Viaticos_idViaticos"
+                    + ")"
+                    + "values(?,?)";
+            
+            PreparedStatement pst = conn.prepareStatement(sqlSol); 
+            
+         
+            pst.setInt(1,idUsuario);
+             pst.setInt(2,idViatico);
+           
+            pst.executeUpdate();
+       }
+
+        catch (SQLException ex) 
+        {
+            JOptionPane.showMessageDialog(null,ex);
+        } 
+
+        finally 
+        {
+         
+        }
+    }
+    
+    public int obtenIdSolicitud()
+    {
+        int idSolicitud=0;
+        try 
+        {
+             Conexion con=new Conexion();
+             Connection conn=con.getConexion();
+             Statement stm=conn.createStatement();
+
+              String sqlBusca="SELECT idSolicitudes FROM Solicitudes order by Fecha_Sol desc limit 1";
+
+              ResultSet resul=stm.executeQuery(sqlBusca);
+
+                while(resul.next())
+                {
+                  idSolicitud=resul.getInt("idSolicitudes");
+                }
+         } 
+
+         catch (SQLException ex) 
+         {
+             Logger.getLogger(usuarios_modelo.class.getName()).log(Level.SEVERE, null, ex);
+         }
+
+        return idSolicitud;
+    }
+    
+    public int obtenIdViatico()
+    {
+        int idViatico=0;
+        try 
+        {
+             Conexion con=new Conexion();
+             Connection conn=con.getConexion();
+             Statement stm=conn.createStatement();
+
+              String sqlBusca="SELECT idViaticos FROM solicitud_viaticos order by FehaSol_Viat desc limit 1";
+
+              ResultSet resul=stm.executeQuery(sqlBusca);
+
+                while(resul.next())
+                {
+                  idViatico=resul.getInt("idViaticos");
+                }
+         } 
+
+         catch (SQLException ex) 
+         {
+             Logger.getLogger(usuarios_modelo.class.getName()).log(Level.SEVERE, null, ex);
+         }
+
+        return idViatico;
+    }
+    
+    
+     public String [][] traerSolicitudesViaticos(String status)
+    {
+       int filas=obtenerCantidadSolicitudes(status);
         String arregloSolicitudes[][]=new String[filas][12];
         try {
             Conexion con=new Conexion();
             Connection conn=con.getConexion();
             Statement stm=conn.createStatement();
             
-             String sql="select idSolViatico,folViatico,fechaSalidaViatico,personalViatico,"
-                     + "diasViatico,lugarViatico,actividadViatico,pernoctado,statusViatico,"
-                     + "idUsuario,nom_prod,idVehiculo "
-                     + "from solicitudes_viaticos "
-                     + "inner join productos ON productos.idProductos=solicitudes_viaticos.idVehiculo";
-            
+            String sql="select idViaticos,Fol_Viat,FechaSal_Viat,Personal_Viat," +
+            "Dias_Viat,Lugar_Viat,Act_Viat,Permotado_Viat,Status_Viat," +
+            "usr_viaticos.Usuario_idUsuario,nom_prod,idVehiculo_Viat " +
+            " from Solicitud_Viaticos " +
+            " inner join productos ON productos.idProductos=Solicitud_Viaticos.idVehiculo_Viat" +
+            " inner join usr_viaticos on usr_viaticos.Solicitud_Viaticos_idViaticos=solicitud_viaticos.idViaticos"
+                    + " where Status_Viat='"+status+"'";
+            //JOptionPane.showMessageDialog(null,sql);
              ResultSet resul=stm.executeQuery(sql);
              DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
 
                while(resul.next())
       {        
                int fila=resul.getRow()-1;
-               int idSolViatico=resul.getInt("idSolViatico");
-               String folViatico=resul.getString("folViatico");
-               Date fechaSalidaViatico=resul.getDate("fechaSalidaViatico");
-               String personalViatico=resul.getString("personalViatico");
-               int diasViatico=resul.getInt("diasViatico");
-               String lugarViatico=resul.getString("lugarViatico");
-               String actividadViatico=resul.getString("actividadViatico");
-               String pernoctado=resul.getString("pernoctado");
-               String statusViatico=resul.getString("statusViatico");
-               int idUsuario=resul.getInt("idUsuario");
+               int idSolViatico=resul.getInt("idViaticos");
+               String folViatico=resul.getString("Fol_Viat");
+               Date fechaSalidaViatico=resul.getDate("FechaSal_Viat");
+               String personalViatico=resul.getString("Personal_Viat");
+               int diasViatico=resul.getInt("Dias_Viat");
+               String lugarViatico=resul.getString("Lugar_Viat");
+               String actividadViatico=resul.getString("Act_Viat");
+               String pernoctado=resul.getString("Permotado_Viat");
+               String statusViatico=resul.getString("Status_Viat");
+               int idUsuario=resul.getInt("Usuario_idUsuario");
                String nom_prod=resul.getString("nom_prod");
-               int idVehiculo=resul.getInt("idVehiculo");
+               int idVehiculo=resul.getInt("idVehiculo_Viat");
           
          
                arregloSolicitudes[fila][0]=String.valueOf(idSolViatico);
@@ -220,7 +501,7 @@ public class Solicitud_modelo {
       return arregloSolicitudes;
     }
     
-    public int obtenerCantidadSolicitudes()
+    public int obtenerCantidadSolicitudes(String status)
     {
        int cantidadSol=0;
        try {
@@ -228,7 +509,7 @@ public class Solicitud_modelo {
             Connection conn=con.getConexion();
             Statement stm=conn.createStatement();
             
-             String sql="select count(*) as cantidad from solicitudes_viaticos";
+             String sql="select count(*) as cantidad from Solicitud_Viaticos where Status_Viat='"+status+"'";
             
              ResultSet resul=stm.executeQuery(sql);
              

@@ -40,6 +40,7 @@ public class SolicitudNueva extends javax.swing.JPanel {
        initComponents();
        listaEncargado.setVisible(false);
        listaVehiculo.setVisible(false);
+       listaEncargado.setEnabled(false);
        cargaElementosListaResponsables();
        cargarElementosListaVehiculo();
        
@@ -81,6 +82,8 @@ public class SolicitudNueva extends javax.swing.JPanel {
         txtFechaSalida = new com.toedter.calendar.JDateChooser();
         jLabel8 = new javax.swing.JLabel();
         txtDias = new javax.swing.JSpinner();
+
+        jPanel1.setPreferredSize(new java.awt.Dimension(928, 523));
 
         lblTituloSol.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         lblTituloSol.setText("Ingresa una nueva solicitud");
@@ -175,7 +178,7 @@ public class SolicitudNueva extends javax.swing.JPanel {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(txtDias, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
+                                .addComponent(txtDias, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
                                 .addGap(430, 430, 430))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -241,32 +244,32 @@ public class SolicitudNueva extends javax.swing.JPanel {
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtFechaSalida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addGap(40, 40, 40)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnEnviar)
                     .addComponent(btnLimpiar))
-                .addContainerGap())
+                .addContainerGap(59, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 811, Short.MAX_VALUE)
+            .addGap(0, 893, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 3, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 3, Short.MAX_VALUE)))
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 881, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 466, Short.MAX_VALUE)
+            .addGap(0, 535, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -313,7 +316,7 @@ public class SolicitudNueva extends javax.swing.JPanel {
      for(int i=0;i<modelo.size();i++)
      {  
          elementoModelo=modelo.get(i);
-         if(elementoModelo.contains(cadenaEntrada))
+         if(elementoModelo.toLowerCase().contains(cadenaEntrada.toLowerCase()))
          {
            resultadosBusqueda.addElement(modelo.get(i));
          }
@@ -344,6 +347,7 @@ public class SolicitudNueva extends javax.swing.JPanel {
             resultadosBusqueda=busquedaLista(CadenaTxtResponsable,modeloResponsables);
             listaEncargado.setModel(resultadosBusqueda);
             listaEncargado.setVisible(true);
+            listaEncargado.setEnabled(true);
         }
         else
         {
@@ -413,6 +417,7 @@ public class SolicitudNueva extends javax.swing.JPanel {
             {
                 objetoSolicitud.insertarSolicitud(fechaSalida,personalViatico,diasDuracion,lugar,actividad,pernoctado,statusViatico,idUsuarioJefeDpto,idVehiculo);
                 limpiarCampos();
+                
             }
     }//GEN-LAST:event_btnEnviarActionPerformed
 
@@ -422,7 +427,7 @@ public class SolicitudNueva extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnEnviar;
+    public javax.swing.JButton btnEnviar;
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

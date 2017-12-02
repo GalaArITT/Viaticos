@@ -18,23 +18,26 @@ import javax.swing.JOptionPane;
 public class JefeDpto_interfaz extends javax.swing.JFrame { /**
      * Creates new form JefeDpto_interfaz
      */
+    SolicitudRegistros pantallaRegistrosSolicitud= new SolicitudRegistros();
+    SolicitudNueva pantallaNuevaSolicitud= new SolicitudNueva();
+    boolean actualizarTabla=false;
     
-    public void cambiarPestana(int indice)
-    {
-        tbNuevaSolicitud.setSelectedIndex(0);
-    }
     public JefeDpto_interfaz() {
         initComponents();       
         
-        SolicitudNueva pantallaNuevaSolicitud= new SolicitudNueva();
         pantallaNuevaSolicitud.setVisible(true);
         tbNuevaSolicitud.add("Nueva Solicitud",pantallaNuevaSolicitud);  
         
-        SolicitudRegistros pantallaRegistrosSolicitud= new SolicitudRegistros();
+        
         pantallaRegistrosSolicitud.setVisible(true);
         tbNuevaSolicitud.add("Solicitudes Elaboradas",pantallaRegistrosSolicitud);  
         
-        
+        pantallaNuevaSolicitud.btnEnviar.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+               actualizarTabla=true;
+            }
+        });
        
         }
     
@@ -67,7 +70,7 @@ public class JefeDpto_interfaz extends javax.swing.JFrame { /**
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tbNuevaSolicitud, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(tbNuevaSolicitud, javax.swing.GroupLayout.DEFAULT_SIZE, 900, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -80,7 +83,14 @@ public class JefeDpto_interfaz extends javax.swing.JFrame { /**
     }// </editor-fold>//GEN-END:initComponents
 
     private void tbNuevaSolicitudMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbNuevaSolicitudMouseClicked
-       
+       if(tbNuevaSolicitud.getSelectedIndex()==1)
+       {
+           if(actualizarTabla)
+           {
+             pantallaRegistrosSolicitud.traerSolicitudes("Solicitada");  
+           }
+           actualizarTabla=false;
+       }
     }//GEN-LAST:event_tbNuevaSolicitudMouseClicked
      /**
      * @param args the command line arguments

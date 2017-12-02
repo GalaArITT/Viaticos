@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package JefeDpto;
+package Secretaria;
 
+ 
+import JefeDpto.ModificarSolicitud;
 import Solicitud.Solicitud_controlador;
 import java.awt.Component;
 import java.awt.Container;
@@ -28,12 +30,8 @@ import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
-
-/**
- *
- * @author fernando
- */
 public class SolicitudRegistros extends javax.swing.JPanel {
+
  String[][] arregloSolicitudes;
  
  int idResponsable=0;
@@ -50,8 +48,8 @@ public class SolicitudRegistros extends javax.swing.JPanel {
      * Creates new form SolicitudRegistros
      */
     public SolicitudRegistros() {
-initComponents();
-traerSolicitudes("Solicitada");
+        initComponents();
+        traerSolicitudes("Solicitada");
 //        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
 txtFechaSalidaBusqueda.getDateEditor().addPropertyChangeListener(
@@ -66,7 +64,6 @@ public void propertyChange(PropertyChangeEvent e) {
     }
 }
 });
-        
     }
 
     /**
@@ -78,6 +75,7 @@ public void propertyChange(PropertyChangeEvent e) {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         txtBusquedaSolicitud = new javax.swing.JTextField();
@@ -186,7 +184,7 @@ public void propertyChange(PropertyChangeEvent e) {
                         .addComponent(jLabel22)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(lbPernoctado, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(280, Short.MAX_VALUE))
         );
         panelMasDetallesLayout.setVerticalGroup(
             panelMasDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -234,7 +232,7 @@ public void propertyChange(PropertyChangeEvent e) {
 
         jLabel2.setText("Filtra las solicitudes");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Solicitadas", "Aprobadas", "Canceladas" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Solicitadas", "Aprobadas", "No Aprobadas" }));
         jComboBox1.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 jComboBox1ItemStateChanged(evt);
@@ -314,6 +312,27 @@ public void propertyChange(PropertyChangeEvent e) {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 928, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                    .addContainerGap(16, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap()))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 523, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                    .addContainerGap(28, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(29, Short.MAX_VALUE)))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -321,20 +340,21 @@ public void propertyChange(PropertyChangeEvent e) {
             .addGap(0, 928, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 16, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 16, Short.MAX_VALUE)))
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 523, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 28, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 29, Short.MAX_VALUE)))
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
+
     
     public void traerSolicitudes(String status)
     {
@@ -455,9 +475,6 @@ public void propertyChange(PropertyChangeEvent e) {
     
     return resultadoBusqueda;
    }
-  
-
-       
     private void txtBusquedaSolicitudKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBusquedaSolicitudKeyReleased
         String cadenaEntrada=txtBusquedaSolicitud.getText();
         if(!cadenaEntrada.equals(""))
@@ -472,7 +489,49 @@ public void propertyChange(PropertyChangeEvent e) {
         }
     }//GEN-LAST:event_txtBusquedaSolicitudKeyReleased
 
-   private Component[] getComponents(Component container) {
+    private void btnEditaSolicitudActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditaSolicitudActionPerformed
+        JDialog jdModificarSol=new JDialog();
+        jdModificarSol.setSize(820,491);
+        ModificarSolicitud ventanaMod=new ModificarSolicitud();
+        ventanaMod.cargarCamposModificar(lugar, actividad, dias, responsable, vehiculo, pernoctado, idFolio, fecha,idVehiculo);
+        jdModificarSol.add(ventanaMod);
+        jdModificarSol.setVisible(true);
+        jdModificarSol.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+
+        ventanaMod.btnLimpiar.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                jdModificarSol.dispose();
+            }
+        });
+
+        ventanaMod.btnEnviar.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                jdModificarSol.dispose();
+                lbLugar.setText("");
+                lbActividad.setText("");
+                lbDias.setText("");
+                lbTransporte.setText("");
+                lbPernoctado.setText("");
+            }
+        });
+
+        for(Component component : getComponents(this))
+        {
+            component.setEnabled(false);
+        }
+
+        jdModificarSol.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                reactivarVentana();
+            }
+        });
+
+    }//GEN-LAST:event_btnEditaSolicitudActionPerformed
+
+      private Component[] getComponents(Component container) {
         ArrayList<Component> list = null;
 
         try {
@@ -497,53 +556,8 @@ public void reactivarVentana()
         component.setEnabled(true);
       }
 }
-     
-    private void btnEditaSolicitudActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditaSolicitudActionPerformed
-        JDialog jdModificarSol=new JDialog();
-        jdModificarSol.setSize(820,491);
-        ModificarSolicitud ventanaMod=new ModificarSolicitud();
-        ventanaMod.cargarCamposModificar(lugar, actividad, dias, responsable, vehiculo, pernoctado, idFolio, fecha,idVehiculo);
-        jdModificarSol.add(ventanaMod);
-        jdModificarSol.setVisible(true); 
-        jdModificarSol.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        
-         ventanaMod.btnLimpiar.addActionListener(new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent arg0) {
-                jdModificarSol.dispose();
-            }
-        });
-         
-         ventanaMod.btnEnviar.addActionListener(new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent arg0) {
-                jdModificarSol.dispose();
-                lbLugar.setText("");
-                lbActividad.setText("");
-                lbDias.setText("");
-                lbTransporte.setText("");
-                lbPernoctado.setText("");
-            }
-        });
-         
-         
-          
-        for(Component component : getComponents(this)) 
-        {
-          component.setEnabled(false);
-        }
-        
-        jdModificarSol.addWindowListener(new WindowAdapter() {
-        @Override
-        public void windowClosed(WindowEvent e) {
-       reactivarVentana();
-    }
-}); 
-            
-    }//GEN-LAST:event_btnEditaSolicitudActionPerformed
-
     private void btnMostrarTodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMostrarTodoActionPerformed
-         cargaTabla(arregloSolicitudes);
+        cargaTabla(arregloSolicitudes);
     }//GEN-LAST:event_btnMostrarTodoActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -552,54 +566,54 @@ public void reactivarVentana()
         CancelarSolicitud ventanaCancel=new CancelarSolicitud();
         ventanaCancel.cargarCampos(Integer.parseInt(idFolio));
         jdCancelar.add(ventanaCancel);
-        jdCancelar.setVisible(true); 
+        jdCancelar.setVisible(true);
         jdCancelar.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        
+
         ventanaCancel.btnCancelarSol.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent arg0) {
                 if(!ventanaCancel.motivoCancelado.equals(""))
                 {
-                  jdCancelar.dispose();
-                  reactivarVentana();
-                  traerSolicitudes("Solicitada");
+                    jdCancelar.dispose();
+                    reactivarVentana();
+                    traerSolicitudes("Solicitada");
                 }
             }
         });
-        
-                for(Component component : getComponents(this)) 
+
+        for(Component component : getComponents(this))
         {
-          component.setEnabled(false);
+            component.setEnabled(false);
         }
-        
+
         jdCancelar.addWindowListener(new WindowAdapter() {
-        @Override
-        public void windowClosed(WindowEvent e) {
-        reactivarVentana();
-        }
-        }); 
+            @Override
+            public void windowClosed(WindowEvent e) {
+                reactivarVentana();
+            }
+        });
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
-         if (evt.getStateChange() == ItemEvent.SELECTED) {
-          Object item = evt.getItem();
-          String status="";
-          if(item.equals("Solicitadas"))
-          {
-             status="Solicitada";
-          }
-          
-          if(item.equals("Aprobadas"))
-          {
-              status="Aprobada"; 
-          }
-          
-          if(item.equals("Canceladas"))
-          {
-              status="Cancelada"; 
-          }
-          traerSolicitudes(status);
-       }
+        if (evt.getStateChange() == ItemEvent.SELECTED) {
+            Object item = evt.getItem();
+            String status="";
+            if(item.equals("Solicitadas"))
+            {
+                status="Solicitada";
+            }
+
+            if(item.equals("Aprobadas"))
+            {
+                status="Aprobada";
+            }
+
+            if(item.equals("No Aprobadas"))
+            {
+                status="No Aprobada";
+            }
+            traerSolicitudes(status);
+        }
     }//GEN-LAST:event_jComboBox1ItemStateChanged
 
 
@@ -621,6 +635,7 @@ public void reactivarVentana()
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JLabel lbActividad;

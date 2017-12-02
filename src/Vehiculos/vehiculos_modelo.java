@@ -32,7 +32,7 @@ public class vehiculos_modelo {
             
              String sql="select Nom_Prod as vehiculo, idProductos from productos "
                      + "inner join clasificacion on (productos.Clasificacion_idClasificacion=clasificacion.idClasificacion) "
-                     + "where productos.Estado_idEstado=7 AND clasificacion.Nom_Clas=\"Equipo de transporte\"";
+                     + "where productos.Estado_idEstado=1 AND clasificacion.Nom_Clas=\"Equipo de transporte\"";
             
              ResultSet resul=stm.executeQuery(sql);
              
@@ -64,7 +64,7 @@ public class vehiculos_modelo {
             
              String sql="select COUNT(p.Nom_Prod) as vehiculo from productos as p "
                      + "inner join clasificacion as cl on (p.Clasificacion_idClasificacion=cl.idClasificacion) "
-                     + "where p.Estado_idEstado=7 AND cl.Nom_Clas=\"Equipo de transporte\"";
+                     + "where p.Estado_idEstado=1 AND cl.Nom_Clas=\"Equipo de transporte\"";
             
              ResultSet resul=stm.executeQuery(sql);
              

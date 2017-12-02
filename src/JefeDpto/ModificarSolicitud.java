@@ -448,7 +448,7 @@ DefaultListModel <String> modeloResponsables=new DefaultListModel <>();
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnEnviar;
+    public javax.swing.JButton btnEnviar;
     public javax.swing.JButton btnLimpiar;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

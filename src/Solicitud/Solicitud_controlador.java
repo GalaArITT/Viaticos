@@ -27,10 +27,16 @@ public void modificaSolicitud(int idFolio,Date fechaSalida,String personalViatic
     objetoSolicitud.modificaSolicitud();
 }
 
- public String [][] traerSolicitudes()
+ public String [][] traerSolicitudes(String status)
     {
       Solicitud_modelo objUsuarios=new Solicitud_modelo();
-      String arregloSolicitudes[][]=objUsuarios.traerSolicitudesViaticos();
+      String arregloSolicitudes[][]=objUsuarios.traerSolicitudesViaticos(status);
       return arregloSolicitudes;
     }
+ 
+ public void modificarStatus(int idFolio,String status)
+ {
+     Solicitud_modelo objSolicitud=new Solicitud_modelo(idFolio,status);
+     objSolicitud.modificaStatusSolicitud();
+ }
 }
