@@ -47,6 +47,8 @@ public class SolicitudRegistros extends javax.swing.JPanel {
     String pernoctado="";
     String fecha="";
     String idFolio;
+    boolean datosModificados=false;
+    float monto;
 
     /**
      * Creates new form SolicitudRegistros
@@ -79,7 +81,6 @@ public class SolicitudRegistros extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         txtBusquedaSolicitud = new javax.swing.JTextField();
@@ -91,22 +92,23 @@ public class SolicitudRegistros extends javax.swing.JPanel {
         jButton1 = new javax.swing.JButton();
         panelMasDetalles = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
         lbLugar = new javax.swing.JLabel();
         lbActividad = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
         lbDias = new javax.swing.JLabel();
-        jLabel20 = new javax.swing.JLabel();
         lbTransporte = new javax.swing.JLabel();
-        jLabel22 = new javax.swing.JLabel();
         lbPernoctado = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         txtFechaSalidaBusqueda = new com.toedter.calendar.JDateChooser();
         btnMostrarTodo = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cbStatus = new javax.swing.JComboBox<>();
+
+        jPanel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jPanel2MouseEntered(evt);
+            }
+        });
 
         jLabel9.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel9.setText("Solicitudes que has realizado");
@@ -143,16 +145,6 @@ public class SolicitudRegistros extends javax.swing.JPanel {
 
         jLabel13.setText("Mas detalles...");
 
-        jLabel14.setText("Lugar:");
-
-        jLabel17.setText("Actividad:");
-
-        jLabel18.setText("Dias:");
-
-        jLabel20.setText("Transporte:");
-
-        jLabel22.setText("Pernoctado:");
-
         javax.swing.GroupLayout panelMasDetallesLayout = new javax.swing.GroupLayout(panelMasDetalles);
         panelMasDetalles.setLayout(panelMasDetallesLayout);
         panelMasDetallesLayout.setHorizontalGroup(
@@ -160,27 +152,19 @@ public class SolicitudRegistros extends javax.swing.JPanel {
             .addGroup(panelMasDetallesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelMasDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(panelMasDetallesLayout.createSequentialGroup()
-                        .addComponent(jLabel20)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(75, 75, 75)
                         .addComponent(lbTransporte, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelMasDetallesLayout.createSequentialGroup()
+                        .addGap(75, 75, 75)
                         .addGroup(panelMasDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel17)
-                            .addComponent(jLabel14)
-                            .addComponent(jLabel18))
-                        .addGap(24, 24, 24)
-                        .addGroup(panelMasDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panelMasDetallesLayout.createSequentialGroup()
-                                .addGap(102, 102, 102)
-                                .addComponent(lbLugar, javax.swing.GroupLayout.PREFERRED_SIZE, 533, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lbLugar, javax.swing.GroupLayout.PREFERRED_SIZE, 533, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lbActividad, javax.swing.GroupLayout.PREFERRED_SIZE, 533, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lbDias, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(panelMasDetallesLayout.createSequentialGroup()
-                        .addComponent(jLabel22)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lbPernoctado, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(78, 78, 78)
+                        .addComponent(lbPernoctado, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelMasDetallesLayout.setVerticalGroup(
@@ -189,26 +173,16 @@ public class SolicitudRegistros extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jLabel13)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelMasDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel14)
-                    .addComponent(lbLugar))
+                .addComponent(lbLugar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelMasDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel17)
-                    .addComponent(lbActividad))
+                .addComponent(lbActividad)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelMasDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel18)
-                    .addComponent(lbDias))
+                .addComponent(lbDias)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelMasDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel20)
-                    .addComponent(lbTransporte))
+                .addComponent(lbTransporte)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelMasDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel22)
-                    .addComponent(lbPernoctado))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(lbPernoctado)
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         jLabel1.setText("Busca una solicitud por fecha");
@@ -229,10 +203,10 @@ public class SolicitudRegistros extends javax.swing.JPanel {
 
         jLabel2.setText("Filtra las solicitudes");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Solicitadas", "Aprobadas", "No Aprobadas" }));
-        jComboBox1.addItemListener(new java.awt.event.ItemListener() {
+        cbStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Solicitadas", "Aprobadas", "Canceladas" }));
+        cbStatus.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jComboBox1ItemStateChanged(evt);
+                cbStatusItemStateChanged(evt);
             }
         });
 
@@ -245,7 +219,7 @@ public class SolicitudRegistros extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(btnCancelar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnMostrarTodo))
@@ -260,7 +234,7 @@ public class SolicitudRegistros extends javax.swing.JPanel {
                                     .addComponent(jLabel12)
                                     .addGroup(jPanel2Layout.createSequentialGroup()
                                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(cbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(jLabel2))
                                         .addGap(134, 134, 134)
                                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -283,7 +257,7 @@ public class SolicitudRegistros extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtBusquedaSolicitud, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(12, 12, 12)
                         .addComponent(jLabel12))
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -299,48 +273,132 @@ public class SolicitudRegistros extends javax.swing.JPanel {
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
                     .addComponent(btnMostrarTodo)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCancelar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelMasDetalles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel10)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 28, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addGap(0, 1043, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 26, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 26, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGap(0, 523, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 31, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 32, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void txtBusquedaSolicitudKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBusquedaSolicitudKeyReleased
+        String cadenaEntrada=txtBusquedaSolicitud.getText();
+        if(!cadenaEntrada.equals(""))
+        {
+            String resultadosBusqueda[][]=busquedaEnTabla(cadenaEntrada);
+            cargaTabla(resultadosBusqueda);
+        }
+
+        else
+        {
+            cargaTabla(arregloSolicitudes);
+        }
+    }//GEN-LAST:event_txtBusquedaSolicitudKeyReleased
+
+    private void btnMostrarTodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMostrarTodoActionPerformed
+        cargaTabla(arregloSolicitudes);
+    }//GEN-LAST:event_btnMostrarTodoActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        JDialog jdCancelar=new JDialog();
+        jdCancelar.setSize(410,310);
+        CancelarSolicitud ventanaCancel=new CancelarSolicitud();
+        ventanaCancel.cargarCampos(Integer.parseInt(idFolio));
+        jdCancelar.add(ventanaCancel);
+        jdCancelar.setVisible(true);
+        jdCancelar.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+
+        ventanaCancel.btnCancelarSol.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                if(!ventanaCancel.motivoCancelado.equals(""))
+                {
+                    jdCancelar.dispose();
+                    reactivarVentana();
+                    datosModificados=true;
+                }
+            }
+        });
+
+        for(Component component : getComponents(this))
+        {
+            component.setEnabled(false);
+        }
+
+        jdCancelar.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                reactivarVentana();
+            }
+        });
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void cbStatusItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbStatusItemStateChanged
+        if (evt.getStateChange() == ItemEvent.SELECTED) {
+            Object item = evt.getItem();
+            String status="";
+            if(item.equals("Solicitadas"))
+            {
+                status="Solicitada";
+            }
+
+            if(item.equals("Aprobadas"))
+            {
+                status="Aprobada";
+            }
+
+            if(item.equals("Canceladas"))
+            {
+                status="Cancelada";
+            }
+            traerSolicitudes(status);
+        }
+    }//GEN-LAST:event_cbStatusItemStateChanged
+
+    private void jPanel2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseEntered
+        if(datosModificados)
+        {
+            if(cbStatus.getSelectedItem().toString().equals("Solicitadas"))
+            {
+                traerSolicitudes("Solicitada");
+            }
+
+            if(cbStatus.getSelectedItem().toString().equals("Aprobadas"))
+            {
+                traerSolicitudes("Aprobada");
+            }
+
+            if(cbStatus.getSelectedItem().toString().equals("Canceladas"))
+            {
+                traerSolicitudes("Cancelada");
+            }
+            datosModificados=false;
+        }
+    }//GEN-LAST:event_jPanel2MouseEntered
 
     public void traerSolicitudes(String status){
        Solicitud_controlador objUsuario=new Solicitud_controlador();
@@ -399,11 +457,13 @@ public class SolicitudRegistros extends javax.swing.JPanel {
      {
          if(arregloSolicitudes[i][1].equals(folio))
          {
-          lbLugar.setText(arregloSolicitudes[i][5]);
-          lbActividad.setText(arregloSolicitudes[i][6]);
-          lbDias.setText(arregloSolicitudes[i][4]);
-          lbTransporte.setText(arregloSolicitudes[i][10]);
-          lbPernoctado.setText(arregloSolicitudes[i][7]);
+          jLabel13.setText("<html>Mas detalles...<br>"
+	+"<strong>Lugar: </strong>"+arregloSolicitudes[i][5]+"<br>"+
+	"<strong>Actividad: </strong>"+arregloSolicitudes[i][6]+"<br>"+
+	"<strong>Dias: </strong>"+arregloSolicitudes[i][4]+"<br>"+
+	"<strong>Transporte: </strong>"+arregloSolicitudes[i][10]+"<br>"+
+	"<strong>Pernoctado: </strong>"+arregloSolicitudes[i][7]+"<br>"+
+	"<strong>Monto: </strong>"+arregloSolicitudes[i][12]+"</html>");
           
           lugar=arregloSolicitudes[i][5];
           actividad=arregloSolicitudes[i][6];
@@ -414,6 +474,7 @@ public class SolicitudRegistros extends javax.swing.JPanel {
           fecha=arregloSolicitudes[i][2];
           idFolio=arregloSolicitudes[i][0];
           idVehiculo=Integer.parseInt(arregloSolicitudes[i][11]);
+          monto=Float.parseFloat(arregloSolicitudes[i][12]);
           }
      }
     }
@@ -490,99 +551,19 @@ public void reactivarVentana()
     
     
     
-    private void txtBusquedaSolicitudKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBusquedaSolicitudKeyReleased
-        String cadenaEntrada=txtBusquedaSolicitud.getText();
-        if(!cadenaEntrada.equals(""))
-        {
-            String resultadosBusqueda[][]=busquedaEnTabla(cadenaEntrada);
-            cargaTabla(resultadosBusqueda);
-        }
-
-        else
-        {
-            cargaTabla(arregloSolicitudes);
-        }
-    }//GEN-LAST:event_txtBusquedaSolicitudKeyReleased
-
-    private void btnMostrarTodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMostrarTodoActionPerformed
-        cargaTabla(arregloSolicitudes);
-    }//GEN-LAST:event_btnMostrarTodoActionPerformed
-
-    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        JDialog jdCancelar=new JDialog();
-        jdCancelar.setSize(410,310);
-        CancelarSolicitud ventanaCancel=new CancelarSolicitud();
-        ventanaCancel.cargarCampos(Integer.parseInt(idFolio));
-        jdCancelar.add(ventanaCancel);
-        jdCancelar.setVisible(true);
-        jdCancelar.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-
-        ventanaCancel.btnCancelarSol.addActionListener(new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent arg0) {
-                if(!ventanaCancel.motivoCancelado.equals(""))
-                {
-                    jdCancelar.dispose();
-                    reactivarVentana();
-                    traerSolicitudes("Solicitada");
-                }
-            }
-        });
-
-        for(Component component : getComponents(this))
-        {
-            component.setEnabled(false);
-        }
-
-        jdCancelar.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosed(WindowEvent e) {
-                reactivarVentana();
-            }
-        });
-    }//GEN-LAST:event_btnCancelarActionPerformed
-
-    private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
-        if (evt.getStateChange() == ItemEvent.SELECTED) {
-            Object item = evt.getItem();
-            String status="";
-            if(item.equals("Solicitadas"))
-            {
-                status="Solicitada";
-            }
-
-            if(item.equals("Aprobadas"))
-            {
-                status="Aprobada";
-            }
-
-            if(item.equals("No Aprobadas"))
-            {
-                status="No Aprobada";
-            }
-            traerSolicitudes(status);
-        }
-    }//GEN-LAST:event_jComboBox1ItemStateChanged
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnMostrarTodo;
+    private javax.swing.JComboBox<String> cbStatus;
     private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JLabel lbActividad;
