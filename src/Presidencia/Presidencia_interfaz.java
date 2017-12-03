@@ -21,7 +21,7 @@ public class Presidencia_interfaz extends javax.swing.JFrame {
      */
     public Presidencia_interfaz() {
         initComponents();
-        traerSolicitudes();
+        //traerSolicitudes();
     }
 
     /**
@@ -33,315 +33,27 @@ public class Presidencia_interfaz extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel2 = new javax.swing.JPanel();
-        jLabel9 = new javax.swing.JLabel();
-        txtBusquedaSolicitud = new javax.swing.JTextField();
-        jLabel10 = new javax.swing.JLabel();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        tablaSolicitudes = new javax.swing.JTable();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        panelMasDetalles = new javax.swing.JPanel();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        lbLugar = new javax.swing.JLabel();
-        lbActividad = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
-        lbDias = new javax.swing.JLabel();
-        jLabel20 = new javax.swing.JLabel();
-        lbTransporte = new javax.swing.JLabel();
-        jLabel22 = new javax.swing.JLabel();
-        lbPernoctado = new javax.swing.JLabel();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jLabel9.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel9.setText("Solicitudes recibidas");
-
-        txtBusquedaSolicitud.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtBusquedaSolicitudActionPerformed(evt);
-            }
-        });
-        txtBusquedaSolicitud.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtBusquedaSolicitudKeyReleased(evt);
-            }
-        });
-
-        tablaSolicitudes.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Folio", "Fecha de salida", "Responsable", "Status"
-            }
-        ));
-        tablaSolicitudes.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tablaSolicitudesMouseClicked(evt);
-            }
-        });
-        jScrollPane4.setViewportView(tablaSolicitudes);
-
-        jLabel11.setText("Busca una solicitud");
-
-        jLabel12.setText("Selecciona una solicitud de la tabla para editar o imprimir PDF");
-
-        jButton1.setText("PDF");
-
-        jLabel13.setText("Mas detalles...");
-
-        jLabel14.setText("Lugar:");
-
-        jLabel17.setText("Actividad:");
-
-        jLabel18.setText("Dias:");
-
-        jLabel20.setText("Transporte:");
-
-        jLabel22.setText("Pernoctado:");
-
-        javax.swing.GroupLayout panelMasDetallesLayout = new javax.swing.GroupLayout(panelMasDetalles);
-        panelMasDetalles.setLayout(panelMasDetallesLayout);
-        panelMasDetallesLayout.setHorizontalGroup(
-            panelMasDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelMasDetallesLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panelMasDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(panelMasDetallesLayout.createSequentialGroup()
-                        .addComponent(jLabel20)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lbTransporte, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelMasDetallesLayout.createSequentialGroup()
-                        .addGroup(panelMasDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel17)
-                            .addComponent(jLabel14)
-                            .addComponent(jLabel18))
-                        .addGap(24, 24, 24)
-                        .addGroup(panelMasDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbLugar, javax.swing.GroupLayout.PREFERRED_SIZE, 533, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbActividad, javax.swing.GroupLayout.PREFERRED_SIZE, 533, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbDias, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(panelMasDetallesLayout.createSequentialGroup()
-                        .addComponent(jLabel22)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lbPernoctado, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(185, Short.MAX_VALUE))
-        );
-        panelMasDetallesLayout.setVerticalGroup(
-            panelMasDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelMasDetallesLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel13)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelMasDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel14)
-                    .addComponent(lbLugar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelMasDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel17)
-                    .addComponent(lbActividad))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelMasDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel18)
-                    .addComponent(lbDias))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelMasDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel20)
-                    .addComponent(lbTransporte))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelMasDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel22)
-                    .addComponent(lbPernoctado))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane4)
-                    .addComponent(panelMasDetalles, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel9)
-                            .addComponent(txtBusquedaSolicitud, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel12)
-                            .addComponent(jLabel11)
-                            .addComponent(jLabel10)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel9)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel11)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtBusquedaSolicitud, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(7, 7, 7)
-                .addComponent(jLabel12)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panelMasDetalles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel10)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 847, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 953, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 466, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 571, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public String[][] busquedaEnTabla(String cadenaEntrada)
-   {
-    String [][] resultadoBusqueda=new String[1][12];
-    
-    for(int i=0;i<arregloSolicitudes.length;i++)
-    {
-       if(arregloSolicitudes[i][0].equals(cadenaEntrada))
-       {
-          resultadoBusqueda[0][0]=arregloSolicitudes[i][0];
-          resultadoBusqueda[0][1]=arregloSolicitudes[i][1];
-          resultadoBusqueda[0][2]=arregloSolicitudes[i][2];
-          resultadoBusqueda[0][3]=arregloSolicitudes[i][3];
-          resultadoBusqueda[0][4]=arregloSolicitudes[i][4];
-          resultadoBusqueda[0][5]=arregloSolicitudes[i][5];
-          resultadoBusqueda[0][6]=arregloSolicitudes[i][6];
-          resultadoBusqueda[0][7]=arregloSolicitudes[i][7];
-          resultadoBusqueda[0][8]=arregloSolicitudes[i][8];
-          resultadoBusqueda[0][9]=arregloSolicitudes[i][9];
-          resultadoBusqueda[0][10]=arregloSolicitudes[i][10];
-          resultadoBusqueda[0][11]=arregloSolicitudes[i][11];
-       }
-    }
-    return resultadoBusqueda;
-   }
-    private void txtBusquedaSolicitudKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBusquedaSolicitudKeyReleased
-        String cadenaEntrada=txtBusquedaSolicitud.getText();
-        if(!cadenaEntrada.equals(""))
-        {
-            String resultadosBusqueda[][]=busquedaEnTabla(cadenaEntrada);
-            cargaTabla(resultadosBusqueda);
-        }
-
-        else
-        {
-            cargaTabla(arregloSolicitudes);
-        }
-    }//GEN-LAST:event_txtBusquedaSolicitudKeyReleased
-
-    private void tablaSolicitudesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaSolicitudesMouseClicked
-
-    }//GEN-LAST:event_tablaSolicitudesMouseClicked
-
-    private void txtBusquedaSolicitudActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBusquedaSolicitudActionPerformed
-        String cadenaEntrada=txtBusquedaSolicitud.getText();
-        if(!cadenaEntrada.equals(""))
-        {
-            String resultadosBusqueda[][]=busquedaEnTabla(cadenaEntrada);
-            cargaTabla(resultadosBusqueda);
-        }
-
-        else
-        {
-            cargaTabla(arregloSolicitudes);
-        }
-    }//GEN-LAST:event_txtBusquedaSolicitudActionPerformed
-
-        public void traerSolicitudes()
-    {
-       Solicitud_controlador pantallaRegSolicitud=new Solicitud_controlador();
-       arregloSolicitudes=pantallaRegSolicitud.traerSolicitudes(); 
-       cargaTabla(arregloSolicitudes);
-    }
-    public void cargaTabla(String [][] arregloSolicitudes )
-    {
-      ListSelectionListener eventoClic=new ListSelectionListener(){
-      public void valueChanged(ListSelectionEvent event) {
-          // do some actions here, for example
-          // print first column value from selected row
-          try
-          {
-               cargaInfoAdicionalTabla(tablaSolicitudes.getValueAt(tablaSolicitudes.getSelectedRow(), 0).toString());
-          }
-          
-          catch(Exception e)
-          {
-            //JOptionPane.showMessageDialog(null, e);
-          }
       
-    //            System.out.println(tablaSolicitudes.getValueAt(tablaSolicitudes.getSelectedRow(), 2).toString());
-      }
-    };
-     DefaultTableModel model=(DefaultTableModel) tablaSolicitudes.getModel();
-    tablaSolicitudes.getSelectionModel().removeListSelectionListener(eventoClic);
-     borrarDatoaTabla(model);
-     for(int i=0;i<arregloSolicitudes.length;i++)
-     {
-         String folio=arregloSolicitudes[i][0];
-         String fechsSalida=arregloSolicitudes[i][2];
-         String responsable=arregloSolicitudes[i][3];
-         String status=arregloSolicitudes[i][8];
-         model.addRow(new Object[]{folio,fechsSalida,responsable,status}); 
-     }
-   
-    tablaSolicitudes.getSelectionModel().addListSelectionListener(eventoClic);
-   }
-    
-       public  void borrarDatoaTabla(final DefaultTableModel model) {
-    for( int i = model.getRowCount() - 1; i >= 0; i-- ) {
-        model.removeRow(i);
-    }
-}
-       
-           public void cargaInfoAdicionalTabla(String folio)
-    {
-     for(int i=0;i<arregloSolicitudes.length;i++)
-     {
-         if(arregloSolicitudes[i][0].equals(folio))
-         {
-          lbLugar.setText(arregloSolicitudes[i][5]);
-          lbActividad.setText(arregloSolicitudes[i][6]);
-          lbDias.setText(arregloSolicitudes[i][4]);
-          lbTransporte.setText(arregloSolicitudes[i][10]);
-          lbPernoctado.setText(arregloSolicitudes[i][7]);
-          }
-     }
-    }
     /**
      * @param args the command line arguments
      */
@@ -378,26 +90,6 @@ public class Presidencia_interfaz extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JLabel lbActividad;
-    private javax.swing.JLabel lbDias;
-    private javax.swing.JLabel lbLugar;
-    private javax.swing.JLabel lbPernoctado;
-    private javax.swing.JLabel lbTransporte;
-    private javax.swing.JPanel panelMasDetalles;
-    private javax.swing.JTable tablaSolicitudes;
-    private javax.swing.JTextField txtBusquedaSolicitud;
+    private javax.swing.JTabbedPane jTabbedPane1;
     // End of variables declaration//GEN-END:variables
 }
