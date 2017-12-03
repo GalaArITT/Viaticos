@@ -82,6 +82,8 @@ public class SolicitudNueva extends javax.swing.JPanel {
         txtFechaSalida = new com.toedter.calendar.JDateChooser();
         jLabel8 = new javax.swing.JLabel();
         txtDias = new javax.swing.JSpinner();
+        jLabel1 = new javax.swing.JLabel();
+        txtMonto = new javax.swing.JTextField();
 
         jPanel1.setPreferredSize(new java.awt.Dimension(928, 523));
 
@@ -159,6 +161,8 @@ public class SolicitudNueva extends javax.swing.JPanel {
 
         jLabel8.setText("Duracion en dias");
 
+        jLabel1.setText("Monto");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -178,9 +182,6 @@ public class SolicitudNueva extends javax.swing.JPanel {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(txtDias, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
-                                .addGap(430, 430, 430))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel3)
                                     .addComponent(txtLugar, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -188,10 +189,14 @@ public class SolicitudNueva extends javax.swing.JPanel {
                                     .addComponent(jLabel4)
                                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(rbPernoctado)
-                                        .addGap(29, 29, 29)
-                                        .addComponent(rbNoPernoctado)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                        .addContainerGap()
+                                        .addComponent(jLabel1)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(txtMonto, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtDias, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE))
+                                .addGap(430, 430, 430)))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel5)
@@ -202,7 +207,12 @@ public class SolicitudNueva extends javax.swing.JPanel {
                             .addComponent(txtVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6)
                             .addComponent(jLabel7)
-                            .addComponent(txtFechaSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txtFechaSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(rbPernoctado)
+                        .addGap(29, 29, 29)
+                        .addComponent(rbNoPernoctado)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -211,7 +221,7 @@ public class SolicitudNueva extends javax.swing.JPanel {
                 .addGap(21, 21, 21)
                 .addComponent(lblTituloSol)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -224,10 +234,10 @@ public class SolicitudNueva extends javax.swing.JPanel {
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtDias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(rbPernoctado)
-                            .addComponent(rbNoPernoctado)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtMonto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -244,7 +254,11 @@ public class SolicitudNueva extends javax.swing.JPanel {
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtFechaSalida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(40, 40, 40)
+                .addGap(8, 8, 8)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rbPernoctado)
+                    .addComponent(rbNoPernoctado))
+                .addGap(4, 4, 4)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnEnviar)
                     .addComponent(btnLimpiar))
@@ -389,6 +403,7 @@ public class SolicitudNueva extends javax.swing.JPanel {
 
     private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
         String pernoctado="";
+        float monto=Float.parseFloat(txtMonto.getText());
         String lugar=txtLugar.getText();
         Date fechaSalida= txtFechaSalida.getDate();
         String actividad=txtActividad.getText();
@@ -415,7 +430,7 @@ public class SolicitudNueva extends javax.swing.JPanel {
             
             else
             {
-                objetoSolicitud.insertarSolicitud(fechaSalida,personalViatico,diasDuracion,lugar,actividad,pernoctado,statusViatico,idUsuarioJefeDpto,idVehiculo);
+                objetoSolicitud.insertarSolicitud(fechaSalida,personalViatico,diasDuracion,lugar,actividad,pernoctado,statusViatico,idUsuarioJefeDpto,idVehiculo,monto);
                 limpiarCampos();
                 
             }
@@ -429,6 +444,7 @@ public class SolicitudNueva extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnEnviar;
     private javax.swing.JButton btnLimpiar;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -448,6 +464,7 @@ public class SolicitudNueva extends javax.swing.JPanel {
     private javax.swing.JSpinner txtDias;
     private com.toedter.calendar.JDateChooser txtFechaSalida;
     private javax.swing.JTextField txtLugar;
+    private javax.swing.JTextField txtMonto;
     private javax.swing.JTextField txtResponsable;
     private javax.swing.JTextField txtVehiculo;
     // End of variables declaration//GEN-END:variables

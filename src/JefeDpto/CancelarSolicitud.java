@@ -15,6 +15,7 @@ import javax.swing.JOptionPane;
 public class CancelarSolicitud extends javax.swing.JPanel {
 int idSolicitud=0;
 public String motivoCancelado="";
+public boolean modificado=false;
     /**
      * Creates new form CancelarSolicitud
      */
@@ -102,7 +103,7 @@ public String motivoCancelado="";
       if(!motivoCancelado.equals(""))
       {
           Solicitud_controlador objControlador=new Solicitud_controlador();
-          objControlador.modificarStatus(idSolicitud,"Cancelada");
+          modificado=objControlador.modificarStatus(idSolicitud,"Cancelada");
       }
       
       else

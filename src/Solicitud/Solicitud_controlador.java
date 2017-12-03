@@ -12,10 +12,10 @@ import java.util.Date;
  */
 public class Solicitud_controlador {
 public void insertarSolicitud(Date fechaSalida,String personalViatico, int diasViatico,String lugarViatico,String actividadViatico,
-                              String pernoctado,String statusViatico,int idUsuario,int idVehiculo)
+                              String pernoctado,String statusViatico,int idUsuario,int idVehiculo,float monto)
 {
     Solicitud_modelo objetoSolicitud=new Solicitud_modelo(fechaSalida,personalViatico,diasViatico,lugarViatico,actividadViatico,
-                                                          pernoctado,statusViatico,idUsuario,idVehiculo);
+                                                          pernoctado,statusViatico,idUsuario,idVehiculo,monto);
     objetoSolicitud.insertaSolicitud();
 }
 
@@ -34,9 +34,10 @@ public void modificaSolicitud(int idFolio,Date fechaSalida,String personalViatic
       return arregloSolicitudes;
     }
  
- public void modificarStatus(int idFolio,String status)
+ public boolean modificarStatus(int idFolio,String status)
  {
      Solicitud_modelo objSolicitud=new Solicitud_modelo(idFolio,status);
-     objSolicitud.modificaStatusSolicitud();
+     boolean modificado=objSolicitud.modificaStatusSolicitud();
+     return modificado;
  }
 }

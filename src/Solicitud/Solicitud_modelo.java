@@ -36,7 +36,7 @@ public class Solicitud_modelo {
      private int idUsuario;
      private int idVehiculo;
      private int idSolicitud;
-     
+     private float monto;
      
     
     Conexion con = new Conexion();
@@ -51,7 +51,7 @@ public class Solicitud_modelo {
      }
      
     public Solicitud_modelo(Date fechaSalida,String personalViatico, int diasViatico,String lugarViatico,String actividadViatico,
-                            String pernoctado,String statusViatico,int idUsuario,int idVehiculo) 
+                            String pernoctado,String statusViatico,int idUsuario,int idVehiculo,float monto) 
     {   
         this.fechaSalida = new java.sql.Date(fechaSalida.getTime());
         this.personalViatico=personalViatico;
@@ -62,8 +62,7 @@ public class Solicitud_modelo {
         this.statusViatico=statusViatico;
         this.idUsuario=idUsuario;
         this.idVehiculo=idVehiculo;
-        
-        
+        this.monto=monto;
     }
     
     public Solicitud_modelo(int idSolicitud,Date fechaSalida,String personalViatico, int diasViatico,String lugarViatico,String actividadViatico,
@@ -188,9 +187,10 @@ public class Solicitud_modelo {
                     + "Status_Viat,"
                     + "idVehiculo_Viat,"
                     + "Permotado_Viat,"
-                    + "Dias_Viat"
+                    + "Dias_Viat,"
+                    + "monto"
                     + ")"
-                    + "values(?,?,now(),?,?,?,?,?,?,?,?)";
+                    + "values(?,?,now(),?,?,?,?,?,?,?,?,?)";
             
             PreparedStatement pst = conn.prepareStatement(sqlSol); 
             
@@ -204,7 +204,8 @@ public class Solicitud_modelo {
             pst.setInt(8,idVehiculo);
             pst.setString(9,pernoctado);
             pst.setInt(10,diasViatico);
-             
+            pst.setFloat(11,monto);
+            
             pst.executeUpdate();
        }
 
@@ -262,7 +263,7 @@ public class Solicitud_modelo {
         }
     }
     
-    public void modificaStatusSolicitud()
+    public boolean modificaStatusSolicitud()
     {
         try
         {
@@ -286,6 +287,7 @@ public class Solicitud_modelo {
         finally 
         {
             JOptionPane.showMessageDialog(null,"Solicitud cancelada");
+            return true;
         }
     }
     
@@ -445,7 +447,8 @@ public class Solicitud_modelo {
      public String [][] traerSolicitudesViaticos(String status)
     {
        int filas=obtenerCantidadSolicitudes(status);
-        String arregloSolicitudes[][]=new String[filas][12];
+       
+        String arregloSolicitudes[][]=new String[filas][13];
         try {
             Conexion con=new Conexion();
             Connection conn=con.getConexion();
@@ -453,12 +456,12 @@ public class Solicitud_modelo {
             
             String sql="select idViaticos,Fol_Viat,FechaSal_Viat,Personal_Viat," +
             "Dias_Viat,Lugar_Viat,Act_Viat,Permotado_Viat,Status_Viat," +
-            "usr_viaticos.Usuario_idUsuario,nom_prod,idVehiculo_Viat " +
+            "usr_viaticos.Usuario_idUsuario,nom_prod,idVehiculo_Viat,monto" +
             " from Solicitud_Viaticos " +
             " inner join productos ON productos.idProductos=Solicitud_Viaticos.idVehiculo_Viat" +
             " inner join usr_viaticos on usr_viaticos.Solicitud_Viaticos_idViaticos=solicitud_viaticos.idViaticos"
                     + " where Status_Viat='"+status+"'";
-            //JOptionPane.showMessageDialog(null,sql);
+           
              ResultSet resul=stm.executeQuery(sql);
              DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
 
@@ -477,7 +480,7 @@ public class Solicitud_modelo {
                int idUsuario=resul.getInt("Usuario_idUsuario");
                String nom_prod=resul.getString("nom_prod");
                int idVehiculo=resul.getInt("idVehiculo_Viat");
-          
+               float monto=resul.getFloat("monto");
          
                arregloSolicitudes[fila][0]=String.valueOf(idSolViatico);
                arregloSolicitudes[fila][1]=String.valueOf(folViatico);
@@ -491,6 +494,7 @@ public class Solicitud_modelo {
                arregloSolicitudes[fila][9]=String.valueOf(idUsuario);
                arregloSolicitudes[fila][10]=nom_prod;
                arregloSolicitudes[fila][11]=String.valueOf(idVehiculo);
+               arregloSolicitudes[fila][12]=String.valueOf(monto);
             
       }
            

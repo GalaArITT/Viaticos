@@ -46,6 +46,7 @@ public class SolicitudRegistros extends javax.swing.JPanel {
  String pernoctado="";
  String fecha="";
  String idFolio;
+ boolean datosModificados=false;
     /**
      * Creates new form SolicitudRegistros
      */
@@ -104,7 +105,13 @@ public class SolicitudRegistros extends javax.swing.JPanel {
         btnMostrarTodo = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cbStatus = new javax.swing.JComboBox<>();
+
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                formMouseEntered(evt);
+            }
+        });
 
         jLabel9.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel9.setText("Solicitudes que has realizado");
@@ -212,7 +219,7 @@ public class SolicitudRegistros extends javax.swing.JPanel {
                 .addGroup(panelMasDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel22)
                     .addComponent(lbPernoctado))
-                .addContainerGap(9, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jLabel1.setText("Busca una solicitud por fecha");
@@ -233,10 +240,10 @@ public class SolicitudRegistros extends javax.swing.JPanel {
 
         jLabel2.setText("Filtra las solicitudes");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Solicitadas", "Aprobadas", "Canceladas" }));
-        jComboBox1.addItemListener(new java.awt.event.ItemListener() {
+        cbStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Solicitadas", "Aprobadas", "Canceladas" }));
+        cbStatus.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jComboBox1ItemStateChanged(evt);
+                cbStatusItemStateChanged(evt);
             }
         });
 
@@ -262,7 +269,7 @@ public class SolicitudRegistros extends javax.swing.JPanel {
                             .addComponent(jLabel12)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel2))
                                 .addGap(134, 134, 134)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -286,7 +293,7 @@ public class SolicitudRegistros extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtBusquedaSolicitud, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(12, 12, 12)
                         .addComponent(jLabel12))
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -399,6 +406,7 @@ public class SolicitudRegistros extends javax.swing.JPanel {
           lbDias.setText(arregloSolicitudes[i][4]);
           lbTransporte.setText(arregloSolicitudes[i][10]);
           lbPernoctado.setText(arregloSolicitudes[i][7]);
+//          lblMontotxt.setText(arregloSolicitudes[i][12]);
           
           lugar=arregloSolicitudes[i][5];
           actividad=arregloSolicitudes[i][6];
@@ -498,6 +506,7 @@ public void reactivarVentana()
 }
      
     private void btnEditaSolicitudActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditaSolicitudActionPerformed
+
         JDialog jdModificarSol=new JDialog();
         jdModificarSol.setSize(820,491);
         ModificarSolicitud ventanaMod=new ModificarSolicitud();
@@ -522,6 +531,7 @@ public void reactivarVentana()
                 lbDias.setText("");
                 lbTransporte.setText("");
                 lbPernoctado.setText("");
+                datosModificados=true;           
             }
         });
          
@@ -561,7 +571,7 @@ public void reactivarVentana()
                 {
                   jdCancelar.dispose();
                   reactivarVentana();
-                  traerSolicitudes("Solicitada");
+                  datosModificados=true;
                 }
             }
         });
@@ -579,7 +589,7 @@ public void reactivarVentana()
         }); 
     }//GEN-LAST:event_btnCancelarActionPerformed
 
-    private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
+    private void cbStatusItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbStatusItemStateChanged
          if (evt.getStateChange() == ItemEvent.SELECTED) {
           Object item = evt.getItem();
           String status="";
@@ -599,15 +609,37 @@ public void reactivarVentana()
           }
           traerSolicitudes(status);
        }
-    }//GEN-LAST:event_jComboBox1ItemStateChanged
+    }//GEN-LAST:event_cbStatusItemStateChanged
+
+    private void formMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseEntered
+
+       if(datosModificados)
+       {
+           if(cbStatus.getSelectedItem().toString().equals("Solicitadas"))
+                {
+                    traerSolicitudes("Solicitada");
+                }
+                
+                if(cbStatus.getSelectedItem().toString().equals("Aprobadas"))
+                {
+                    traerSolicitudes("Aprobada");
+                }
+                
+                if(cbStatus.getSelectedItem().toString().equals("Canceladas"))
+                {
+                    traerSolicitudes("Cancelada");
+                }
+                datosModificados=false;
+       }
+    }//GEN-LAST:event_formMouseEntered
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     public javax.swing.JButton btnEditaSolicitud;
     private javax.swing.JButton btnMostrarTodo;
+    private javax.swing.JComboBox<String> cbStatus;
     private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
