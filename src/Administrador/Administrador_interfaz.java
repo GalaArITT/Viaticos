@@ -11,11 +11,15 @@ package Administrador;
  */
 public class Administrador_interfaz extends javax.swing.JFrame {
     Administrador.SolicitudRegistros pantallaRegistrosSolicitud=new Administrador.SolicitudRegistros();
+    Administrador.InformesRegistros pantallaInformeRegistros = new Administrador.InformesRegistros();
     
     public Administrador_interfaz() {
         initComponents();
         pantallaRegistrosSolicitud.setVisible(true);
         tbAdministrador.add("Solicitudes",pantallaRegistrosSolicitud);
+        pantallaInformeRegistros.setVisible(true);
+        tbAdministrador.add("Informes",pantallaInformeRegistros);
+        
     }
 
     /**
