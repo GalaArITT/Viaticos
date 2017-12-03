@@ -14,6 +14,7 @@ import javax.swing.table.DefaultTableModel;
  * @author oliver
  */
 public class Presidencia_interfaz extends javax.swing.JFrame {
+    Presidencia.SolicitudRegistros pantallaRegistrosSolicitud=new Presidencia.SolicitudRegistros();
     String[][] arregloSolicitudes;
 
     /**
@@ -22,6 +23,8 @@ public class Presidencia_interfaz extends javax.swing.JFrame {
     public Presidencia_interfaz() {
         initComponents();
         //traerSolicitudes();
+        pantallaRegistrosSolicitud.setVisible(true);
+        tbPresidencia.add("Solicitudes Elaboradas",pantallaRegistrosSolicitud);  
     }
 
     /**
@@ -33,7 +36,7 @@ public class Presidencia_interfaz extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        tbPresidencia = new javax.swing.JTabbedPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -41,12 +44,12 @@ public class Presidencia_interfaz extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 953, Short.MAX_VALUE)
+            .addComponent(tbPresidencia, javax.swing.GroupLayout.DEFAULT_SIZE, 953, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 571, Short.MAX_VALUE)
+                .addComponent(tbPresidencia, javax.swing.GroupLayout.DEFAULT_SIZE, 571, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -90,6 +93,6 @@ public class Presidencia_interfaz extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTabbedPane tbPresidencia;
     // End of variables declaration//GEN-END:variables
 }
