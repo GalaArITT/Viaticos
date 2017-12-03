@@ -403,7 +403,15 @@ public class SolicitudNueva extends javax.swing.JPanel {
 
     private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
         String pernoctado="";
-        float monto=Float.parseFloat(txtMonto.getText());
+        float monto=0;
+        try
+        {
+         monto=Float.parseFloat(txtMonto.getText());
+        }
+        catch(NumberFormatException ex)
+        {
+          monto=0;
+        }
         String lugar=txtLugar.getText();
         Date fechaSalida= txtFechaSalida.getDate();
         String actividad=txtActividad.getText();

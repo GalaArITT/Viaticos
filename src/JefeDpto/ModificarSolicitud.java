@@ -425,13 +425,22 @@ DefaultListModel <String> modeloResponsables=new DefaultListModel <>();
     }//GEN-LAST:event_txtVehiculoKeyReleased
 
     private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
+        
+        float monto=0;
+        try
+        {
+         monto=Float.parseFloat(txtMonto.getText());
+        }
+        catch(NumberFormatException ex)
+        {
+          monto=0;
+        }
         String pernoctado="";
         String lugar=txtLugar.getText();
         Date fechaSalida= txtFechaSalida.getDate();
         String actividad=txtActividad.getText();
         String personalViatico=txtResponsable.getText();
         String statusViatico="Solicitado";
-        float monto=Float.parseFloat(txtMonto.getText());
         int idUsuarioJefeDpto=1;
         int diasDuracion=(Integer)txtDias.getValue();
 
