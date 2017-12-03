@@ -81,6 +81,8 @@ DefaultListModel <String> modeloResponsables=new DefaultListModel <>();
         txtFechaSalida = new com.toedter.calendar.JDateChooser();
         jLabel8 = new javax.swing.JLabel();
         txtDias = new javax.swing.JSpinner();
+        jLabel9 = new javax.swing.JLabel();
+        txtMonto = new javax.swing.JTextField();
 
         lblTituloSol.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         lblTituloSol.setText("Ingresa una nueva solicitud");
@@ -156,6 +158,8 @@ DefaultListModel <String> modeloResponsables=new DefaultListModel <>();
 
         jLabel8.setText("Duracion en dias");
 
+        jLabel9.setText("Monto");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -164,19 +168,10 @@ DefaultListModel <String> modeloResponsables=new DefaultListModel <>();
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(lblTituloSol)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(btnEnviar)
-                                .addGap(23, 23, 23)
-                                .addComponent(btnLimpiar))))
+                        .addComponent(lblTituloSol)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(txtDias, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
-                                .addGap(430, 430, 430))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel3)
@@ -185,10 +180,16 @@ DefaultListModel <String> modeloResponsables=new DefaultListModel <>();
                                     .addComponent(jLabel4)
                                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(rbPernoctado)
-                                        .addGap(29, 29, 29)
-                                        .addComponent(rbNoPernoctado)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                        .addContainerGap()
+                                        .addComponent(jLabel9)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(txtDias, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
+                                .addGap(430, 430, 430))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(txtMonto)
+                                .addGap(444, 444, 444)))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel5)
@@ -199,7 +200,15 @@ DefaultListModel <String> modeloResponsables=new DefaultListModel <>();
                             .addComponent(txtVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6)
                             .addComponent(jLabel7)
-                            .addComponent(txtFechaSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txtFechaSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(rbPernoctado)
+                        .addGap(29, 29, 29)
+                        .addComponent(rbNoPernoctado)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnEnviar)
+                        .addGap(23, 23, 23)
+                        .addComponent(btnLimpiar)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -208,7 +217,7 @@ DefaultListModel <String> modeloResponsables=new DefaultListModel <>();
                 .addGap(21, 21, 21)
                 .addComponent(lblTituloSol)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -221,10 +230,10 @@ DefaultListModel <String> modeloResponsables=new DefaultListModel <>();
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtDias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(rbPernoctado)
-                            .addComponent(rbNoPernoctado)))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtMonto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -241,11 +250,18 @@ DefaultListModel <String> modeloResponsables=new DefaultListModel <>();
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtFechaSalida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnEnviar)
-                    .addComponent(btnLimpiar))
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnEnviar)
+                            .addComponent(btnLimpiar))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(rbPernoctado)
+                            .addComponent(rbNoPernoctado))
+                        .addGap(28, 28, 28))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -261,7 +277,7 @@ DefaultListModel <String> modeloResponsables=new DefaultListModel <>();
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 466, Short.MAX_VALUE)
+            .addGap(0, 468, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -271,7 +287,7 @@ DefaultListModel <String> modeloResponsables=new DefaultListModel <>();
     }// </editor-fold>//GEN-END:initComponents
     
      public void cargarCamposModificar(String lugar,String actividad,String dias,String responsable
-    ,String vehiculo,String pernoctado,String idFolio,String fecha,int idVehiculo)
+    ,String vehiculo,String pernoctado,String idFolio,String fecha,int idVehiculo,float monto)
     {
                 txtLugar.setText(lugar);
                 txtActividad.setText(actividad);
@@ -281,6 +297,7 @@ DefaultListModel <String> modeloResponsables=new DefaultListModel <>();
                 rbPernoctado.setSelected(pernoctado.equals("si"));
                 rbNoPernoctado.setSelected(pernoctado.equals("no"));
                 lblTituloSol.setText("Modifica la solicitud (Folio "+idFolio+")");
+                txtMonto.setText(String.valueOf(monto));
                 this.idFolio=idFolio;
                 this.idVehiculo=idVehiculo;
                 try {
@@ -414,6 +431,7 @@ DefaultListModel <String> modeloResponsables=new DefaultListModel <>();
         String actividad=txtActividad.getText();
         String personalViatico=txtResponsable.getText();
         String statusViatico="Solicitado";
+        float monto=Float.parseFloat(txtMonto.getText());
         int idUsuarioJefeDpto=1;
         int diasDuracion=(Integer)txtDias.getValue();
 
@@ -436,7 +454,7 @@ DefaultListModel <String> modeloResponsables=new DefaultListModel <>();
          
          else
          {
-            objetoSolicitud.modificaSolicitud(Integer.parseInt(idFolio),fechaSalida,personalViatico,diasDuracion,lugar,actividad,pernoctado,statusViatico,idUsuarioJefeDpto,idVehiculo);
+            objetoSolicitud.modificaSolicitud(Integer.parseInt(idFolio),fechaSalida,personalViatico,diasDuracion,lugar,actividad,pernoctado,statusViatico,idUsuarioJefeDpto,idVehiculo,monto);
             limpiarCampos();
          }
     }//GEN-LAST:event_btnEnviarActionPerformed
@@ -456,6 +474,7 @@ DefaultListModel <String> modeloResponsables=new DefaultListModel <>();
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -469,6 +488,7 @@ DefaultListModel <String> modeloResponsables=new DefaultListModel <>();
     private javax.swing.JSpinner txtDias;
     private com.toedter.calendar.JDateChooser txtFechaSalida;
     private javax.swing.JTextField txtLugar;
+    private javax.swing.JTextField txtMonto;
     private javax.swing.JTextField txtResponsable;
     private javax.swing.JTextField txtVehiculo;
     // End of variables declaration//GEN-END:variables

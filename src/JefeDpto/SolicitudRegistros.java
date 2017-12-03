@@ -47,6 +47,7 @@ public class SolicitudRegistros extends javax.swing.JPanel {
  String fecha="";
  String idFolio;
  boolean datosModificados=false;
+ float monto;
     /**
      * Creates new form SolicitudRegistros
      */
@@ -90,15 +91,10 @@ public class SolicitudRegistros extends javax.swing.JPanel {
         btnEditaSolicitud = new javax.swing.JButton();
         panelMasDetalles = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
         lbLugar = new javax.swing.JLabel();
         lbActividad = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
         lbDias = new javax.swing.JLabel();
-        jLabel20 = new javax.swing.JLabel();
         lbTransporte = new javax.swing.JLabel();
-        jLabel22 = new javax.swing.JLabel();
         lbPernoctado = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         txtFechaSalidaBusqueda = new com.toedter.calendar.JDateChooser();
@@ -156,16 +152,6 @@ public class SolicitudRegistros extends javax.swing.JPanel {
 
         jLabel13.setText("Mas detalles...");
 
-        jLabel14.setText("Lugar:");
-
-        jLabel17.setText("Actividad:");
-
-        jLabel18.setText("Dias:");
-
-        jLabel20.setText("Transporte:");
-
-        jLabel22.setText("Pernoctado:");
-
         javax.swing.GroupLayout panelMasDetallesLayout = new javax.swing.GroupLayout(panelMasDetalles);
         panelMasDetalles.setLayout(panelMasDetallesLayout);
         panelMasDetallesLayout.setHorizontalGroup(
@@ -173,25 +159,19 @@ public class SolicitudRegistros extends javax.swing.JPanel {
             .addGroup(panelMasDetallesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelMasDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(panelMasDetallesLayout.createSequentialGroup()
-                        .addComponent(jLabel20)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(75, 75, 75)
                         .addComponent(lbTransporte, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelMasDetallesLayout.createSequentialGroup()
-                        .addGroup(panelMasDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel17)
-                            .addComponent(jLabel14)
-                            .addComponent(jLabel18))
-                        .addGap(24, 24, 24)
+                        .addGap(75, 75, 75)
                         .addGroup(panelMasDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lbLugar, javax.swing.GroupLayout.PREFERRED_SIZE, 533, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lbActividad, javax.swing.GroupLayout.PREFERRED_SIZE, 533, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lbDias, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(panelMasDetallesLayout.createSequentialGroup()
-                        .addComponent(jLabel22)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lbPernoctado, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(78, 78, 78)
+                        .addComponent(lbPernoctado, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelMasDetallesLayout.setVerticalGroup(
@@ -200,26 +180,16 @@ public class SolicitudRegistros extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jLabel13)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelMasDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel14)
-                    .addComponent(lbLugar))
+                .addComponent(lbLugar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelMasDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel17)
-                    .addComponent(lbActividad))
+                .addComponent(lbActividad)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelMasDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel18)
-                    .addComponent(lbDias))
+                .addComponent(lbDias)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelMasDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel20)
-                    .addComponent(lbTransporte))
+                .addComponent(lbTransporte)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelMasDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel22)
-                    .addComponent(lbPernoctado))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(lbPernoctado)
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         jLabel1.setText("Busca una solicitud por fecha");
@@ -317,7 +287,7 @@ public class SolicitudRegistros extends javax.swing.JPanel {
                 .addComponent(panelMasDetalles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel10)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -337,7 +307,7 @@ public class SolicitudRegistros extends javax.swing.JPanel {
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 28, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 29, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -401,12 +371,13 @@ public class SolicitudRegistros extends javax.swing.JPanel {
      {
          if(arregloSolicitudes[i][1].equals(folio))
          {
-          lbLugar.setText(arregloSolicitudes[i][5]);
-          lbActividad.setText(arregloSolicitudes[i][6]);
-          lbDias.setText(arregloSolicitudes[i][4]);
-          lbTransporte.setText(arregloSolicitudes[i][10]);
-          lbPernoctado.setText(arregloSolicitudes[i][7]);
-//          lblMontotxt.setText(arregloSolicitudes[i][12]);
+          jLabel13.setText("<html>Mas detalles...<br>"
+	+"<strong>Lugar: </strong>"+arregloSolicitudes[i][5]+"<br>"+
+	"<strong>Actividad: </strong>"+arregloSolicitudes[i][6]+"<br>"+
+	"<strong>Dias: </strong>"+arregloSolicitudes[i][4]+"<br>"+
+	"<strong>Transporte: </strong>"+arregloSolicitudes[i][10]+"<br>"+
+	"<strong>Pernoctado: </strong>"+arregloSolicitudes[i][7]+"<br>"+
+	"<strong>Monto: </strong>"+arregloSolicitudes[i][12]+"</html>");
           
           lugar=arregloSolicitudes[i][5];
           actividad=arregloSolicitudes[i][6];
@@ -417,6 +388,7 @@ public class SolicitudRegistros extends javax.swing.JPanel {
           fecha=arregloSolicitudes[i][2];
           idFolio=arregloSolicitudes[i][0];
           idVehiculo=Integer.parseInt(arregloSolicitudes[i][11]);
+          monto=Float.parseFloat(arregloSolicitudes[i][12]);
           }
      }
     }
@@ -506,11 +478,11 @@ public void reactivarVentana()
 }
      
     private void btnEditaSolicitudActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditaSolicitudActionPerformed
-
+        
         JDialog jdModificarSol=new JDialog();
         jdModificarSol.setSize(820,491);
         ModificarSolicitud ventanaMod=new ModificarSolicitud();
-        ventanaMod.cargarCamposModificar(lugar, actividad, dias, responsable, vehiculo, pernoctado, idFolio, fecha,idVehiculo);
+        ventanaMod.cargarCamposModificar(lugar, actividad, dias, responsable, vehiculo, pernoctado, idFolio, fecha,idVehiculo,monto);
         jdModificarSol.add(ventanaMod);
         jdModificarSol.setVisible(true); 
         jdModificarSol.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -645,12 +617,7 @@ public void reactivarVentana()
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane4;

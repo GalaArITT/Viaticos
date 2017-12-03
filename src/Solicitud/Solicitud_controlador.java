@@ -20,10 +20,10 @@ public void insertarSolicitud(Date fechaSalida,String personalViatico, int diasV
 }
 
 public void modificaSolicitud(int idFolio,Date fechaSalida,String personalViatico, int diasViatico,String lugarViatico,String actividadViatico,
-                              String pernoctado,String statusViatico,int idUsuario,int idVehiculo)
+                              String pernoctado,String statusViatico,int idUsuario,int idVehiculo,float monto)
 {
     Solicitud_modelo objetoSolicitud=new Solicitud_modelo(idFolio,fechaSalida,personalViatico,diasViatico,lugarViatico,actividadViatico,
-                                                          pernoctado,statusViatico,idUsuario,idVehiculo);
+                                                          pernoctado,statusViatico,idUsuario,idVehiculo,monto);
     objetoSolicitud.modificaSolicitud();
 }
 

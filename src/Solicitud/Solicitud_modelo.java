@@ -66,7 +66,7 @@ public class Solicitud_modelo {
     }
     
     public Solicitud_modelo(int idSolicitud,Date fechaSalida,String personalViatico, int diasViatico,String lugarViatico,String actividadViatico,
-                            String pernoctado,String statusViatico,int idUsuario,int idVehiculo) 
+                            String pernoctado,String statusViatico,int idUsuario,int idVehiculo,float monto) 
     {   
         this.idSolicitud=idSolicitud;
         this.fechaSalida = new java.sql.Date(fechaSalida.getTime());
@@ -78,8 +78,7 @@ public class Solicitud_modelo {
         this.statusViatico=statusViatico;
         this.idUsuario=idUsuario;
         this.idVehiculo=idVehiculo;
-        
-        
+        this.monto=monto;
     }
     
     public int comprobarExistenciaSolicitudes()
@@ -235,7 +234,8 @@ public class Solicitud_modelo {
                     + "Permotado_Viat=?,"
                     + "FechaSal_Viat=?,"
                     + "Personal_Viat=?,"
-                    + "Dias_Viat=?"
+                    + "Dias_Viat=?,"
+                    + "monto=?"
                     + " where idViaticos=?";
             
             PreparedStatement pst = conn.prepareStatement(sqlModSol); 
@@ -247,7 +247,8 @@ public class Solicitud_modelo {
             pst.setDate(5,fechaSalida);
             pst.setString(6,personalViatico);
              pst.setInt(7,diasViatico);
-            pst.setInt(8,idSolicitud);
+             pst.setFloat(8,monto);
+            pst.setInt(9,idSolicitud);
             
             pst.executeUpdate();
        }
