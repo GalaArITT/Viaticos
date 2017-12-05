@@ -91,7 +91,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Motivio de la cancelaci&#xf3;n (Obligatorio)"/>
+            <Property name="text" type="java.lang.String" value="Motivio de la denegacio&#xf3;n (Obligatorio)"/>
           </Properties>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane1">
@@ -114,7 +114,7 @@
         </Container>
         <Component class="javax.swing.JButton" name="btnCancelarSol">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Cancelar solicitud"/>
+            <Property name="text" type="java.lang.String" value="Denegar solicitud"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCancelarSolActionPerformed"/>

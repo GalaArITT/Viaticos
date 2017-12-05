@@ -97,7 +97,6 @@ public class SolicitudRegistros extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         txtFechaSalidaBusqueda = new com.toedter.calendar.JDateChooser();
         btnMostrarTodo = new javax.swing.JButton();
-        btnCancelar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         cbStatus = new javax.swing.JComboBox<>();
 
@@ -199,16 +198,9 @@ public class SolicitudRegistros extends javax.swing.JPanel {
             }
         });
 
-        btnCancelar.setText("Cancelar");
-        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelarActionPerformed(evt);
-            }
-        });
-
         jLabel2.setText("Filtra las solicitudes");
 
-        cbStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Solicitadas", "Aprobadas", "Canceladas" }));
+        cbStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Solicitadas", "Aprobadas", "Canceladas", "No aprobadas" }));
         cbStatus.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cbStatusItemStateChanged(evt);
@@ -226,8 +218,6 @@ public class SolicitudRegistros extends javax.swing.JPanel {
                         .addComponent(btnEditaSolicitud, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnCancelar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnMostrarTodo))
                     .addComponent(jLabel9)
@@ -279,8 +269,7 @@ public class SolicitudRegistros extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnEditaSolicitud)
                     .addComponent(jButton1)
-                    .addComponent(btnMostrarTodo)
-                    .addComponent(btnCancelar))
+                    .addComponent(btnMostrarTodo))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelMasDetalles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -372,40 +361,6 @@ public class SolicitudRegistros extends javax.swing.JPanel {
         cargaTabla(arregloSolicitudes);
     }//GEN-LAST:event_btnMostrarTodoActionPerformed
 
-    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        JDialog jdCancelar=new JDialog();
-        jdCancelar.setSize(410,310);
-        CancelarSolicitud ventanaCancel=new CancelarSolicitud();
-        ventanaCancel.cargarCampos(Integer.parseInt(idFolio));
-        jdCancelar.add(ventanaCancel);
-        jdCancelar.setVisible(true);
-        jdCancelar.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-
-        ventanaCancel.btnCancelarSol.addActionListener(new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent arg0) {
-                if(!ventanaCancel.motivoCancelado.equals(""))
-                {
-                    jdCancelar.dispose();
-                    reactivarVentana();
-                    datosModificados=true;
-                }
-            }
-        });
-
-        for(Component component : getComponents(this))
-        {
-            component.setEnabled(false);
-        }
-
-        jdCancelar.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosed(WindowEvent e) {
-                reactivarVentana();
-            }
-        });
-    }//GEN-LAST:event_btnCancelarActionPerformed
-
     private void cbStatusItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbStatusItemStateChanged
         if (evt.getStateChange() == ItemEvent.SELECTED) {
             Object item = evt.getItem();
@@ -423,6 +378,11 @@ public class SolicitudRegistros extends javax.swing.JPanel {
             if(item.equals("Canceladas"))
             {
                 status="Cancelada";
+            }
+            
+            if(item.equals("No aprobadas"))
+            {
+                status="No aprobada";
             }
             traerSolicitudes(status);
         }
@@ -444,6 +404,11 @@ public class SolicitudRegistros extends javax.swing.JPanel {
                 if(cbStatus.getSelectedItem().toString().equals("Canceladas"))
                 {
                     traerSolicitudes("Cancelada");
+                }
+                
+                if(cbStatus.getSelectedItem().toString().equals("No aprobadas"))
+                {
+                    traerSolicitudes("No aprobada");
                 }
                 datosModificados=false;
        }
@@ -598,7 +563,6 @@ public void reactivarVentana()
 }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCancelar;
     public javax.swing.JButton btnEditaSolicitud;
     private javax.swing.JButton btnMostrarTodo;
     private javax.swing.JComboBox<String> cbStatus;

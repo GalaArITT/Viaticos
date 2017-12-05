@@ -5,7 +5,7 @@
  */
 package Presidencia;
 
-import JefeDpto.ModificarSolicitud;
+
 import Solicitud.Solicitud_controlador;
 import java.awt.Component;
 import java.awt.Container;
@@ -103,6 +103,7 @@ public class SolicitudRegistros extends javax.swing.JPanel {
         btnCancelar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         cbStatus = new javax.swing.JComboBox<>();
+        btnAprobar = new javax.swing.JButton();
 
         jPanel2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -194,7 +195,7 @@ public class SolicitudRegistros extends javax.swing.JPanel {
             }
         });
 
-        btnCancelar.setText("Aprobar");
+        btnCancelar.setText("No aprobar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarActionPerformed(evt);
@@ -203,10 +204,17 @@ public class SolicitudRegistros extends javax.swing.JPanel {
 
         jLabel2.setText("Filtra las solicitudes");
 
-        cbStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Solicitadas", "Aprobadas", "Canceladas" }));
+        cbStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Solicitadas", "Aprobadas", "No aprobadas" }));
         cbStatus.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cbStatusItemStateChanged(evt);
+            }
+        });
+
+        btnAprobar.setText("Aprobar");
+        btnAprobar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAprobarActionPerformed(evt);
             }
         });
 
@@ -219,7 +227,9 @@ public class SolicitudRegistros extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGap(51, 51, 51)
+                        .addComponent(btnAprobar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnCancelar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnMostrarTodo))
@@ -272,10 +282,12 @@ public class SolicitudRegistros extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnMostrarTodo)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCancelar))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnAprobar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnCancelar)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelMasDetalles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -371,9 +383,9 @@ public class SolicitudRegistros extends javax.swing.JPanel {
                 status="Aprobada";
             }
 
-            if(item.equals("Canceladas"))
+            if(item.equals("No aprobadas"))
             {
-                status="Cancelada";
+                status="No Aprobada";
             }
             traerSolicitudes(status);
         }
@@ -399,6 +411,13 @@ public class SolicitudRegistros extends javax.swing.JPanel {
             datosModificados=false;
         }
     }//GEN-LAST:event_jPanel2MouseEntered
+
+    private void btnAprobarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAprobarActionPerformed
+     Solicitud_controlador objControlador=new Solicitud_controlador();
+     int idSolicitud=Integer.parseInt(idFolio);
+     objControlador.modificarStatus(idSolicitud,"Aprobada");
+     traerSolicitudes("Solicitada");
+    }//GEN-LAST:event_btnAprobarActionPerformed
 
     public void traerSolicitudes(String status){
        Solicitud_controlador objUsuario=new Solicitud_controlador();
@@ -553,6 +572,7 @@ public void reactivarVentana()
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAprobar;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnMostrarTodo;
     private javax.swing.JComboBox<String> cbStatus;

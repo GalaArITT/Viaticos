@@ -15,8 +15,11 @@ public class Empleado_interfaz extends javax.swing.JFrame {
      * Creates new form Empleado_interfaz
      */
     public Empleado_interfaz() {
-        initComponents();
-    }
+         initComponents();
+        SolicitudRegistros pantallaRegistros=new SolicitudRegistros();
+        pantallaRegistros.setVisible(true);
+        tbOficiosInformes.add("Tus comisiones",pantallaRegistros);
+ }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -35,12 +38,12 @@ public class Empleado_interfaz extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tbOficiosInformes, javax.swing.GroupLayout.DEFAULT_SIZE, 902, Short.MAX_VALUE)
+            .addComponent(tbOficiosInformes, javax.swing.GroupLayout.DEFAULT_SIZE, 1016, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(tbOficiosInformes, javax.swing.GroupLayout.DEFAULT_SIZE, 550, Short.MAX_VALUE)
+                .addComponent(tbOficiosInformes, javax.swing.GroupLayout.DEFAULT_SIZE, 594, Short.MAX_VALUE)
                 .addContainerGap())
         );
 

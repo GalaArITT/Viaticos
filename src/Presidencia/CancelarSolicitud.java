@@ -22,7 +22,7 @@ public String motivoCancelado="";
         public void cargarCampos(int idSolicitud)
     {
         this.idSolicitud=idSolicitud;
-        lblCancela.setText("Cancela una solicitud (folio "+idSolicitud+")");
+        lblCancela.setText("Denegar una solicitud (folio "+idSolicitud+")");
     }
 
 
@@ -45,7 +45,7 @@ public String motivoCancelado="";
         lblCancela.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         lblCancela.setText("Cancela una solicitud (Folio)");
 
-        jLabel2.setText("Motivio de la cancelación (Obligatorio)");
+        jLabel2.setText("Motivio de la denegacioón (Obligatorio)");
 
         txtCancela.setColumns(20);
         txtCancela.setRows(5);
@@ -56,7 +56,7 @@ public String motivoCancelado="";
         });
         jScrollPane1.setViewportView(txtCancela);
 
-        btnCancelarSol.setText("Cancelar solicitud");
+        btnCancelarSol.setText("Denegar solicitud");
         btnCancelarSol.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarSolActionPerformed(evt);
@@ -130,7 +130,7 @@ public String motivoCancelado="";
 
         else
         {
-            JOptionPane.showMessageDialog(null,"Debe haber un motivo de cancelación");
+            JOptionPane.showMessageDialog(null,"Debe haber un motivo de no aprobación");
         }
     }//GEN-LAST:event_btnCancelarSolActionPerformed
 

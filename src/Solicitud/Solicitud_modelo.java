@@ -44,11 +44,17 @@ public class Solicitud_modelo {
     
     public Solicitud_modelo() {}
     
+     public Solicitud_modelo(int idFolio) 
+     {
+      this.idSolicitud=idFolio;
+     }
+    
      public Solicitud_modelo(int idFolio,String statusViatico) 
      {
       this.idSolicitud=idFolio;
         this.statusViatico=statusViatico;
      }
+     
      
     public Solicitud_modelo(Date fechaSalida,String personalViatico, int diasViatico,String lugarViatico,String actividadViatico,
                             String pernoctado,String statusViatico,int idUsuario,int idVehiculo,float monto) 
@@ -105,7 +111,6 @@ public class Solicitud_modelo {
          {
              Logger.getLogger(usuarios_modelo.class.getName()).log(Level.SEVERE, null, ex);
          }
-        
         return totalRegistros;
     }
     
@@ -216,8 +221,8 @@ public class Solicitud_modelo {
         finally 
         {
             insertaUsuarioViatico();
-            insertarSolicitudDetalles();
-            insertarUsuarioDetalle();
+            //insertarSolicitudDetalles();
+            //insertarUsuarioDetalle();
             JOptionPane.showMessageDialog(null,"Solicitud enviada para su revisión");
         }
     }
@@ -287,7 +292,7 @@ public class Solicitud_modelo {
 
         finally 
         {
-            JOptionPane.showMessageDialog(null,"Solicitud cancelada");
+            JOptionPane.showMessageDialog(null,"Solicitud "+statusViatico);
             return true;
         }
     }
@@ -529,4 +534,205 @@ public class Solicitud_modelo {
        return cantidadSol;
     }
     
+    
+    public int obtenerCantidadComisiones(String status)
+    {
+       int cantidadSol=0;
+       try {
+            Conexion con=new Conexion();
+            Connection conn=con.getConexion();
+            Statement stm=conn.createStatement();
+            
+             String sql="select count(*) as cantidad from Solicitud_Viaticos where realizada='"+status+"'";
+            
+             ResultSet resul=stm.executeQuery(sql);
+             
+               while(resul.next())
+      {
+         cantidadSol=resul.getInt("cantidad");
+      }
+           
+        } catch (SQLException ex) {
+            Logger.getLogger(usuarios_modelo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       return cantidadSol;
+    }
+    
+    public void marcarRealizada()
+    {
+        try
+        {
+            
+            String sqlModSol="update Solicitud_Viaticos set "
+                    + "realizada=?"
+                    + " where idViaticos=?";
+            
+            PreparedStatement pst = conn.prepareStatement(sqlModSol); 
+            
+            pst.setString(1,"si");
+            pst.setInt(2,idSolicitud);
+            
+            pst.executeUpdate();
+       }
+
+        catch (SQLException ex) 
+        {
+            JOptionPane.showMessageDialog(null,ex);
+        } 
+
+        finally 
+        {
+            JOptionPane.showMessageDialog(null,"Comisión marcada como realizada");
+        }
+    }
+    
+    public String [][] traerComisionesViaticos(String status)
+    {
+       int filas=obtenerCantidadComisiones(status);
+       
+        String arregloSolicitudes[][]=new String[filas][13];
+        try {
+            Conexion con=new Conexion();
+            Connection conn=con.getConexion();
+            Statement stm=conn.createStatement();
+            
+            String sql="select idViaticos,Fol_Viat,FechaSal_Viat,Personal_Viat," +
+            "Dias_Viat,Lugar_Viat,Act_Viat,Permotado_Viat,realizada," +
+            "usr_viaticos.Usuario_idUsuario,nom_prod,idVehiculo_Viat,monto" +
+            " from Solicitud_Viaticos " +
+            " inner join productos ON productos.idProductos=Solicitud_Viaticos.idVehiculo_Viat" +
+            " inner join usr_viaticos on usr_viaticos.Solicitud_Viaticos_idViaticos=solicitud_viaticos.idViaticos"
+                    + " where realizada='"+status+"'";
+            
+           
+             ResultSet resul=stm.executeQuery(sql);
+             DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+
+               while(resul.next())
+      {        
+               int fila=resul.getRow()-1;
+               int idSolViatico=resul.getInt("idViaticos");
+               String folViatico=resul.getString("Fol_Viat");
+               Date fechaSalidaViatico=resul.getDate("FechaSal_Viat");
+               String personalViatico=resul.getString("Personal_Viat");
+               int diasViatico=resul.getInt("Dias_Viat");
+               String lugarViatico=resul.getString("Lugar_Viat");
+               String actividadViatico=resul.getString("Act_Viat");
+               String pernoctado=resul.getString("Permotado_Viat");
+               String statusViatico=resul.getString("realizada");
+               int idUsuario=resul.getInt("Usuario_idUsuario");
+               String nom_prod=resul.getString("nom_prod");
+               int idVehiculo=resul.getInt("idVehiculo_Viat");
+               float monto=resul.getFloat("monto");
+               
+               arregloSolicitudes[fila][0]=String.valueOf(idSolViatico);
+               arregloSolicitudes[fila][1]=String.valueOf(folViatico);
+               arregloSolicitudes[fila][2]=df.format(fechaSalidaViatico);
+               arregloSolicitudes[fila][3]=personalViatico;
+               arregloSolicitudes[fila][4]=String.valueOf(diasViatico);
+               arregloSolicitudes[fila][5]=lugarViatico;
+               arregloSolicitudes[fila][6]=actividadViatico;
+               arregloSolicitudes[fila][7]=pernoctado;
+               arregloSolicitudes[fila][8]=statusViatico;
+               arregloSolicitudes[fila][9]=String.valueOf(idUsuario);
+               arregloSolicitudes[fila][10]=nom_prod;
+               arregloSolicitudes[fila][11]=String.valueOf(idVehiculo);
+               arregloSolicitudes[fila][12]=String.valueOf(monto);
+            
+      }
+           
+        } catch (SQLException ex) {
+            Logger.getLogger(usuarios_modelo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+      return arregloSolicitudes;
+    }
+    
+    public void insertarKmInicial(String kmInicial,String descrip,int idVehiculo)
+    {
+        try
+        {
+            String sqlSol="insert into Datos_Vehiculo("
+                    + "KmInicial,"
+                    + "Descripcion,"
+                    + "IdProducto,"
+                    + "IdViaticos"
+                    + ")"
+                    + "values(?,?,?,?)";
+            
+            PreparedStatement pst = conn.prepareStatement(sqlSol); 
+            
+            pst.setString(1,kmInicial);
+            pst.setString(2,descrip);
+            pst.setInt(3,idVehiculo);
+            pst.setInt(4,idSolicitud);
+            pst.executeUpdate();
+       }
+
+        catch (SQLException ex) 
+        {
+            JOptionPane.showMessageDialog(null,ex);
+        } 
+
+        finally 
+        {
+            JOptionPane.showMessageDialog(null,"Kilometraje inicial agregado");
+        }
+    }
+            
+    public String[] traerDatosVehiculo()
+    {
+     String arregloDatosV[]=new String[3];
+        try {
+            Conexion con=new Conexion();
+            Connection conn=con.getConexion();
+            Statement stm=conn.createStatement();
+            
+            String sql="select KmInicial,Descripcion,IdDatos from datos_vehiculo where IdViaticos="+idSolicitud;
+           
+             ResultSet resul=stm.executeQuery(sql);
+            
+             while(resul.next())
+             {        
+                String KmInicial=resul.getString("KmInicial");
+                String Descripcion=resul.getString("Descripcion");
+                int IdDatos=resul.getInt("IdDatos");
+           
+               arregloDatosV[0]=KmInicial;
+               arregloDatosV[1]=Descripcion;
+               arregloDatosV[2]=String.valueOf(IdDatos);
+           }
+           
+        } catch (SQLException ex) {
+            Logger.getLogger(usuarios_modelo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+      return arregloDatosV;
+    }
+    
+    public void modificarKmFinal(String kmFinal, int idDatos)
+    {
+        try
+        {
+            String sqlSol="update datos_vehiculo set"
+                    + " KmFinal=?"
+                    + " where idDatos=?";
+            
+            PreparedStatement pst = conn.prepareStatement(sqlSol); 
+            
+            pst.setString(1,kmFinal);
+            pst.setInt(2,idDatos);
+            pst.executeUpdate();
+       }
+
+        catch (SQLException ex) 
+        {
+            JOptionPane.showMessageDialog(null,ex);
+        } 
+
+        finally 
+        {
+            JOptionPane.showMessageDialog(null,"Kilometraje final agregado");
+        }
+    }
 }

@@ -34,10 +34,42 @@ public void modificaSolicitud(int idFolio,Date fechaSalida,String personalViatic
       return arregloSolicitudes;
     }
  
+ public String [][] traerComisiones(String status)
+    {
+      Solicitud_modelo objModelo=new Solicitud_modelo();
+      String arregloSolicitudes[][]=objModelo.traerComisionesViaticos(status);
+      return arregloSolicitudes;
+    }
+ 
  public boolean modificarStatus(int idFolio,String status)
  {
      Solicitud_modelo objSolicitud=new Solicitud_modelo(idFolio,status);
      boolean modificado=objSolicitud.modificaStatusSolicitud();
      return modificado;
+ }
+ 
+ public void marcarRealizada(int idFolio)
+ {
+   Solicitud_modelo objSolicitud=new Solicitud_modelo(idFolio);
+   objSolicitud.marcarRealizada();
+ }
+ 
+ public void insertarKmInicial(int idFolio,String kmInicial,String descrip,int idVehiculo)
+ {
+   Solicitud_modelo objSolicitud=new Solicitud_modelo(idFolio);
+   objSolicitud.insertarKmInicial(kmInicial,descrip,idVehiculo);
+ }
+ 
+ public void modificarKmFinal(String kmFinal, int idDatos)
+ {
+    Solicitud_modelo objSolicitud=new Solicitud_modelo();
+   objSolicitud.modificarKmFinal(kmFinal,idDatos); 
+ }
+ 
+ public String[] traerDatosVehiculo(int idFolio)
+ {
+   Solicitud_modelo objSolicitud=new Solicitud_modelo(idFolio);
+   String[] datosVehiculo=objSolicitud.traerDatosVehiculo();
+   return datosVehiculo;
  }
 }

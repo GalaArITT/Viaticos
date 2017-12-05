@@ -210,7 +210,7 @@ public class SolicitudRegistros extends javax.swing.JPanel {
 
         jLabel2.setText("Filtra las solicitudes");
 
-        cbStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Solicitadas", "Aprobadas", "Canceladas" }));
+        cbStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Solicitadas", "Aprobadas", "No aprobadas", "Canceladas" }));
         cbStatus.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cbStatusItemStateChanged(evt);
@@ -579,6 +579,11 @@ public void reactivarVentana()
           {
               status="Cancelada"; 
           }
+          
+          if(item.equals("No aprobadas"))
+          {
+              status="No aprobada"; 
+          }
           traerSolicitudes(status);
        }
     }//GEN-LAST:event_cbStatusItemStateChanged
@@ -600,6 +605,11 @@ public void reactivarVentana()
                 if(cbStatus.getSelectedItem().toString().equals("Canceladas"))
                 {
                     traerSolicitudes("Cancelada");
+                }
+                
+                if(cbStatus.getSelectedItem().toString().equals("No aprobadas"))
+                {
+                    traerSolicitudes("No aprobada");
                 }
                 datosModificados=false;
        }
