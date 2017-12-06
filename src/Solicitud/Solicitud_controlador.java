@@ -72,4 +72,17 @@ public void modificaSolicitud(int idFolio,Date fechaSalida,String personalViatic
    String[] datosVehiculo=objSolicitud.traerDatosVehiculo();
    return datosVehiculo;
  }
+ 
+ public void insertarActividad(String actividad,int idFolio)
+ {
+  Solicitud_modelo objSolicitud=new Solicitud_modelo(idFolio);
+  objSolicitud.insertarActividad(actividad);
+ }
+ 
+ public String [][] traerInformes()
+ {
+     Solicitud_modelo objSolicitud=new Solicitud_modelo();
+     String [][] informes=objSolicitud.traerInformes();
+     return informes;
+ }
 }

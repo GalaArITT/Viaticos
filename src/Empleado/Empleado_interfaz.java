@@ -19,6 +19,10 @@ public class Empleado_interfaz extends javax.swing.JFrame {
         SolicitudRegistros pantallaRegistros=new SolicitudRegistros();
         pantallaRegistros.setVisible(true);
         tbOficiosInformes.add("Tus comisiones",pantallaRegistros);
+        
+        RegistrosInformes pantallaInformes=new RegistrosInformes();
+        pantallaInformes.setVisible(true);
+        tbOficiosInformes.add("Informes elaborados",pantallaInformes);
  }
 
     /**

@@ -8,6 +8,8 @@ package Empleado;
 import Solicitud.Solicitud_controlador;
 import java.awt.Component;
 import java.awt.Container;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.beans.PropertyChangeEvent;
@@ -491,25 +493,18 @@ public void reactivarVentana()
         jdDatosVehiculo.setVisible(true);
         jdDatosVehiculo.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
-       
-
-//        ventanaMod.btnEnviar.addActionListener(new ActionListener(){
-//            @Override
-//            public void actionPerformed(ActionEvent arg0) {
-//                jdModificarSol.dispose();
-//                lbLugar.setText("");
-//                lbActividad.setText("");
-//                lbDias.setText("");
-//                lbTransporte.setText("");
-//                lbPernoctado.setText("");
-//                datosModificados=true;
-//            }
-//        });
-
         for(Component component : getComponents(this))
         {
             component.setEnabled(false);
         }
+        
+        
+        ventanaVehiculo.btnGuardar.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                jdDatosVehiculo.dispose();
+            }
+        });
 
         jdDatosVehiculo.addWindowListener(new WindowAdapter() {
             @Override
@@ -562,6 +557,13 @@ public void reactivarVentana()
         {
             component.setEnabled(false);
         }
+        
+        ventanaInforme.btnGuardar.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                jdInforme.dispose();
+            }
+        });
 
         jdInforme.addWindowListener(new WindowAdapter() {
             @Override

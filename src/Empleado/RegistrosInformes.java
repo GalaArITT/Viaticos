@@ -3,58 +3,34 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Administrador;
+package Empleado;
 
-import Empleado.*;
 import Solicitud.Solicitud_controlador;
 import java.awt.Component;
 import java.awt.Container;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import javax.swing.JDialog;
-import javax.swing.JOptionPane;
-import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author oliver
+ * @author fernando
  */
-public class SolicitudRegistros extends javax.swing.JPanel {
-
- String[][] arregloSolicitudes;
- 
- int idResponsable=0;
- int idVehiculo=0;
- String lugar="";
- String actividad="";
- String dias="";
- String responsable="";
- String vehiculo="";
- String pernoctado="";
- String fecha="";
- String idFolio;
+public class RegistrosInformes extends javax.swing.JPanel {
+String[][] arregloSolicitudes;
  boolean datosModificados=false;
- float monto;
- String realizada="si";
     /**
-     * Creates new form SolicitudRegistros
+     * Creates new form RegistrosInformes
      */
-    public SolicitudRegistros() {
+    public RegistrosInformes() {
         initComponents();
-        
-        traerComisiones("si");
-        //        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+        traerInformes();
+         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         txtFechaSalidaBusqueda.getDateEditor().addPropertyChangeListener(
             new PropertyChangeListener() {
                 @Override
@@ -67,7 +43,6 @@ public class SolicitudRegistros extends javax.swing.JPanel {
                     }
                 }
             });
-        
     }
 
     /**
@@ -94,10 +69,9 @@ public class SolicitudRegistros extends javax.swing.JPanel {
         lbDias = new javax.swing.JLabel();
         lbTransporte = new javax.swing.JLabel();
         lbPernoctado = new javax.swing.JLabel();
+        btnMostrarTodo = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         txtFechaSalidaBusqueda = new com.toedter.calendar.JDateChooser();
-        btnMostrarTodo = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
 
         jPanel2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -106,7 +80,7 @@ public class SolicitudRegistros extends javax.swing.JPanel {
         });
 
         jLabel9.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel9.setText("Comisiones realizadas");
+        jLabel9.setText("Informes realizados");
 
         txtBusquedaSolicitud.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -119,11 +93,11 @@ public class SolicitudRegistros extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Folio", "Fecha de salida", "Responsable", "Realizada"
+                "Folio", "Fecha de creación"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -132,11 +106,18 @@ public class SolicitudRegistros extends javax.swing.JPanel {
         });
         jScrollPane4.setViewportView(tablaSolicitudes);
 
-        jLabel11.setText("Busca una solicitud por folio, responsable o status");
+        jLabel11.setText("Busca un informe por folio, responsable o status");
 
-        jLabel12.setText("Selecciona una solicitud de la tabla para editar, cancelar o imprimir PDF");
+        jLabel12.setText("Selecciona un informe de la tabla para ver sus detalles");
 
         jLabel13.setText("Mas detalles...");
+
+        btnMostrarTodo.setText("Mostrar todo");
+        btnMostrarTodo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMostrarTodoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelMasDetallesLayout = new javax.swing.GroupLayout(panelMasDetalles);
         panelMasDetalles.setLayout(panelMasDetallesLayout);
@@ -146,25 +127,33 @@ public class SolicitudRegistros extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(panelMasDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelMasDetallesLayout.createSequentialGroup()
-                        .addGap(75, 75, 75)
-                        .addComponent(lbTransporte, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnMostrarTodo))
                     .addGroup(panelMasDetallesLayout.createSequentialGroup()
-                        .addGap(75, 75, 75)
                         .addGroup(panelMasDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbLugar, javax.swing.GroupLayout.PREFERRED_SIZE, 533, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbActividad, javax.swing.GroupLayout.PREFERRED_SIZE, 533, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbDias, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(panelMasDetallesLayout.createSequentialGroup()
-                        .addGap(78, 78, 78)
-                        .addComponent(lbPernoctado, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(panelMasDetallesLayout.createSequentialGroup()
+                                .addGap(75, 75, 75)
+                                .addComponent(lbTransporte, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(panelMasDetallesLayout.createSequentialGroup()
+                                .addGap(75, 75, 75)
+                                .addGroup(panelMasDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lbLugar, javax.swing.GroupLayout.PREFERRED_SIZE, 533, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lbActividad, javax.swing.GroupLayout.PREFERRED_SIZE, 533, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lbDias, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(panelMasDetallesLayout.createSequentialGroup()
+                                .addGap(78, 78, 78)
+                                .addComponent(lbPernoctado, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 270, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         panelMasDetallesLayout.setVerticalGroup(
             panelMasDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelMasDetallesLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel13)
+                .addGroup(panelMasDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel13)
+                    .addComponent(btnMostrarTodo))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lbLugar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -178,16 +167,7 @@ public class SolicitudRegistros extends javax.swing.JPanel {
                 .addContainerGap(22, Short.MAX_VALUE))
         );
 
-        jLabel1.setText("Busca una solicitud por fecha");
-
-        btnMostrarTodo.setText("Mostrar todo");
-        btnMostrarTodo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMostrarTodoActionPerformed(evt);
-            }
-        });
-
-        jButton2.setText("PDF");
+        jLabel1.setText("Busca un folio por fecha");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -200,16 +180,10 @@ public class SolicitudRegistros extends javax.swing.JPanel {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnMostrarTodo))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel9)
-                                    .addComponent(jLabel10)
-                                    .addComponent(jLabel12))
-                                .addGap(0, 489, Short.MAX_VALUE)))))
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel12))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
@@ -242,18 +216,11 @@ public class SolicitudRegistros extends javax.swing.JPanel {
                 .addComponent(jLabel12)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnMostrarTodo))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addComponent(jButton2)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(26, 26, 26)
                 .addComponent(panelMasDetalles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(45, 45, 45)
                 .addComponent(jLabel10)
-                .addContainerGap(58, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -263,13 +230,13 @@ public class SolicitudRegistros extends javax.swing.JPanel {
             .addGap(0, 908, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addContainerGap()
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 507, Short.MAX_VALUE)
+            .addGap(0, 475, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
@@ -277,15 +244,10 @@ public class SolicitudRegistros extends javax.swing.JPanel {
                     .addContainerGap()))
         );
     }// </editor-fold>//GEN-END:initComponents
-    
-    public void traerComisiones(String status){
+
+     public void traerInformes(){
        Solicitud_controlador objControlador=new Solicitud_controlador();
-       arregloSolicitudes=objControlador.traerComisiones(status); 
-         lbLugar.setText("");
-         lbActividad.setText("");
-         lbDias.setText("");
-         lbTransporte.setText("");
-         lbPernoctado.setText("");
+       arregloSolicitudes=objControlador.traerInformes(); 
        cargaTabla(arregloSolicitudes);
     }
      public void cargaTabla(String [][] arregloSolicitudes )
@@ -310,12 +272,11 @@ public class SolicitudRegistros extends javax.swing.JPanel {
      
      for(int i=0;i<arregloSolicitudes.length;i++)
      {
-         String[] fechaTotal=arregloSolicitudes[i][2].split(" ");
-         String folio=arregloSolicitudes[i][1];
-         String fechsSalida=fechaTotal[0];
-         String responsable=arregloSolicitudes[i][3];
-         String status=arregloSolicitudes[i][8];
-         model.addRow(new Object[]{folio,fechsSalida,responsable,status}); 
+         String fechsSalida=arregloSolicitudes[i][1];
+         String folio=arregloSolicitudes[i][0];
+        
+
+         model.addRow(new Object[]{folio,fechsSalida}); 
      }
    
     tablaSolicitudes.getSelectionModel().addListSelectionListener(eventoClic);
@@ -333,27 +294,11 @@ public class SolicitudRegistros extends javax.swing.JPanel {
     {
      for(int i=0;i<arregloSolicitudes.length;i++)
      {
-         if(arregloSolicitudes[i][1].equals(folio))
+         if(arregloSolicitudes[i][0].equals(folio))
          {
           jLabel13.setText("<html>Mas detalles...<br>"
-	+"<strong>Lugar: </strong>"+arregloSolicitudes[i][5]+"<br>"+
-	"<strong>Actividad: </strong>"+arregloSolicitudes[i][6]+"<br>"+
-	"<strong>Dias: </strong>"+arregloSolicitudes[i][4]+"<br>"+
-	"<strong>Transporte: </strong>"+arregloSolicitudes[i][10]+"<br>"+
-	"<strong>Pernoctado: </strong>"+arregloSolicitudes[i][7]+"<br>"+
-	"<strong>Monto: </strong>"+arregloSolicitudes[i][12]+"</html>");
-          
-          lugar=arregloSolicitudes[i][5];
-          actividad=arregloSolicitudes[i][6];
-          dias=arregloSolicitudes[i][4];
-          responsable=arregloSolicitudes[i][3];
-          vehiculo=arregloSolicitudes[i][10];
-          pernoctado=arregloSolicitudes[i][7];
-          fecha=arregloSolicitudes[i][2];
-          idFolio=arregloSolicitudes[i][0];
-          idVehiculo=Integer.parseInt(arregloSolicitudes[i][11]);
-          monto=Float.parseFloat(arregloSolicitudes[i][12]);
-          realizada=arregloSolicitudes[i][8];
+	+"<strong>Informe: </strong>"+arregloSolicitudes[i][2]+"<br>"+
+	"</html>");
           }
      }
     }
@@ -364,42 +309,30 @@ public class SolicitudRegistros extends javax.swing.JPanel {
     
     for(int i=0;i<arregloSolicitudes.length;i++)
     {
-       if(arregloSolicitudes[i][1].toLowerCase().contains(cadenaEntrada.toLowerCase())
-               ||arregloSolicitudes[i][8].toLowerCase().contains(cadenaEntrada.toLowerCase())
-               ||arregloSolicitudes[i][3].toLowerCase().contains(cadenaEntrada.toLowerCase())
-               ||arregloSolicitudes[i][2].contains(cadenaEntrada))
+       if(arregloSolicitudes[i][0].toLowerCase().contains(cadenaEntrada.toLowerCase())
+          ||arregloSolicitudes[i][1].contains(cadenaEntrada))
        {
           resultadoBusquedaId=resultadoBusquedaId+arregloSolicitudes[i][0]+"-";
        }
     }
     String[] idsEncontrados=resultadoBusquedaId.split("-");
-     String [][] resultadoBusqueda=new String[idsEncontrados.length][12];
+    String [][] resultadoBusqueda=new String[idsEncontrados.length][3];
     for(int i=0;i<idsEncontrados.length;i++)
     {
       for(int j=0;j<arregloSolicitudes.length;j++)
         {
-          
           if(idsEncontrados[i].equals(arregloSolicitudes[j][0]))
           {
             resultadoBusqueda[i][0]=arregloSolicitudes[j][0];
             resultadoBusqueda[i][1]=arregloSolicitudes[j][1];
             resultadoBusqueda[i][2]=arregloSolicitudes[j][2];
-            resultadoBusqueda[i][3]=arregloSolicitudes[j][3];
-            resultadoBusqueda[i][4]=arregloSolicitudes[j][4];
-            resultadoBusqueda[i][5]=arregloSolicitudes[j][5];
-            resultadoBusqueda[i][6]=arregloSolicitudes[j][6];
-            resultadoBusqueda[i][7]=arregloSolicitudes[j][7];
-            resultadoBusqueda[i][8]=arregloSolicitudes[j][8];
-            resultadoBusqueda[i][9]=arregloSolicitudes[j][9];
-            resultadoBusqueda[i][10]=arregloSolicitudes[j][10];
-            resultadoBusqueda[i][11]=arregloSolicitudes[j][11];  
           }
         }
     } 
     
     return resultadoBusqueda;
    }
-      private Component[] getComponents(Component container) {
+        private Component[] getComponents(Component container) {
         ArrayList<Component> list = null;
 
         try {
@@ -417,13 +350,14 @@ public class SolicitudRegistros extends javax.swing.JPanel {
         return list.toArray(new Component[list.size()]);
         }
     
-public void reactivarVentana()
-{
-    for(Component component : getComponents(this)) 
-      {
-        component.setEnabled(true);
-      }
-}
+        public void reactivarVentana()
+        {
+            for(Component component : getComponents(this)) 
+              {
+                component.setEnabled(true);
+              }
+        }
+
     private void txtBusquedaSolicitudKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBusquedaSolicitudKeyReleased
         String cadenaEntrada=txtBusquedaSolicitud.getText();
         if(!cadenaEntrada.equals(""))
@@ -445,25 +379,25 @@ public void reactivarVentana()
     private void jPanel2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseEntered
         if(datosModificados)
         {
-//            if(cbStatus.getSelectedItem().toString().equals("Solicitadas"))
-//            {
-//                traerSolicitudes("Solicitada");
-//            }
-//
-//            if(cbStatus.getSelectedItem().toString().equals("Aprobadas"))
-//            {
-//                traerSolicitudes("Aprobada");
-//            }
-//
-//            if(cbStatus.getSelectedItem().toString().equals("Canceladas"))
-//            {
-//                traerSolicitudes("Cancelada");
-//            }
-//
-//            if(cbStatus.getSelectedItem().toString().equals("No aprobadas"))
-//            {
-//                traerSolicitudes("No aprobada");
-//            }
+            //            if(cbStatus.getSelectedItem().toString().equals("Solicitadas"))
+            //            {
+                //                traerSolicitudes("Solicitada");
+                //            }
+            //
+            //            if(cbStatus.getSelectedItem().toString().equals("Aprobadas"))
+            //            {
+                //                traerSolicitudes("Aprobada");
+                //            }
+            //
+            //            if(cbStatus.getSelectedItem().toString().equals("Canceladas"))
+            //            {
+                //                traerSolicitudes("Cancelada");
+                //            }
+            //
+            //            if(cbStatus.getSelectedItem().toString().equals("No aprobadas"))
+            //            {
+                //                traerSolicitudes("No aprobada");
+                //            }
             datosModificados=false;
         }
     }//GEN-LAST:event_jPanel2MouseEntered
@@ -471,7 +405,6 @@ public void reactivarVentana()
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnMostrarTodo;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

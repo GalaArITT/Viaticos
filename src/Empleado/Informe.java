@@ -5,12 +5,14 @@
  */
 package Empleado;
 
+import Solicitud.Solicitud_controlador;
+
 /**
  *
  * @author fernando
  */
 public class Informe extends javax.swing.JPanel {
-
+int idFolio=0;
     /**
      * Creates new form Informe
      */
@@ -21,6 +23,7 @@ public class Informe extends javax.swing.JPanel {
     public void cargarCampos(String idFolio)
     {
         lblTitulo.setText("Ingresa el informe de actividades realizadas en la comisión (folio "+idFolio+")");
+        this.idFolio=Integer.parseInt(idFolio);
     }
 
     /**
@@ -35,7 +38,7 @@ public class Informe extends javax.swing.JPanel {
         lblTitulo = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtActividades = new javax.swing.JTextArea();
-        jButton1 = new javax.swing.JButton();
+        btnGuardar = new javax.swing.JButton();
 
         lblTitulo.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         lblTitulo.setText("Ingresa las actividades realizadas en la comisión");
@@ -44,7 +47,12 @@ public class Informe extends javax.swing.JPanel {
         txtActividades.setRows(5);
         jScrollPane1.setViewportView(txtActividades);
 
-        jButton1.setText("Ingresar");
+        btnGuardar.setText("Ingresar");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -53,7 +61,7 @@ public class Informe extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton1)
+                    .addComponent(btnGuardar)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(lblTitulo)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 534, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -67,14 +75,20 @@ public class Informe extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1)
+                .addComponent(btnGuardar)
                 .addContainerGap(7, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+      String actividades=txtActividades.getText();
+      Solicitud_controlador objControlador=new Solicitud_controlador();
+      objControlador.insertarActividad(actividades,idFolio);
+    }//GEN-LAST:event_btnGuardarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    public javax.swing.JButton btnGuardar;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JTextArea txtActividades;

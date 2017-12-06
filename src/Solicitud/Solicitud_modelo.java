@@ -735,4 +735,127 @@ public class Solicitud_modelo {
             JOptionPane.showMessageDialog(null,"Kilometraje final agregado");
         }
     }
+    
+    public void insertarActividad(String actividad)
+    {
+        try
+        {
+            if(existenciaInforme()==0)
+            {
+            String sqlSol="insert into informes(Viaticos_idViaticos,Actividad_Infor,Status_Infor,Fecha_Infor)"
+               + " values(?,?,?,now())";
+            
+            PreparedStatement pst = conn.prepareStatement(sqlSol); 
+            
+            pst.setInt(1,idSolicitud);
+            pst.setString(2,actividad);
+            pst.setString(3,"Disponible");
+            pst.executeUpdate();
+            }
+            
+            else
+            {
+            String sqlSol="update informes set Actividad_Infor=? where Viaticos_idViaticos=?";
+            
+            PreparedStatement pst = conn.prepareStatement(sqlSol); 
+            
+            pst.setString(1,actividad);
+            pst.setInt(2,idSolicitud);
+           
+            pst.executeUpdate();
+            }
+           
+       }
+
+        catch (SQLException ex) 
+        {
+            JOptionPane.showMessageDialog(null,ex);
+        } 
+
+        finally 
+        {
+            JOptionPane.showMessageDialog(null,"Actividades agregadas al informe");
+        }
+    }
+    
+    public int existenciaInforme()
+    {
+       int existencia=0;
+       try {
+            Conexion con=new Conexion();
+            Connection conn=con.getConexion();
+            Statement stm=conn.createStatement();
+            
+             String sql="select  COUNT(idInformes) as cantidad from informes where Viaticos_idViaticos ="+idSolicitud;
+            
+             ResultSet resul=stm.executeQuery(sql);
+             
+      while(resul.next())
+      {
+         existencia=resul.getInt("cantidad");
+      }
+           
+        } catch (SQLException ex) {
+            Logger.getLogger(usuarios_modelo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       return existencia;
+    }
+    
+    public String[][] traerInformes()
+    {
+        int filas=obtenerCantidadInformes();
+        
+        String arregloSolicitudes[][]=new String[filas][3];
+        try {
+            Conexion con=new Conexion();
+            Connection conn=con.getConexion();
+            Statement stm=conn.createStatement();
+            
+            String sql="select Viaticos_IdViaticos,Fecha_Infor,Actividad_Infor from informes";
+           
+             ResultSet resul=stm.executeQuery(sql);
+             DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+
+               while(resul.next())
+      {        
+               int fila=resul.getRow()-1;
+               int idSolViatico=resul.getInt("Viaticos_IdViaticos");
+               String actividad=resul.getString("Actividad_Infor");
+               Date fechaInfor=resul.getDate("Fecha_Infor");
+              
+         
+               arregloSolicitudes[fila][0]=String.valueOf(idSolViatico);
+               arregloSolicitudes[fila][1]=df.format(fechaInfor);
+               arregloSolicitudes[fila][2]=String.valueOf(actividad);   
+      }
+           
+        } catch (SQLException ex) {
+            Logger.getLogger(usuarios_modelo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+      return arregloSolicitudes;
+    }
+    
+    public int obtenerCantidadInformes()
+    {
+       int cantidadSol=0;
+       try {
+            Conexion con=new Conexion();
+            Connection conn=con.getConexion();
+            Statement stm=conn.createStatement();
+            
+             String sql="select count(*) as cantidad from informes";
+            
+             ResultSet resul=stm.executeQuery(sql);
+             
+               while(resul.next())
+      {
+         cantidadSol=resul.getInt("cantidad");
+      }
+           
+        } catch (SQLException ex) {
+            Logger.getLogger(usuarios_modelo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       return cantidadSol;
+    }
 }

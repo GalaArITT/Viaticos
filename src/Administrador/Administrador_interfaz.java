@@ -11,7 +11,7 @@ package Administrador;
  */
 public class Administrador_interfaz extends javax.swing.JFrame {
     Administrador.SolicitudRegistros pantallaRegistrosSolicitud=new Administrador.SolicitudRegistros();
-    Administrador.InformesRegistros pantallaInformeRegistros = new Administrador.InformesRegistros();
+    Administrador.RegistrosInformes pantallaInformeRegistros = new Administrador.RegistrosInformes();
     
     public Administrador_interfaz() {
         initComponents();
