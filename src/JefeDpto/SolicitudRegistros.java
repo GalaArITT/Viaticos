@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package JefeDpto;
-
 import Solicitud.Solicitud_controlador;
 import java.awt.Component;
 import java.awt.Container;
@@ -87,7 +86,7 @@ public class SolicitudRegistros extends javax.swing.JPanel {
         tablaSolicitudes = new javax.swing.JTable();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnPDF = new javax.swing.JButton();
         btnEditaSolicitud = new javax.swing.JButton();
         panelMasDetalles = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
@@ -140,7 +139,12 @@ public class SolicitudRegistros extends javax.swing.JPanel {
 
         jLabel12.setText("Selecciona una solicitud de la tabla para editar, cancelar o imprimir PDF");
 
-        jButton1.setText("PDF");
+        btnPDF.setText("PDF");
+        btnPDF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPDFActionPerformed(evt);
+            }
+        });
 
         btnEditaSolicitud.setText("Editar");
         btnEditaSolicitud.setAutoscrolls(true);
@@ -227,7 +231,7 @@ public class SolicitudRegistros extends javax.swing.JPanel {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(btnEditaSolicitud, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnPDF, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnCancelar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -280,7 +284,7 @@ public class SolicitudRegistros extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnEditaSolicitud)
-                    .addComponent(jButton1)
+                    .addComponent(btnPDF)
                     .addComponent(btnMostrarTodo)
                     .addComponent(btnCancelar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -615,13 +619,17 @@ public void reactivarVentana()
        }
     }//GEN-LAST:event_formMouseEntered
 
+    private void btnPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPDFActionPerformed
+    
+    }//GEN-LAST:event_btnPDFActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     public javax.swing.JButton btnEditaSolicitud;
     private javax.swing.JButton btnMostrarTodo;
+    private javax.swing.JButton btnPDF;
     private javax.swing.JComboBox<String> cbStatus;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

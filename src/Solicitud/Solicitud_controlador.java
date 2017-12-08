@@ -11,19 +11,19 @@ import java.util.Date;
  * @author oliver
  */
 public class Solicitud_controlador {
-public void insertarSolicitud(Date fechaSalida,String personalViatico, int diasViatico,String lugarViatico,String actividadViatico,
+public void insertarSolicitud(int idEmpleado,Date fechaSalida,String personalViatico, int diasViatico,String lugarViatico,String actividadViatico,
                               String pernoctado,String statusViatico,int idUsuario,int idVehiculo,float monto)
 {
-    Solicitud_modelo objetoSolicitud=new Solicitud_modelo(fechaSalida,personalViatico,diasViatico,lugarViatico,actividadViatico,
+    Solicitud_modelo objetoSolicitud=new Solicitud_modelo(idEmpleado,fechaSalida,personalViatico,diasViatico,lugarViatico,actividadViatico,
                                                           pernoctado,statusViatico,idUsuario,idVehiculo,monto);
     objetoSolicitud.insertaSolicitud();
 }
 
 public void modificaSolicitud(int idFolio,Date fechaSalida,String personalViatico, int diasViatico,String lugarViatico,String actividadViatico,
-                              String pernoctado,String statusViatico,int idUsuario,int idVehiculo,float monto)
+                              String pernoctado,String statusViatico,int idUsuario,int idVehiculo,float monto,int na)
 {
     Solicitud_modelo objetoSolicitud=new Solicitud_modelo(idFolio,fechaSalida,personalViatico,diasViatico,lugarViatico,actividadViatico,
-                                                          pernoctado,statusViatico,idUsuario,idVehiculo,monto);
+                                                          pernoctado,statusViatico,idUsuario,idVehiculo,monto,na);
     objetoSolicitud.modificaSolicitud();
 }
 

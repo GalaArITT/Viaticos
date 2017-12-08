@@ -16,13 +16,14 @@ import javax.swing.table.DefaultTableModel;
 public class Presidencia_interfaz extends javax.swing.JFrame {
     Presidencia.SolicitudRegistros pantallaRegistrosSolicitud=new Presidencia.SolicitudRegistros();
     String[][] arregloSolicitudes;
-
+    int idUsuario;
     /**
      * Creates new form Presidencia_interfaz
      */
-    public Presidencia_interfaz() {
+    public Presidencia_interfaz(int idUsuario) {
         initComponents();
         //traerSolicitudes();
+        this.idUsuario=idUsuario;
         pantallaRegistrosSolicitud.setVisible(true);
         tbPresidencia.add("Solicitudes Elaboradas",pantallaRegistrosSolicitud);  
     }
@@ -87,7 +88,7 @@ public class Presidencia_interfaz extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Presidencia_interfaz().setVisible(true);
+                //new Presidencia_interfaz().setVisible(true);
             }
         });
     }

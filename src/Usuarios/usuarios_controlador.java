@@ -16,4 +16,24 @@ public class usuarios_controlador {
       String arregloResponsables[][]=objUsuarios.traerUsuarioTipoEmpleado();
       return arregloResponsables;
     }
+    
+    public boolean comprobarExistenciaUsuario(String usuario,String pass)
+    {
+       usuarios_modelo objUsuarios=new usuarios_modelo();
+       return objUsuarios.comprobarExistenciaUsuario(usuario,pass);
+    }
+    
+    public String tipoUsuario(String usuario)
+    {
+      usuarios_modelo objUsuarios=new usuarios_modelo();
+      return objUsuarios.tipoUsuario(usuario); 
+    }
+    
+    public int traerIdUsuario(String usuario,String pass)
+    {
+         usuarios_modelo objUsuarios=new usuarios_modelo();
+        return objUsuarios.traerIdUsuario(usuario,pass);
+    }
+    
+    
 }

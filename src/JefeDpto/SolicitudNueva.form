@@ -85,7 +85,7 @@
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="1" attributes="0">
                                       <Component id="txtMonto" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="txtDias" pref="173" max="32767" attributes="0"/>
+                                      <Component id="txtDias" pref="179" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="-2" pref="430" max="-2" attributes="0"/>
                               </Group>
@@ -168,7 +168,7 @@
                       <Component id="btnEnviar" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnLimpiar" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="90" max="32767" attributes="0"/>
+                  <EmptySpace pref="59" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>

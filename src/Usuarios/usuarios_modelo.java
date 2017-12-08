@@ -20,10 +20,58 @@ import java.util.logging.Logger;
  * @author fernando
  */
 public class usuarios_modelo {
-
+private String usuario;
+private String contrasena;
     public usuarios_modelo() {
     }
-    
+     public String tipoUsuario(String usuario)
+     {
+         String tipoUsuario="";
+         try {
+            Conexion con=new Conexion();
+            Connection conn=con.getConexion();
+            Statement stm=conn.createStatement();
+            
+             String sql="select tipoUsuario from tipousuarioviatico inner join "
+                     + " usuariosviatico on usuariosviatico.tipousuarioviatico=tipousuarioviatico.idtipoUsuario "
+                     + " where usuario='"+usuario+"'";
+            
+             ResultSet resul=stm.executeQuery(sql);
+             
+               while(resul.next())
+      {
+      tipoUsuario=resul.getString("tipoUsuario");
+      }
+           
+        } catch (SQLException ex) {
+            Logger.getLogger(usuarios_modelo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       return tipoUsuario; 
+     }
+    public boolean comprobarExistenciaUsuario(String usuario,String pass)
+    { 
+      int numeroUsuario=0;
+        try {
+            Conexion con=new Conexion();
+            Connection conn=con.getConexion();
+            Statement stm=conn.createStatement();
+            
+             String sql="select count(*) as cantidad from usuariosviatico where usuario='"+usuario+"' and password='"+pass+"'";
+             
+             ResultSet resul=stm.executeQuery(sql);
+             
+               while(resul.next())
+      {
+         numeroUsuario=resul.getInt("cantidad");
+      }
+           
+        } catch (SQLException ex) {
+            Logger.getLogger(usuarios_modelo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return numeroUsuario>0;
+    }
+
     public String [][] traerUsuarioTipoEmpleado()
     {
        int filas=obtenerNumeroResponsables();
@@ -77,5 +125,32 @@ public class usuarios_modelo {
             Logger.getLogger(usuarios_modelo.class.getName()).log(Level.SEVERE, null, ex);
         }
         return numeroResp;
+    }
+    
+    public int traerIdUsuario(String usuario,String pass)
+    {
+        int tipoUsuario=0;
+         try {
+            Conexion con=new Conexion();
+            Connection conn=con.getConexion();
+            Statement stm=conn.createStatement();
+            
+            String sql="select usuario.idUsuario from usuariosviatico \n" +
+            "inner join empleado\n" +
+            "on empleado.RFC_Emp=usuariosviatico.idEmpleado\n" +
+            "inner JOIN usuario\n" +
+            "on empleado.RFC_Emp=usuario.Empleado_RFC_Emp where usuariosviatico.usuario='"+usuario+"' and usuariosviatico.password='"+pass+"'";
+            
+             ResultSet resul=stm.executeQuery(sql);
+             
+               while(resul.next())
+      {
+      tipoUsuario=resul.getInt("idUsuario");
+      }
+           
+        } catch (SQLException ex) {
+            Logger.getLogger(usuarios_modelo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       return tipoUsuario; 
     }
 }

@@ -12,9 +12,10 @@ package Administrador;
 public class Administrador_interfaz extends javax.swing.JFrame {
     Administrador.SolicitudRegistros pantallaRegistrosSolicitud=new Administrador.SolicitudRegistros();
     Administrador.RegistrosInformes pantallaInformeRegistros = new Administrador.RegistrosInformes();
-    
-    public Administrador_interfaz() {
+    int idUsuario;
+    public Administrador_interfaz(int idUsuario) {
         initComponents();
+        this.idUsuario=idUsuario;
         pantallaRegistrosSolicitud.setVisible(true);
         tbAdministrador.add("Solicitudes",pantallaRegistrosSolicitud);
         pantallaInformeRegistros.setVisible(true);
@@ -81,7 +82,7 @@ public class Administrador_interfaz extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Administrador_interfaz().setVisible(true);
+                //new Administrador_interfaz().setVisible(true);
             }
         });
     }

@@ -11,12 +11,13 @@ package Secretaria;
  */
 public class Secretaria_interfaz extends javax.swing.JFrame {
 SolicitudRegistros pantallaRegistrosSolicitud=new SolicitudRegistros();
-
+int idUsuario;
     /**
      * Creates new form Secretaria_interfaz
      */
-    public Secretaria_interfaz() {
+    public Secretaria_interfaz(int idUsuario) {
         initComponents();
+        this.idUsuario=idUsuario;
          pantallaRegistrosSolicitud.setVisible(true);
         tbSecretaria.add("Solicitudes Elaboradas",pantallaRegistrosSolicitud);  
     }
@@ -78,7 +79,7 @@ SolicitudRegistros pantallaRegistrosSolicitud=new SolicitudRegistros();
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Secretaria_interfaz().setVisible(true);
+               // new Secretaria_interfaz().setVisible(true);
             }
         });
     }

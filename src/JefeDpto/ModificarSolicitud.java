@@ -463,7 +463,7 @@ DefaultListModel <String> modeloResponsables=new DefaultListModel <>();
          
          else
          {
-            objetoSolicitud.modificaSolicitud(Integer.parseInt(idFolio),fechaSalida,personalViatico,diasDuracion,lugar,actividad,pernoctado,statusViatico,idUsuarioJefeDpto,idVehiculo,monto);
+            objetoSolicitud.modificaSolicitud(Integer.parseInt(idFolio),fechaSalida,personalViatico,diasDuracion,lugar,actividad,pernoctado,statusViatico,idUsuarioJefeDpto,idVehiculo,monto,0);
             limpiarCampos();
          }
     }//GEN-LAST:event_btnEnviarActionPerformed

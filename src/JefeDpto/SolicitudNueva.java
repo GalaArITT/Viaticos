@@ -34,14 +34,16 @@ public class SolicitudNueva extends javax.swing.JPanel {
  String fecha="";
  boolean modificandoSol=false;
  String idFolio;
+ int idUsuario;
     /**
      * Creates new form SolicitudNueva
      */
-    public SolicitudNueva() {
+    public SolicitudNueva(int idUsuario) {
        initComponents();
 //       listaEncargado.setVisible(false);
 //       listaVehiculo.setVisible(false);
 //       listaEncargado.setEnabled(false);
+        this.idUsuario=idUsuario;
        cargaElementosListaResponsables();
        cargarElementosListaVehiculo();
        
@@ -463,7 +465,7 @@ public class SolicitudNueva extends javax.swing.JPanel {
             
             else
             {
-                objetoSolicitud.insertarSolicitud(fechaSalida,personalViatico,diasDuracion,lugar,actividad,pernoctado,statusViatico,idUsuarioJefeDpto,idVehiculo,monto);
+                objetoSolicitud.insertarSolicitud(idUsuario,fechaSalida,personalViatico,diasDuracion,lugar,actividad,pernoctado,statusViatico,idUsuarioJefeDpto,idVehiculo,monto);
                 limpiarCampos();
                 
             }

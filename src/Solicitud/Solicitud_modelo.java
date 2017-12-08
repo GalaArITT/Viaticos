@@ -37,6 +37,7 @@ public class Solicitud_modelo {
      private int idVehiculo;
      private int idSolicitud;
      private float monto;
+     private int idEmpleado;
      
     
     Conexion con = new Conexion();
@@ -56,7 +57,7 @@ public class Solicitud_modelo {
      }
      
      
-    public Solicitud_modelo(Date fechaSalida,String personalViatico, int diasViatico,String lugarViatico,String actividadViatico,
+    public Solicitud_modelo(int idEmpleado,Date fechaSalida,String personalViatico, int diasViatico,String lugarViatico,String actividadViatico,
                             String pernoctado,String statusViatico,int idUsuario,int idVehiculo,float monto) 
     {   
         this.fechaSalida = new java.sql.Date(fechaSalida.getTime());
@@ -69,10 +70,11 @@ public class Solicitud_modelo {
         this.idUsuario=idUsuario;
         this.idVehiculo=idVehiculo;
         this.monto=monto;
+        this.idEmpleado=idEmpleado;
     }
     
     public Solicitud_modelo(int idSolicitud,Date fechaSalida,String personalViatico, int diasViatico,String lugarViatico,String actividadViatico,
-                            String pernoctado,String statusViatico,int idUsuario,int idVehiculo,float monto) 
+                            String pernoctado,String statusViatico,int idUsuario,int idVehiculo,float monto,int na) 
     {   
         this.idSolicitud=idSolicitud;
         this.fechaSalida = new java.sql.Date(fechaSalida.getTime());

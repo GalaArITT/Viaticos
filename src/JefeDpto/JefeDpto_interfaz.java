@@ -19,12 +19,16 @@ public class JefeDpto_interfaz extends javax.swing.JFrame { /**
      * Creates new form JefeDpto_interfaz
      */
     SolicitudRegistros pantallaRegistrosSolicitud= new SolicitudRegistros();
-    SolicitudNueva pantallaNuevaSolicitud= new SolicitudNueva();
+    SolicitudNueva pantallaNuevaSolicitud;
     boolean actualizarTabla=false;
-    
-    public JefeDpto_interfaz() {
-        initComponents();       
-        
+    int idUsuario;
+    public JefeDpto_interfaz(int idUsuario) {
+       
+        initComponents();      
+              this.idUsuario=idUsuario;
+               this.pantallaNuevaSolicitud = new SolicitudNueva(idUsuario);
+
+         this.pantallaNuevaSolicitud = new SolicitudNueva(idUsuario);
         pantallaNuevaSolicitud.setVisible(true);
         tbNuevaSolicitud.add("Nueva Solicitud",pantallaNuevaSolicitud);  
         
@@ -41,8 +45,7 @@ public class JefeDpto_interfaz extends javax.swing.JFrame { /**
        
         }
     
-    
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -127,7 +130,7 @@ public class JefeDpto_interfaz extends javax.swing.JFrame { /**
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JefeDpto_interfaz().setVisible(true);
+                //new JefeDpto_interfaz().setVisible(true);
             }
         });
         

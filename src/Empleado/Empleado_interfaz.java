@@ -10,12 +10,13 @@ package Empleado;
  * @author oliver
  */
 public class Empleado_interfaz extends javax.swing.JFrame {
-
+int idUsuario;
     /**
      * Creates new form Empleado_interfaz
      */
-    public Empleado_interfaz() {
+    public Empleado_interfaz(int idUsuario) {
          initComponents();
+          this.idUsuario=idUsuario;
         SolicitudRegistros pantallaRegistros=new SolicitudRegistros();
         pantallaRegistros.setVisible(true);
         tbOficiosInformes.add("Tus comisiones",pantallaRegistros);
@@ -84,7 +85,7 @@ public class Empleado_interfaz extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Empleado_interfaz().setVisible(true);
+                //new Empleado_interfaz().setVisible(true);
             }
         });
     }
