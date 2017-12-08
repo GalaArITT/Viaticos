@@ -8,6 +8,7 @@ package JefeDpto;
 import Solicitud.Solicitud_controlador;
 import Usuarios.usuarios_controlador;
 import Vehiculos.vehiculos_controlador;
+import java.awt.event.KeyEvent;
 import java.util.Date;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultListModel;
@@ -38,9 +39,9 @@ public class SolicitudNueva extends javax.swing.JPanel {
      */
     public SolicitudNueva() {
        initComponents();
-       listaEncargado.setVisible(false);
-       listaVehiculo.setVisible(false);
-       listaEncargado.setEnabled(false);
+//       listaEncargado.setVisible(false);
+//       listaVehiculo.setVisible(false);
+//       listaEncargado.setEnabled(false);
        cargaElementosListaResponsables();
        cargarElementosListaVehiculo();
        
@@ -368,6 +369,18 @@ public class SolicitudNueva extends javax.swing.JPanel {
             listaEncargado.setModel(modeloResponsables);
             listaEncargado.setVisible(false);
         }
+        
+        if(CadenaTxtResponsable.equals(""))
+        {
+            listaEncargado.setModel(modeloResponsables);
+            listaEncargado.setVisible(true);
+        }
+        
+         if (evt.getKeyCode() == KeyEvent.VK_BACK_SPACE) 
+         {
+           listaEncargado.setModel(modeloResponsables);
+           listaEncargado.setVisible(true);
+         }
 
     }//GEN-LAST:event_txtResponsableKeyReleased
 
@@ -398,6 +411,18 @@ public class SolicitudNueva extends javax.swing.JPanel {
             listaVehiculo.setModel(modeloVehiculos);
             listaVehiculo.setVisible(false);
         }
+        
+        if(CadenaTxtVehiculo.equals(""))
+        {
+            listaVehiculo.setModel(modeloVehiculos);
+            listaVehiculo.setVisible(true);
+        }
+        
+         if (evt.getKeyCode() == KeyEvent.VK_BACK_SPACE) 
+         {
+           listaVehiculo.setModel(modeloVehiculos);
+           listaVehiculo.setVisible(true);
+         }
 
     }//GEN-LAST:event_txtVehiculoKeyReleased
 
