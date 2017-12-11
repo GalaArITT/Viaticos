@@ -1,5 +1,13 @@
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Calendar;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.showMessageDialog;
+import javax.swing.table.DefaultTableModel;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -62,10 +70,28 @@ public class Datos_Solicitud extends javax.swing.JDialog {
         jLabel4.setText("Fecha:");
 
         btnEst.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        btnEst.setEnabled(false);
 
         btnAsun.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        btnAsun.setEnabled(false);
+        btnAsun.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAsunActionPerformed(evt);
+            }
+        });
 
         btnDest.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        btnDest.setEnabled(false);
+        btnDest.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnDestMousePressed(evt);
+            }
+        });
+        btnDest.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btnDestKeyPressed(evt);
+            }
+        });
 
         btnFech.setEditable(false);
 
@@ -77,11 +103,22 @@ public class Datos_Solicitud extends javax.swing.JDialog {
 
         btnDesc.setColumns(20);
         btnDesc.setRows(5);
+        btnDesc.setEnabled(false);
         jScrollPane1.setViewportView(btnDesc);
 
         jButton1.setText("Aceptar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -93,32 +130,34 @@ public class Datos_Solicitud extends javax.swing.JDialog {
                         .addGap(0, 218, Short.MAX_VALUE)
                         .addComponent(jLabel7)
                         .addGap(259, 259, 259))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnAsun)
-                            .addComponent(btnEst, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnDest, javax.swing.GroupLayout.Alignment.LEADING)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(44, 44, 44)
-                        .addComponent(jButton1)
-                        .addGap(6, 6, 6)
-                        .addComponent(btnCancelar))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addComponent(jLabel4)
-                        .addGap(10, 10, 10)
-                        .addComponent(btnFech)))
+                        .addGap(44, 44, 44)
+                        .addComponent(jButton1)
+                        .addGap(6, 6, 6)
+                        .addComponent(btnCancelar)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(29, 29, 29)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel3)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(42, 42, 42)
+                                .addComponent(jLabel4)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnFech)
+                            .addComponent(btnAsun, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnEst)
+                            .addComponent(btnDest))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -165,6 +204,51 @@ public class Datos_Solicitud extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnDestKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnDestKeyPressed
+
+    }//GEN-LAST:event_btnDestKeyPressed
+
+    private void btnDestMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDestMousePressed
+        Consulta c = new Consulta(null, true);
+        c.ds = this;
+        c.setVisible(true);
+    }//GEN-LAST:event_btnDestMousePressed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if(btnDest.getText().equals("")){
+            showMessageDialog(this, "Falta definir el destino de la solicitud.", "Error.", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        //Creamos la conexion para insertar la solicitud de la base de datos
+        conectar cc = new conectar();
+        Connection cn = cc.conexion();
+        
+        //Definir query
+        String []fecha = btnFech.getText().split("/");
+        String query = "INSERT INTO solicitudes(Status_Sol, Fecha_Sol, Tipo_Sol, idUsuario_Sol, Descripcion_Sol)"
+                + " VALUES (\""+btnEst.getText()+"\",\'"+fecha[2]+"-"+fecha[1]+"-"+fecha[0]+"\',"
+                + "\'"+btnAsun.getText()+"\', (SELECT idUsuario FROM Usuario WHERE Empleado_RFC_Emp LIKE \'"+btnDest.getText()+"\'),"
+                + "\""+btnDesc.getText()+"\");";
+        
+        try {
+            Statement statement = cn.createStatement();
+            statement.executeUpdate(query);
+        }catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        this.dispose();
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnAsunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAsunActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAsunActionPerformed
 
     /**
      * @param args the command line arguments

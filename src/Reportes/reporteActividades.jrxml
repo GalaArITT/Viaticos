@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ofi" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2f16dde7-0dec-40a0-9292-bff0830adcdd">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<image>
+				<reportElement x="-1" y="-4" width="556" height="83" uuid="361a9f36-729a-4580-bdcc-31e59520e8bb"/>
+				<imageExpression><![CDATA["/home/oliver/NetBeansProjects/IEE_VVI/src/img/banner.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement x="178" y="8" width="227" height="20" uuid="e065f05d-093a-4051-b1a7-89ba66678780"/>
+				<text><![CDATA[SOLICITUD DE VIATICOS IEEN 2017 ]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="102" splitType="Stretch">
+			<staticText>
+				<reportElement x="6" y="29" width="44" height="20" uuid="ef00bdc0-704f-46bd-a62c-845e8973f940"/>
+				<text><![CDATA[Nombre :]]></text>
+			</staticText>
+			<line>
+				<reportElement x="51" y="44" width="325" height="1" uuid="fe5a0521-e463-4428-93fd-04b6b8cb5f08"/>
+			</line>
+			<staticText>
+				<reportElement x="6" y="6" width="82" height="20" uuid="c9875968-2fde-455d-8dbb-dc66faa6366f"/>
+				<text><![CDATA[Fecha de salida:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="86" y="20" width="229" height="1" uuid="af9395f5-cf69-4239-b504-86d6135dfd29"/>
+			</line>
+			<staticText>
+				<reportElement x="7" y="55" width="43" height="20" uuid="2a97e5b7-3f59-4764-a514-f9e5d844106f"/>
+				<text><![CDATA[Lugar:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="37" y="69" width="307" height="1" uuid="353898a6-8711-4f7b-b500-b6fa3a439cbd"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="276" splitType="Stretch">
+			<staticText>
+				<reportElement x="7" y="36" width="44" height="20" uuid="5e8caff0-d66e-41d9-a125-4d1ca92a40ef"/>
+				<text><![CDATA[Actividad:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="57" y="51" width="476" height="1" uuid="3d7e8c2c-7400-47ba-9537-8393f7b11284"/>
+			</line>
+			<line>
+				<reportElement x="16" y="74" width="517" height="1" uuid="49f5ba10-1f54-4a70-97ee-043433a32598"/>
+			</line>
+			<line>
+				<reportElement x="16" y="93" width="517" height="1" uuid="d7eeb4fd-9304-40a0-aae1-1887c40dcd1b"/>
+			</line>
+			<line>
+				<reportElement x="16" y="113" width="517" height="1" uuid="98a402c1-cae4-495d-bae3-846857575f18"/>
+			</line>
+			<line>
+				<reportElement x="16" y="132" width="517" height="1" uuid="1afb0e39-78c5-4f3b-9812-19354c3ad304"/>
+			</line>
+			<staticText>
+				<reportElement x="23" y="229" width="59" height="20" uuid="151575bf-1541-4c8f-b1cd-77ec1cb396ed"/>
+				<text><![CDATA[Vehículo:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="70" y="245" width="175" height="1" uuid="f0aab0a9-8c59-4243-ac14-138a947591e4"/>
+			</line>
+			<staticText>
+				<reportElement x="23" y="202" width="59" height="20" uuid="925b6dc6-1e64-4d03-8846-5bfa764fa6db"/>
+				<text><![CDATA[Pernoctado:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="84" y="215" width="60" height="1" uuid="4ca43d30-2e21-4d2e-bf88-9c028c37eabc"/>
+			</line>
+			<staticText>
+				<reportElement x="210" y="203" width="70" height="20" uuid="3553ced5-619c-4e16-aa06-ba75235a3b9b"/>
+				<text><![CDATA[Sin pernoctar:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="281" y="216" width="69" height="1" uuid="efbbffc6-1571-46ef-a9e6-b14116fa2d42"/>
+			</line>
+			<line>
+				<reportElement x="16" y="154" width="517" height="1" uuid="251bd5c6-b9af-4a08-86ec-93df61911d02"/>
+			</line>
+			<line>
+				<reportElement x="16" y="172" width="517" height="1" uuid="55a0cfb8-2e0a-4004-8434-c362b806381c"/>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="102" splitType="Stretch">
+			<staticText>
+				<reportElement x="276" y="2" width="39" height="20" uuid="e3614e92-ec46-4300-9dfb-6d4258b04a49"/>
+				<text><![CDATA[V.° B.°]]></text>
+			</staticText>
+			<line>
+				<reportElement x="186" y="65" width="217" height="1" uuid="e898c78b-8ffe-4b2b-8bf7-e52da652908a"/>
+			</line>
+			<staticText>
+				<reportElement x="206" y="72" width="195" height="20" uuid="67367d92-21a8-473c-ae8c-9fe8860f335e"/>
+				<text><![CDATA[DR: CELSO VALDERRAMA DELGADO]]></text>
+			</staticText>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

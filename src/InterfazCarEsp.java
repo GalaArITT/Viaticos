@@ -119,7 +119,7 @@ public class InterfazCarEsp extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Canselar");
+        jButton2.setText("Cancelar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -330,7 +330,7 @@ public class InterfazCarEsp extends javax.swing.JFrame {
             }
         
         }catch(NullPointerException e){
-            showMessageDialog(null,"Asegurese de aver insertado");
+            showMessageDialog(null,"Asegurese de haber insertado");
         }
         
        

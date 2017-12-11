@@ -1,35 +1,314 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reportePresidencia" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7e735d26-16f4-4758-a896-c75675573c6a">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e489056e-e51f-4c9e-8fb8-e4e1031b8044">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
+	<parameter name="idUsuario" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     tipousuarioviatico.`idTipoUsuario` AS tipousuarioviatico_idTipoUsuario,
+     tipousuarioviatico.`tipoUsuario` AS tipousuarioviatico_tipoUsuario,
+     usuariosviatico.`idUsuario` AS usuariosviatico_idUsuario,
+     usuariosviatico.`usuario` AS usuariosviatico_usuario,
+     usuariosviatico.`password` AS usuariosviatico_password,
+     usuariosviatico.`idEmpleado` AS usuariosviatico_idEmpleado,
+     usuariosviatico.`tipousuarioviatico` AS usuariosviatico_tipousuarioviatico,
+     usuario.`idUsuario` AS usuario_idUsuario,
+     usuario.`Password_Usr` AS usuario_Password_Usr,
+     usuario.`Empleado_RFC_Emp` AS usuario_Empleado_RFC_Emp,
+     usuario.`Tipo_Usr_idTipo_Usr` AS usuario_Tipo_Usr_idTipo_Usr,
+     empleado.`RFC_Emp` AS empleado_RFC_Emp,
+     empleado.`Puestos_idPuesto` AS empleado_Puestos_idPuesto,
+     empleado.`Persona_idPersona` AS empleado_Persona_idPersona,
+     usr_viaticos.`Usuario_idUsuario` AS usr_viaticos_Usuario_idUsuario,
+     usr_viaticos.`Solicitud_Viaticos_idViaticos` AS usr_viaticos_Solicitud_Viaticos_idViaticos,
+     solicitud_viaticos.`idViaticos` AS solicitud_viaticos_idViaticos,
+     solicitud_viaticos.`Fol_Viat` AS solicitud_viaticos_Fol_Viat,
+     solicitud_viaticos.`fol_viatico_int` AS solicitud_viaticos_fol_viatico_int,
+     solicitud_viaticos.`FehaSol_Viat` AS solicitud_viaticos_FehaSol_Viat,
+     solicitud_viaticos.`FechaAprov_Viat` AS solicitud_viaticos_FechaAprov_Viat,
+     solicitud_viaticos.`FechaSal_Viat` AS solicitud_viaticos_FechaSal_Viat,
+     solicitud_viaticos.`Personal_Viat` AS solicitud_viaticos_Personal_Viat,
+     solicitud_viaticos.`Dias_Viat` AS solicitud_viaticos_Dias_Viat,
+     solicitud_viaticos.`monto` AS solicitud_viaticos_monto,
+     solicitud_viaticos.`Lugar_Viat` AS solicitud_viaticos_Lugar_Viat,
+     solicitud_viaticos.`Act_Viat` AS solicitud_viaticos_Act_Viat,
+     solicitud_viaticos.`Status_Viat` AS solicitud_viaticos_Status_Viat,
+     solicitud_viaticos.`idVehiculo_Viat` AS solicitud_viaticos_idVehiculo_Viat,
+     solicitud_viaticos.`Permotado_Viat` AS solicitud_viaticos_Permotado_Viat,
+     solicitud_viaticos.`FechaRet_Viat` AS solicitud_viaticos_FechaRet_Viat,
+     solicitud_viaticos.`realizada` AS solicitud_viaticos_realizada,
+     productos.`idProductos` AS productos_idProductos,
+     productos.`Clasificacion_idClasificacion` AS productos_Clasificacion_idClasificacion,
+     productos.`Estado_idEstado` AS productos_Estado_idEstado,
+     productos.`Fotos_idFotos` AS productos_Fotos_idFotos,
+     productos.`Car_Esp_idCar_Esp` AS productos_Car_Esp_idCar_Esp,
+     productos.`TipoStock_idTipoStock` AS productos_TipoStock_idTipoStock,
+     productos.`Almacen_idAlmacen` AS productos_Almacen_idAlmacen,
+     productos.`Asignacion_Usr_idAsignacion` AS productos_Asignacion_Usr_idAsignacion,
+     productos.`Nom_Prod` AS productos_Nom_Prod,
+     productos.`FolioClas_Prod` AS productos_FolioClas_Prod,
+     productos.`Des_Prod` AS productos_Des_Prod,
+     productos.`FechaComp_Prod` AS productos_FechaComp_Prod,
+     productos.`Stoc_Prod` AS productos_Stoc_Prod,
+     productos.`StockMin_Prod` AS productos_StockMin_Prod,
+     productos.`Obs_Prod` AS productos_Obs_Prod,
+     productos.`NoFact_Prod` AS productos_NoFact_Prod,
+     produc_viaticos.`Productos_idProductos` AS produc_viaticos_Productos_idProductos,
+     produc_viaticos.`Solicitud_Viaticos_idViaticos` AS produc_viaticos_Solicitud_Viaticos_idViaticos,
+     persona.`idPersona` AS persona_idPersona,
+     persona.`Nombre_Per` AS persona_Nombre_Per,
+     persona.`Ape_Pat_Per` AS persona_Ape_Pat_Per,
+     persona.`Ape_Mat_Per` AS persona_Ape_Mat_Per,
+     persona.`Curp_Per` AS persona_Curp_Per,
+     persona.`Fecha_Nac_Per` AS persona_Fecha_Nac_Per,
+     persona.`Calle_Per` AS persona_Calle_Per,
+     persona.`Colonia_Per` AS persona_Colonia_Per,
+     persona.`CP_Per` AS persona_CP_Per,
+     persona.`Tel_Per` AS persona_Tel_Per,
+     persona.`NoLic_Per` AS persona_NoLic_Per,
+     persona.`NoCred_Per` AS persona_NoCred_Per
+FROM
+     `tipousuarioviatico` tipousuarioviatico INNER JOIN `usuariosviatico` usuariosviatico ON tipousuarioviatico.`idTipoUsuario` = usuariosviatico.`tipousuarioviatico`
+     INNER JOIN `empleado` empleado ON usuariosviatico.`idEmpleado` = empleado.`RFC_Emp`
+     INNER JOIN `usuario` usuario ON empleado.`RFC_Emp` = usuario.`Empleado_RFC_Emp`
+     INNER JOIN `persona` persona ON empleado.`Persona_idPersona` = persona.`idPersona`
+     INNER JOIN `usr_viaticos` usr_viaticos ON usuario.`idUsuario` = usr_viaticos.`Usuario_idUsuario`
+     INNER JOIN `solicitud_viaticos` solicitud_viaticos ON usr_viaticos.`Solicitud_Viaticos_idViaticos` = solicitud_viaticos.`idViaticos`
+     INNER JOIN `produc_viaticos` produc_viaticos ON solicitud_viaticos.`idViaticos` = produc_viaticos.`Solicitud_Viaticos_idViaticos`
+     INNER JOIN `productos` productos ON produc_viaticos.`Productos_idProductos` = productos.`idProductos`
+WHERE usuario_idUsuario = $P{idUsuario} ]]>
+	</queryString>
+	<field name="tipousuarioviatico_idTipoUsuario" class="java.lang.Integer"/>
+	<field name="tipousuarioviatico_tipoUsuario" class="java.lang.String"/>
+	<field name="usuariosviatico_idUsuario" class="java.lang.Integer"/>
+	<field name="usuariosviatico_usuario" class="java.lang.String"/>
+	<field name="usuariosviatico_password" class="java.lang.String"/>
+	<field name="usuariosviatico_idEmpleado" class="java.lang.String"/>
+	<field name="usuariosviatico_tipousuarioviatico" class="java.lang.Integer"/>
+	<field name="usuario_idUsuario" class="java.lang.Integer"/>
+	<field name="usuario_Password_Usr" class="java.lang.String"/>
+	<field name="usuario_Empleado_RFC_Emp" class="java.lang.String"/>
+	<field name="usuario_Tipo_Usr_idTipo_Usr" class="java.lang.Integer"/>
+	<field name="empleado_RFC_Emp" class="java.lang.String"/>
+	<field name="empleado_Puestos_idPuesto" class="java.lang.Integer"/>
+	<field name="empleado_Persona_idPersona" class="java.lang.Integer"/>
+	<field name="usr_viaticos_Usuario_idUsuario" class="java.lang.Integer"/>
+	<field name="usr_viaticos_Solicitud_Viaticos_idViaticos" class="java.lang.Integer"/>
+	<field name="solicitud_viaticos_idViaticos" class="java.lang.Integer"/>
+	<field name="solicitud_viaticos_Fol_Viat" class="java.lang.String"/>
+	<field name="solicitud_viaticos_fol_viatico_int" class="java.lang.Integer"/>
+	<field name="solicitud_viaticos_FehaSol_Viat" class="java.sql.Timestamp"/>
+	<field name="solicitud_viaticos_FechaAprov_Viat" class="java.sql.Date"/>
+	<field name="solicitud_viaticos_FechaSal_Viat" class="java.sql.Date"/>
+	<field name="solicitud_viaticos_Personal_Viat" class="java.lang.String"/>
+	<field name="solicitud_viaticos_Dias_Viat" class="java.lang.String"/>
+	<field name="solicitud_viaticos_monto" class="java.lang.Float"/>
+	<field name="solicitud_viaticos_Lugar_Viat" class="java.lang.String"/>
+	<field name="solicitud_viaticos_Act_Viat" class="java.lang.String"/>
+	<field name="solicitud_viaticos_Status_Viat" class="java.lang.String"/>
+	<field name="solicitud_viaticos_idVehiculo_Viat" class="java.lang.Integer"/>
+	<field name="solicitud_viaticos_Permotado_Viat" class="java.lang.String"/>
+	<field name="solicitud_viaticos_FechaRet_Viat" class="java.sql.Date"/>
+	<field name="solicitud_viaticos_realizada" class="java.lang.String"/>
+	<field name="productos_idProductos" class="java.lang.Integer"/>
+	<field name="productos_Clasificacion_idClasificacion" class="java.lang.Integer"/>
+	<field name="productos_Estado_idEstado" class="java.lang.Integer"/>
+	<field name="productos_Fotos_idFotos" class="java.lang.Integer"/>
+	<field name="productos_Car_Esp_idCar_Esp" class="java.lang.Integer"/>
+	<field name="productos_TipoStock_idTipoStock" class="java.lang.Integer"/>
+	<field name="productos_Almacen_idAlmacen" class="java.lang.Integer"/>
+	<field name="productos_Asignacion_Usr_idAsignacion" class="java.lang.Integer"/>
+	<field name="productos_Nom_Prod" class="java.lang.String"/>
+	<field name="productos_FolioClas_Prod" class="java.lang.String"/>
+	<field name="productos_Des_Prod" class="java.lang.String"/>
+	<field name="productos_FechaComp_Prod" class="java.sql.Date"/>
+	<field name="productos_Stoc_Prod" class="java.lang.Integer"/>
+	<field name="productos_StockMin_Prod" class="java.lang.Integer"/>
+	<field name="productos_Obs_Prod" class="java.lang.String"/>
+	<field name="productos_NoFact_Prod" class="java.lang.String"/>
+	<field name="produc_viaticos_Productos_idProductos" class="java.lang.Integer"/>
+	<field name="produc_viaticos_Solicitud_Viaticos_idViaticos" class="java.lang.Integer"/>
+	<field name="persona_idPersona" class="java.lang.Integer"/>
+	<field name="persona_Nombre_Per" class="java.lang.String"/>
+	<field name="persona_Ape_Pat_Per" class="java.lang.String"/>
+	<field name="persona_Ape_Mat_Per" class="java.lang.String"/>
+	<field name="persona_Curp_Per" class="java.lang.String"/>
+	<field name="persona_Fecha_Nac_Per" class="java.sql.Date"/>
+	<field name="persona_Calle_Per" class="java.lang.String"/>
+	<field name="persona_Colonia_Per" class="java.lang.String"/>
+	<field name="persona_CP_Per" class="java.lang.Integer"/>
+	<field name="persona_Tel_Per" class="java.lang.String"/>
+	<field name="persona_NoLic_Per" class="java.lang.String"/>
+	<field name="persona_NoCred_Per" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
 		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="365" y="47" width="117" height="20" uuid="bd16c917-861e-4fd2-a542-3fadbaf185aa"/>
+				<textElement>
+					<font fontName="Arial Black"/>
+				</textElement>
+				<text><![CDATA[Folio Numero:______________]]></text>
+			</staticText>
+			<line>
+				<reportElement x="443" y="56" width="100" height="1" uuid="ca49c272-78f1-4131-a457-d5fe72ff9446"/>
+			</line>
 			<image>
-				<reportElement x="16" y="0" width="161" height="65" uuid="38acea61-4594-4726-ba37-2535d910852f"/>
-				<imageExpression><![CDATA["/home/oliver/NetBeansProjects/Viaticos/src/Imagenes/logoGrande.jpg"]]></imageExpression>
+				<reportElement x="0" y="-1" width="336" height="80" uuid="491c09a3-56be-480a-921f-83b3246a6072"/>
+				<imageExpression><![CDATA["/home/oliver/NetBeansProjects/Viaticos/src/Imagenes/banner.jpg"]]></imageExpression>
 			</image>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="35" splitType="Stretch"/>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement x="243" y="4" width="100" height="20" uuid="ab3be29e-cb07-4645-96d6-2fd69a95e449"/>
+				<textElement>
+					<font fontName="Arial Black" isBold="true"/>
+				</textElement>
+				<text><![CDATA[VIATICOS ]]></text>
+			</staticText>
+		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="61" splitType="Stretch"/>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="17" y="10" width="45" height="20" uuid="284600de-48f7-41f7-9c3d-47d9f51ec771"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Nombre:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="17" y="41" width="45" height="20" uuid="c452562b-4249-415f-8ef4-ffc15a76b75b"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Puesto: ]]></text>
+			</staticText>
+			<line>
+				<reportElement x="63" y="23" width="306" height="1" uuid="336bc240-9eb6-423b-9d9c-f63473759ce7"/>
+			</line>
+			<line>
+				<reportElement x="61" y="51" width="305" height="1" uuid="93bdd8c2-246c-4708-b070-21b1ec10c954"/>
+			</line>
+		</band>
 	</columnHeader>
 	<detail>
-		<band height="125" splitType="Stretch"/>
+		<band height="417" splitType="Stretch">
+			<staticText>
+				<reportElement x="17" y="12" width="319" height="20" uuid="337d9bf5-f67c-4c3e-821d-e4a303dda2fa"/>
+				<textElement>
+					<font fontName="Arial Black"/>
+				</textElement>
+				<text><![CDATA[Con base en el Oficio de Comisión se autoriza la cantidad de:]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="369" y="12" width="149" height="20" uuid="bf80207b-8e51-4ba8-b808-f4f0bfcca700"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="198" y="32" width="100" height="20" uuid="305366eb-bb0a-44ea-8834-fb9be095881c"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[( PESO 00/100 M.N.) ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="17" y="57" width="100" height="20" uuid="538d6ede-f867-411f-8927-2def4744907f"/>
+				<textElement>
+					<font fontName="Arial Black"/>
+				</textElement>
+				<text><![CDATA[Con motivo de:]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="17" y="77" width="501" height="86" uuid="de5df719-2ad8-4816-bfb3-6edf6abe95c7"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="18" y="172" width="338" height="20" uuid="053f79ce-ba5a-4fe8-8e91-863156e82801"/>
+				<textElement>
+					<font fontName="Arial Black"/>
+				</textElement>
+				<text><![CDATA[Para llevar a cabo la visita de trabajo en la localidad de :]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="17" y="188" width="501" height="48" uuid="17c2994a-38bb-4e47-b69c-f546eb390880"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="18" y="244" width="129" height="20" uuid="26f20e38-3462-4dcc-a6ce-5d001c1909c3"/>
+				<textElement>
+					<font fontName="Arial Black"/>
+				</textElement>
+				<text><![CDATA[Vehiculo Oficial Asignado: ]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="18" y="261" width="500" height="26" uuid="c0b3b924-94f9-4254-9bfd-a5534afb342b"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="19" y="309" width="100" height="20" uuid="118cfb80-895b-46b2-8151-8dcef0ddc18e"/>
+				<textElement>
+					<font fontName="Arial Black"/>
+				</textElement>
+				<text><![CDATA[Por los dias :]]></text>
+			</staticText>
+			<line>
+				<reportElement x="20" y="338" width="100" height="1" uuid="06807001-d131-49c6-9462-a53c0ba5b44b"/>
+			</line>
+			<staticText>
+				<reportElement x="142" y="328" width="21" height="20" uuid="2fdf80be-9f4f-4d67-9db7-4b9612e2e719"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[de]]></text>
+			</staticText>
+			<line>
+				<reportElement x="184" y="338" width="100" height="1" uuid="f49da9db-dbdf-4cfb-a54c-c4bd0a10d527"/>
+			</line>
+			<staticText>
+				<reportElement x="386" y="330" width="100" height="19" uuid="d24db808-7761-4f4f-bff9-e0b9c9e8c17e"/>
+				<textElement>
+					<font fontName="Arial Black"/>
+				</textElement>
+				<text><![CDATA[TOTAL:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="431" y="348" width="100" height="1" uuid="de00b980-04cd-47ff-a492-d118599ab46e"/>
+			</line>
+			<staticText>
+				<reportElement x="19" y="348" width="100" height="20" uuid="da24b874-4eb1-4f06-80f0-3f981ed9381f"/>
+				<text><![CDATA[Firma de recibido]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="18" y="376" width="100" height="20" uuid="9e8f2042-f763-4c01-a1ce-4fe904467695"/>
+				<text><![CDATA[COMISIONADO]]></text>
+			</staticText>
+			<line>
+				<reportElement x="17" y="396" width="184" height="1" uuid="851c979d-4211-4020-b73a-eb761c2ed705"/>
+			</line>
+			<staticText>
+				<reportElement x="382" y="356" width="100" height="20" uuid="ff34071f-1169-4ca3-a371-5c39f7e9b3a0"/>
+				<text><![CDATA[Firma de autorizado]]></text>
+			</staticText>
+			<line>
+				<reportElement x="343" y="376" width="173" height="1" uuid="340a3808-2d39-49d1-8e26-29180216e56b"/>
+			</line>
+			<staticText>
+				<reportElement x="345" y="390" width="186" height="27" uuid="ad8bd6c3-0808-49fb-b9d3-e212c3ce823c"/>
+				<text><![CDATA[DR. CELSO VALDERRAMA DELGADO CONSEJERO PRESIDENTE ]]></text>
+			</staticText>
+		</band>
 	</detail>
 	<columnFooter>
-		<band height="45" splitType="Stretch"/>
+		<band height="7" splitType="Stretch"/>
 	</columnFooter>
 	<pageFooter>
-		<band height="54" splitType="Stretch"/>
+		<band height="8" splitType="Stretch"/>
 	</pageFooter>
 	<summary>
-		<band height="42" splitType="Stretch"/>
+		<band height="7" splitType="Stretch"/>
 	</summary>
 </jasperReport>

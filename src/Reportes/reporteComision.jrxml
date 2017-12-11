@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="11e5dc28-9dc5-4a23-b524-d4250dcb4f89">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="285" height="79" uuid="f2c582c9-4acd-4e9a-929f-9c602088203b"/>
+				<imageExpression><![CDATA["/home/oliver/NetBeansProjects/Viaticos/src/Imagenes/banner.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="351" y="27" width="100" height="20" uuid="3267ea82-67f9-4452-b4fa-6949495fc945"/>
+				<text><![CDATA[Folio Número:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="430" y="37" width="112" height="1" uuid="732c7444-64a4-4350-8b9f-8b1feeeb721a"/>
+			</line>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="24" splitType="Stretch">
+			<staticText>
+				<reportElement x="230" y="0" width="145" height="20" uuid="397f0832-04c9-4934-95a9-bc4ead89f317"/>
+				<text><![CDATA[OFICIO DE COMISIÓN]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="71" splitType="Stretch">
+			<staticText>
+				<reportElement x="3" y="10" width="46" height="20" uuid="ec434613-dcc7-48dd-9117-a772c1a6909a"/>
+				<text><![CDATA[Nombre:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="3" y="50" width="46" height="20" uuid="c208d6ee-200b-4884-bbf7-90a58839e67c"/>
+				<text><![CDATA[Puesto: ]]></text>
+			</staticText>
+			<line>
+				<reportElement x="49" y="23" width="326" height="1" uuid="630d7751-4b1d-4693-bccc-b2c45e6ccba7"/>
+			</line>
+			<line>
+				<reportElement x="49" y="61" width="326" height="1" uuid="1990745a-2557-43a6-87fb-9bd72eccabcf"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="378" splitType="Stretch">
+			<staticText>
+				<reportElement x="3" y="1" width="100" height="20" uuid="9a649810-6d61-44f6-911b-693798377ca0"/>
+				<text><![CDATA[PRESENTE:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="3" y="46" width="173" height="20" uuid="ca0eab6d-326f-415a-8f13-dc2e22afef50"/>
+				<text><![CDATA[Con lugar y fecha en :   Tepic, Nayarit;]]></text>
+			</staticText>
+			<line>
+				<reportElement x="176" y="58" width="44" height="1" uuid="bc4b5028-bdb3-453e-88ce-fd9ec67b7359"/>
+			</line>
+			<staticText>
+				<reportElement x="226" y="49" width="21" height="20" uuid="5f5245be-108a-4c34-8ab4-01aff5f0b28e"/>
+				<text><![CDATA[de]]></text>
+			</staticText>
+			<line>
+				<reportElement x="249" y="59" width="89" height="1" uuid="82bea963-8bee-451b-9ba5-ff1e999cc308"/>
+			</line>
+			<staticText>
+				<reportElement x="346" y="49" width="21" height="20" uuid="d88cf5f1-b62e-4ec7-aaba-0391d4cb2ab5"/>
+				<text><![CDATA[del]]></text>
+			</staticText>
+			<line>
+				<reportElement x="372" y="59" width="46" height="1" uuid="91a7c5a9-0f32-44fb-8744-25d2deeab427"/>
+			</line>
+			<staticText>
+				<reportElement x="3" y="86" width="383" height="20" uuid="43dc0a36-5b3a-432c-b701-1a166901455e"/>
+				<text><![CDATA[Ha sido comisionado por el suscrito, a efecto de llevar a cabo visita de trabajo:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="16" y="127" width="45" height="20" uuid="460fb6d6-1919-47bb-9562-bc7c6247cec3"/>
+				<text><![CDATA[Los dias:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="60" y="138" width="45" height="1" uuid="1995e019-b5af-469a-88f1-86a85fc409af"/>
+			</line>
+			<staticText>
+				<reportElement x="109" y="128" width="42" height="20" uuid="f7395f2a-4be1-4bc4-9c0f-0e021b734a7a"/>
+				<text><![CDATA[del mes:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="156" y="139" width="62" height="1" uuid="34c6442f-9582-4b6e-aea6-1bdd8119dad5"/>
+			</line>
+			<staticText>
+				<reportElement x="225" y="128" width="40" height="20" uuid="4e0df6c4-6a74-4869-bf41-b26f34108b4e"/>
+				<text><![CDATA[del año:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="265" y="139" width="46" height="1" uuid="c5e639cb-5ce2-43b5-87c7-dbed3d1cf893"/>
+			</line>
+			<staticText>
+				<reportElement x="9" y="187" width="100" height="20" uuid="79c41bd3-d64b-43fd-9a33-6c217e7d8c32"/>
+				<text><![CDATA[En la localidad de :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="9" y="249" width="100" height="20" uuid="f3664fc2-a1ca-4a08-b332-c38b0f96b943"/>
+				<text><![CDATA[Que consiste en :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="9" y="306" width="125" height="20" uuid="86376548-f37c-4a56-9b8f-8c66bb255fe7"/>
+				<text><![CDATA[Vehículo Oficial Asignado :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="225" y="326" width="100" height="20" uuid="2c5e8d0c-3e25-451e-a4e1-0d4cb151bea4"/>
+				<text><![CDATA[Firma de autorizado]]></text>
+			</staticText>
+			<line>
+				<reportElement x="176" y="346" width="216" height="1" uuid="546c28e0-f717-49b0-aa21-32ca261e059a"/>
+			</line>
+			<staticText>
+				<reportElement x="187" y="347" width="205" height="30" uuid="b4661d1d-6512-41ac-be3f-7311ccf40d3d"/>
+				<text><![CDATA[DR. CELSO VALDERRAMA DELGADO CONSEJERO PRESIDENTE ]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="5" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="4" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="4" splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -5,7 +5,9 @@
  */
 package Empleado;
 
+import Conexion.Conexion;
 import Solicitud.Solicitud_controlador;
+import com.mysql.jdbc.Connection;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
@@ -18,12 +20,20 @@ import java.beans.PropertyChangeListener;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -208,6 +218,11 @@ public class SolicitudRegistros extends javax.swing.JPanel {
         });
 
         jButton2.setText("PDF");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Filtra las comisiones");
 
@@ -612,6 +627,40 @@ public void reactivarVentana()
           traerComisiones(status);
        }
     }//GEN-LAST:event_cbFiltroComisionItemStateChanged
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+                    try {
+           //int leer = Integer.parseInt(txtbuscar.getText());
+            // TODO add your handling code here:
+            Conexion con = new Conexion();
+            Connection conn = (Connection) con.getConexion();
+            
+            JasperReport reporte = null;
+            ///src/ejemploreportes/
+            //String path = "src/ejemploreportes/municipios.jasper";
+            String path = "src//Reportes//reporteComision.jasper";
+            
+            Map parametro = new HashMap();
+            parametro.put("id_estado", 1);
+            
+            //reporte = (JasperReport) JRLoader.loadObjectFromFile(path);
+            reporte = (JasperReport) JRLoader.loadObjectFromFile(path);
+            
+            //JasperPrint jprint = JasperFillManager.fillReport(reporte, null, conn);
+            JasperPrint jprint = JasperFillManager.fillReport(reporte, parametro, conn);
+            
+            JasperViewer view = new JasperViewer(jprint,false);
+            
+            view.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            
+            view.setVisible(true);
+            
+        } catch (JRException ex) {
+            //Logger.getLogger(SolicitudRegistro.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex);
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

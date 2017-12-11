@@ -1,5 +1,4 @@
 
-
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -372,12 +371,12 @@ String a,a2,b,b2,c,c2,d,d2;
     
     
     private void btnSolicitudesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSolicitudesActionPerformed
-        Solicitudes s = new Solicitudes();
+        Solicitudes s = new Solicitudes("MACGUSTAVO");
         s.setVisible(true);
     }//GEN-LAST:event_btnSolicitudesActionPerformed
 
     private void btnpriviActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnpriviActionPerformed
- AsigPrivi p= new AsigPrivi();
+        AsigPrivi p= new AsigPrivi();
         p.setVisible(true);         // TODO add your handling code here:
     }//GEN-LAST:event_btnpriviActionPerformed
 

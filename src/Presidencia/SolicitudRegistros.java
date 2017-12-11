@@ -6,7 +6,9 @@
 package Presidencia;
 
 
+import Conexion.Conexion;
 import Solicitud.Solicitud_controlador;
+import com.mysql.jdbc.Connection;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dialog;
@@ -22,6 +24,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JDialog;
 import static javax.swing.JFrame.EXIT_ON_CLOSE;
 import javax.swing.JOptionPane;
@@ -29,6 +35,12 @@ import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -147,6 +159,11 @@ public class SolicitudRegistros extends javax.swing.JPanel {
         jLabel12.setText("Selecciona una solicitud de la tabla para editar, cancelar o imprimir PDF");
 
         jButton1.setText("PDF");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel13.setText("Mas detalles...");
 
@@ -175,7 +192,7 @@ public class SolicitudRegistros extends javax.swing.JPanel {
                         .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblCancela, javax.swing.GroupLayout.PREFERRED_SIZE, 521, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelMasDetallesLayout.setVerticalGroup(
             panelMasDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -449,6 +466,40 @@ public class SolicitudRegistros extends javax.swing.JPanel {
     private void btnMotCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMotCancelActionPerformed
        mostrarCancel();
     }//GEN-LAST:event_btnMotCancelActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+            try {
+           //int leer = Integer.parseInt(txtbuscar.getText());
+            // TODO add your handling code here:
+            Conexion con = new Conexion();
+            Connection conn = (Connection) con.getConexion();
+            
+            JasperReport reporte = null;
+            ///src/ejemploreportes/
+            //String path = "src/ejemploreportes/municipios.jasper";
+            String path = "src//Reportes//reportePresidencia.jasper";
+            
+            Map parametro = new HashMap();
+            parametro.put("id_estado", 1);
+            
+            //reporte = (JasperReport) JRLoader.loadObjectFromFile(path);
+            reporte = (JasperReport) JRLoader.loadObjectFromFile(path);
+            
+            //JasperPrint jprint = JasperFillManager.fillReport(reporte, null, conn);
+            JasperPrint jprint = JasperFillManager.fillReport(reporte, parametro, conn);
+            
+            JasperViewer view = new JasperViewer(jprint,false);
+            
+            view.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            
+            view.setVisible(true);
+            
+        } catch (JRException ex) {
+            //Logger.getLogger(SolicitudRegistro.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     public void mostrarCancel()
     {

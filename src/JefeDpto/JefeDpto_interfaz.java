@@ -114,6 +114,7 @@ public class JefeDpto_interfaz extends javax.swing.JFrame { /**
     private void btnCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesionActionPerformed
 
      this.dispose();
+     System.exit(0);
     }//GEN-LAST:event_btnCerrarSesionActionPerformed
      /**
      * @param args the command line arguments
