@@ -7,7 +7,7 @@ package Solicitud;
 
 import Conexion.Conexion;
 import Usuarios.usuarios_modelo;
-import java.sql.Connection;
+import java.sql.Connection;     
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
