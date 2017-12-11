@@ -8,12 +8,14 @@ package Usuarios;
 import Conexion.Conexion;
 import java.awt.List;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -22,6 +24,10 @@ import java.util.logging.Logger;
 public class usuarios_modelo {
 private String usuario;
 private String contrasena;
+
+ 
+    Conexion con = new Conexion();
+    Connection conn = con.getConexion();
     public usuarios_modelo() {
     }
      public String tipoUsuario(String usuario)
@@ -152,5 +158,35 @@ private String contrasena;
             Logger.getLogger(usuarios_modelo.class.getName()).log(Level.SEVERE, null, ex);
         }
        return tipoUsuario; 
+    }
+    
+     public void insertarNuevo(String nombre,String apellidoP,String apellidoM,String curp,String fechaNac,String tipoUsr,String calle,String colonia,String codigo,String telefono,String rfc,String contrasena)
+    {
+        try
+        {
+            
+            String sqlPer="insert into persona (Nombre_Per,Ape_Pat_Per,Ape_Mat_Per,"
+                    + "Curp_Per,Calle_Per,Colonia_Per,CP_Per,Tel_Per) "
+                    + " values(?,?,?,?,?,?,?,?)";
+            
+            PreparedStatement pst = conn.prepareStatement(sqlPer);
+            
+            
+//            pst.setInt(1,idSolicitud);
+//            pst.setString(2,motivo);
+//            
+//            numero = stmt.executeUpdate(query, Statement.RETURN_GENERATED_KEYS);
+//            pst.executeUpdate();
+       }
+
+        catch (SQLException ex) 
+        {
+            JOptionPane.showMessageDialog(null,ex);
+        } 
+
+        finally 
+        {
+         
+        }
     }
 }

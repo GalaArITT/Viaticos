@@ -117,4 +117,10 @@ public void modificaSolicitud(int idFolio,Date fechaSalida,String personalViatic
      String [][] informes=objSolicitud.traerInformes();
      return informes;
  }
+  
+ public String verMotivoCancelJefe(int idSolicitud)
+ {
+    Solicitud_modelo objSolicitud=new Solicitud_modelo();
+    return objSolicitud.verMotivoCancelJefe(idSolicitud);
+ }
 }

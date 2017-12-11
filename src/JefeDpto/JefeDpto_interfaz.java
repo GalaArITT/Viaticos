@@ -4,13 +4,12 @@
  * and open the template in the editor.
  */
 package JefeDpto;
-
+ 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import javax.swing.JOptionPane;
-
 /**
  *
  * @author oliver
@@ -57,10 +56,13 @@ public class JefeDpto_interfaz extends javax.swing.JFrame { /**
 
         label1 = new java.awt.Label();
         tbNuevaSolicitud = new javax.swing.JTabbedPane();
+        btnCerrarSesion = new javax.swing.JButton();
 
         label1.setText("label1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Modulo De Jefe De Departamento");
+        setAlwaysOnTop(true);
 
         tbNuevaSolicitud.setPreferredSize(new java.awt.Dimension(820, 495));
         tbNuevaSolicitud.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -69,17 +71,30 @@ public class JefeDpto_interfaz extends javax.swing.JFrame { /**
             }
         });
 
+        btnCerrarSesion.setText("Cerrar Sesión");
+        btnCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCerrarSesionActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(tbNuevaSolicitud, javax.swing.GroupLayout.DEFAULT_SIZE, 1025, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnCerrarSesion)
+                .addGap(17, 17, 17))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(tbNuevaSolicitud, javax.swing.GroupLayout.PREFERRED_SIZE, 498, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(94, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addComponent(btnCerrarSesion)
+                .addContainerGap())
         );
 
         pack();
@@ -95,6 +110,11 @@ public class JefeDpto_interfaz extends javax.swing.JFrame { /**
            actualizarTabla=false;
        }
     }//GEN-LAST:event_tbNuevaSolicitudMouseClicked
+
+    private void btnCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesionActionPerformed
+
+     this.dispose();
+    }//GEN-LAST:event_btnCerrarSesionActionPerformed
      /**
      * @param args the command line arguments
      */
@@ -138,6 +158,7 @@ public class JefeDpto_interfaz extends javax.swing.JFrame { /**
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCerrarSesion;
     private java.awt.Label label1;
     private javax.swing.JTabbedPane tbNuevaSolicitud;
     // End of variables declaration//GEN-END:variables

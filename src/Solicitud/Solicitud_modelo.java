@@ -744,9 +744,36 @@ public class Solicitud_modelo {
         }
     }
     
+     public int obtenerCantidadComisionesEmpleado(String status,int idEmpleado)
+    {
+       int cantidadSol=0;
+       try {
+            Conexion con=new Conexion();
+            Connection conn=con.getConexion();
+            Statement stm=conn.createStatement();
+            
+             String sql="select count(*) as cantidad from Solicitud_Viaticos"
+                     + " inner join responsable_viaticos on responsable_viaticos.idViaticos= Solicitud_Viaticos.idViaticos"
+                     + " where realizada='"+status+"' and responsable_viaticos.idResponsable="+idEmpleado;
+            
+             ResultSet resul=stm.executeQuery(sql);
+             
+               while(resul.next())
+      {
+         cantidadSol=resul.getInt("cantidad");
+      }
+           
+        } catch (SQLException ex) {
+            Logger.getLogger(usuarios_modelo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       return cantidadSol;
+    }
+    
+    
+    
     public String [][] traerComisionesViaticosEmpleado(String status,int idUsuarioEmpleado)
     {
-       int filas=obtenerCantidadComisiones(status);
+       int filas=obtenerCantidadComisionesEmpleado(status,idUsuarioEmpleado);
        
         String arregloSolicitudes[][]=new String[filas][13];
         try {
@@ -761,7 +788,7 @@ public class Solicitud_modelo {
             " inner join productos ON productos.idProductos=Solicitud_Viaticos.idVehiculo_Viat" +
             " inner join usr_viaticos on usr_viaticos.Solicitud_Viaticos_idViaticos=solicitud_viaticos.idViaticos"+
             " inner join responsable_viaticos on responsable_viaticos.idViaticos=Solicitud_Viaticos.idViaticos"+
-            " where realizada='"+status+"' and status='Aprobada' and responsable_viaticos.idResponsable="+idUsuarioEmpleado;
+            " where realizada='"+status+"' and status_viat='Aprobada' and responsable_viaticos.idResponsable="+idUsuarioEmpleado;
             
              ResultSet resul=stm.executeQuery(sql);
              DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
@@ -822,7 +849,8 @@ public class Solicitud_modelo {
             " from Solicitud_Viaticos " +
             " inner join productos ON productos.idProductos=Solicitud_Viaticos.idVehiculo_Viat" +
             " inner join usr_viaticos on usr_viaticos.Solicitud_Viaticos_idViaticos=solicitud_viaticos.idViaticos"+
-            " inner join responsable_viaticos on responsable_viaticos.idViaticos=Solicitud_Viaticos.idViaticos";
+            " inner join responsable_viaticos on responsable_viaticos.idViaticos=Solicitud_Viaticos.idViaticos"
+                    + " where realizada='"+status+"'";
             
              ResultSet resul=stm.executeQuery(sql);
              DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
@@ -1116,4 +1144,29 @@ public class Solicitud_modelo {
         }
        return cantidadSol;
     }
+    
+    public String verMotivoCancelJefe(int idSolicitud)
+    {
+        String motivo="";
+       try {
+            Conexion con=new Conexion();
+            Connection conn=con.getConexion();
+            Statement stm=conn.createStatement();
+            
+             String sql="select motivoCancelada from viaticos_cancelada where idViaticos="+idSolicitud;
+            
+             ResultSet resul=stm.executeQuery(sql);
+             
+               while(resul.next())
+      {
+         motivo=resul.getString("motivoCancelada");
+      }
+           
+        } catch (SQLException ex) {
+            Logger.getLogger(usuarios_modelo.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+       return motivo;
+    }
+    
+   
 }

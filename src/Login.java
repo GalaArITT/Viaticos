@@ -1,7 +1,10 @@
 
+
+
 import Administrador.Administrador_interfaz;
 import Empleado.Empleado_interfaz;
 import JefeDpto.JefeDpto_interfaz;
+import JefeSistemas.Sistemas;
 import Presidencia.Presidencia_interfaz;
 import Secretaria.Secretaria_interfaz;
 import java.awt.Color;
@@ -268,7 +271,9 @@ void cerrar(){
       
       if(tipoUsuario.equals("JefeInformaticoViatico"))
       {
-          
+          Sistemas pantalla=new Sistemas();
+          pantalla.setVisible(true);
+          this.setVisible(false);
       }
       //determinar a que pantalla ira
      }

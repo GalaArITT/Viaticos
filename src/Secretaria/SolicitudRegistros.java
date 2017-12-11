@@ -51,6 +51,8 @@ public class SolicitudRegistros extends javax.swing.JPanel {
      */
     public SolicitudRegistros() {
         initComponents();
+        btnMotCancel.setVisible(false);
+         lblCancela.setVisible(false);
         traerSolicitudes("Solicitada");
         //        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
@@ -94,11 +96,13 @@ public class SolicitudRegistros extends javax.swing.JPanel {
         lbDias = new javax.swing.JLabel();
         lbTransporte = new javax.swing.JLabel();
         lbPernoctado = new javax.swing.JLabel();
+        lblCancela = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         txtFechaSalidaBusqueda = new com.toedter.calendar.JDateChooser();
         btnMostrarTodo = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         cbStatus = new javax.swing.JComboBox<>();
+        btnMotCancel = new javax.swing.JButton();
 
         jPanel2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -149,6 +153,8 @@ public class SolicitudRegistros extends javax.swing.JPanel {
 
         jLabel13.setText("Mas detalles...");
 
+        lblCancela.setText("Motivo de la cancelación:");
+
         javax.swing.GroupLayout panelMasDetallesLayout = new javax.swing.GroupLayout(panelMasDetalles);
         panelMasDetalles.setLayout(panelMasDetallesLayout);
         panelMasDetallesLayout.setHorizontalGroup(
@@ -168,14 +174,19 @@ public class SolicitudRegistros extends javax.swing.JPanel {
                     .addGroup(panelMasDetallesLayout.createSequentialGroup()
                         .addGap(78, 78, 78)
                         .addComponent(lbPernoctado, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(panelMasDetallesLayout.createSequentialGroup()
+                        .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblCancela, javax.swing.GroupLayout.PREFERRED_SIZE, 605, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
         panelMasDetallesLayout.setVerticalGroup(
             panelMasDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelMasDetallesLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel13)
+                .addGroup(panelMasDetallesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel13)
+                    .addComponent(lblCancela))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lbLugar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -207,6 +218,13 @@ public class SolicitudRegistros extends javax.swing.JPanel {
             }
         });
 
+        btnMotCancel.setText("Ver motivo de la cancelación");
+        btnMotCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMotCancelActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -218,27 +236,32 @@ public class SolicitudRegistros extends javax.swing.JPanel {
                         .addComponent(btnEditaSolicitud, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnMotCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnMostrarTodo))
-                    .addComponent(jLabel9)
-                    .addComponent(jLabel10)
+                    .addComponent(jScrollPane4)
+                    .addComponent(panelMasDetalles, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel12)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel10)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel2))
-                                .addGap(134, 134, 134)
+                                    .addComponent(jLabel12)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(cbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel2))
+                                        .addGap(134, 134, 134)
+                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel11)
+                                            .addComponent(txtBusquedaSolicitud, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(32, 32, 32)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel11)
-                                    .addComponent(txtBusquedaSolicitud, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(32, 32, 32)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtFechaSalidaBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1)))
-                    .addComponent(jScrollPane4)
-                    .addComponent(panelMasDetalles, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(txtFechaSalidaBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel1))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -269,7 +292,8 @@ public class SolicitudRegistros extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnEditaSolicitud)
                     .addComponent(jButton1)
-                    .addComponent(btnMostrarTodo))
+                    .addComponent(btnMostrarTodo)
+                    .addComponent(btnMotCancel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelMasDetalles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -284,9 +308,9 @@ public class SolicitudRegistros extends javax.swing.JPanel {
             .addGap(0, 1019, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 14, Short.MAX_VALUE)
+                    .addGap(0, 10, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 14, Short.MAX_VALUE)))
+                    .addGap(0, 9, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -364,21 +388,29 @@ public class SolicitudRegistros extends javax.swing.JPanel {
             if(item.equals("Solicitadas"))
             {
                 status="Solicitada";
+                 btnMotCancel.setVisible(false);
+              lblCancela.setVisible(false);
             }
 
             if(item.equals("Aprobadas"))
             {
                 status="Aprobada";
+                 btnMotCancel.setVisible(false);
+              lblCancela.setVisible(false);
             }
 
             if(item.equals("Canceladas"))
             {
                 status="Cancelada";
+                 btnMotCancel.setVisible(true);
+              lblCancela.setVisible(true);
             }
             
             if(item.equals("No aprobadas"))
             {
                 status="No aprobada";
+                 btnMotCancel.setVisible(true);
+              lblCancela.setVisible(true);
             }
             traerSolicitudes(status);
         }
@@ -410,6 +442,16 @@ public class SolicitudRegistros extends javax.swing.JPanel {
        }
     }//GEN-LAST:event_jPanel2MouseEntered
 
+    private void btnMotCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMotCancelActionPerformed
+      mostrarCancel();
+    }//GEN-LAST:event_btnMotCancelActionPerformed
+
+    public void mostrarCancel()
+    {
+     Solicitud_controlador objControlador=new Solicitud_controlador();
+     String motivo=objControlador.verMotivoCancelJefe(Integer.parseInt(idFolio));
+    lblCancela.setText("Motivo de cancelación: "+motivo);
+    }
     
     public void traerSolicitudes(String status){
        Solicitud_controlador objUsuario=new Solicitud_controlador();
@@ -425,6 +467,8 @@ public class SolicitudRegistros extends javax.swing.JPanel {
       {
           try
           {
+               btnMotCancel.setVisible(true);
+              lblCancela.setVisible(true);
                cargaInfoAdicionalTabla(tablaSolicitudes.getValueAt(tablaSolicitudes.getSelectedRow(), 0).toString());
           }
           
@@ -561,6 +605,7 @@ public void reactivarVentana()
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnEditaSolicitud;
     private javax.swing.JButton btnMostrarTodo;
+    private javax.swing.JButton btnMotCancel;
     private javax.swing.JComboBox<String> cbStatus;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
@@ -577,6 +622,7 @@ public void reactivarVentana()
     private javax.swing.JLabel lbLugar;
     private javax.swing.JLabel lbPernoctado;
     private javax.swing.JLabel lbTransporte;
+    private javax.swing.JLabel lblCancela;
     private javax.swing.JPanel panelMasDetalles;
     private javax.swing.JTable tablaSolicitudes;
     private javax.swing.JTextField txtBusquedaSolicitud;

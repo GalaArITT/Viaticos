@@ -3,29 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Presidencia;
-import Solicitud.Solicitud_controlador;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-import javax.swing.table.DefaultTableModel;
+package JefeSistemas;
 
 /**
  *
- * @author oliver
+ * @author fernando
  */
-public class Presidencia_interfaz extends javax.swing.JFrame {
-    Presidencia.SolicitudRegistros pantallaRegistrosSolicitud=new Presidencia.SolicitudRegistros();
-    String[][] arregloSolicitudes;
-    int idUsuario;
+public class Sistemas extends javax.swing.JFrame {
+
     /**
-     * Creates new form Presidencia_interfaz
+     * Creates new form Sistemas
      */
-    public Presidencia_interfaz(int idUsuario) {
+    public Sistemas() {
         initComponents();
-        //traerSolicitudes();
-        this.idUsuario=idUsuario;
-        pantallaRegistrosSolicitud.setVisible(true);
-        tbPresidencia.add("Solicitudes Elaboradas",pantallaRegistrosSolicitud);  
+        nuevoUsuario pantallaNuevoUsuario=new nuevoUsuario();
+        tbSistemas.add("Nueva Solicitud",pantallaNuevoUsuario);  
     }
 
     /**
@@ -37,46 +29,36 @@ public class Presidencia_interfaz extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        tbPresidencia = new javax.swing.JTabbedPane();
-        btnCerrarSesion = new javax.swing.JButton();
+        tbSistemas = new javax.swing.JTabbedPane();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Modulo De Presidencia");
+        setTitle("Modulo De Jefe De Informatica");
+        setPreferredSize(new java.awt.Dimension(1025, 559));
 
-        btnCerrarSesion.setText("Cerrar Sesión");
-        btnCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCerrarSesionActionPerformed(evt);
-            }
-        });
+        jButton1.setText("Cerrar Sesión");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tbPresidencia, javax.swing.GroupLayout.DEFAULT_SIZE, 953, Short.MAX_VALUE)
+            .addComponent(tbSistemas)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(873, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(tbPresidencia, javax.swing.GroupLayout.PREFERRED_SIZE, 533, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tbSistemas, javax.swing.GroupLayout.PREFERRED_SIZE, 514, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnCerrarSesion)
-                .addContainerGap())
+                .addComponent(jButton1))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesionActionPerformed
-       this.dispose();
-    }//GEN-LAST:event_btnCerrarSesionActionPerformed
-
-      
     /**
      * @param args the command line arguments
      */
@@ -94,26 +76,26 @@ public class Presidencia_interfaz extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Presidencia_interfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Sistemas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Presidencia_interfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Sistemas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Presidencia_interfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Sistemas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Presidencia_interfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Sistemas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                //new Presidencia_interfaz().setVisible(true);
+                new Sistemas().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCerrarSesion;
-    private javax.swing.JTabbedPane tbPresidencia;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JTabbedPane tbSistemas;
     // End of variables declaration//GEN-END:variables
 }

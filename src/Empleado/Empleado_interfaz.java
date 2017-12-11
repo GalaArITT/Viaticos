@@ -41,12 +41,21 @@ RegistrosInformes pantallaInformes;
     private void initComponents() {
 
         tbOficiosInformes = new javax.swing.JTabbedPane();
+        btnCerrarSesion = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Modulo De Empleado");
 
         tbOficiosInformes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbOficiosInformesMouseClicked(evt);
+            }
+        });
+
+        btnCerrarSesion.setText("Cerrar Sesión");
+        btnCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCerrarSesionActionPerformed(evt);
             }
         });
 
@@ -55,12 +64,18 @@ RegistrosInformes pantallaInformes;
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(tbOficiosInformes, javax.swing.GroupLayout.DEFAULT_SIZE, 1016, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(tbOficiosInformes, javax.swing.GroupLayout.DEFAULT_SIZE, 594, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(tbOficiosInformes, javax.swing.GroupLayout.PREFERRED_SIZE, 552, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnCerrarSesion)
+                .addGap(0, 6, Short.MAX_VALUE))
         );
 
         pack();
@@ -69,6 +84,10 @@ RegistrosInformes pantallaInformes;
     private void tbOficiosInformesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbOficiosInformesMouseClicked
        pantallaInformes.traerInformes();
     }//GEN-LAST:event_tbOficiosInformesMouseClicked
+
+    private void btnCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesionActionPerformed
+     this.dispose();
+    }//GEN-LAST:event_btnCerrarSesionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -106,6 +125,7 @@ RegistrosInformes pantallaInformes;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCerrarSesion;
     private javax.swing.JTabbedPane tbOficiosInformes;
     // End of variables declaration//GEN-END:variables
 }
