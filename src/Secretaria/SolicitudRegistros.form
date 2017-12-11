@@ -138,7 +138,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Dialog" size="18" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Solicitudes que has realizado"/>
+            <Property name="text" type="java.lang.String" value="Solicitudes elaboradas"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtBusquedaSolicitud">
@@ -161,9 +161,33 @@
                   <Table columnCount="4" rowCount="0">
                     <Column editable="false" title="Folio" type="java.lang.Object"/>
                     <Column editable="false" title="Fecha de salida" type="java.lang.Object"/>
-                    <Column editable="false" title="Responsable" type="java.lang.Object"/>
+                    <Column editable="false" title="Quien solicita" type="java.lang.Object"/>
                     <Column editable="false" title="Status" type="java.lang.Object"/>
                   </Table>
+                </Property>
+                <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+                  <TableColumnModel selectionModel="0">
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                  </TableColumnModel>
                 </Property>
                 <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                   <TableHeader reorderingAllowed="true" resizingAllowed="true"/>

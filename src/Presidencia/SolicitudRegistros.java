@@ -415,7 +415,7 @@ public class SolicitudRegistros extends javax.swing.JPanel {
     private void btnAprobarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAprobarActionPerformed
      Solicitud_controlador objControlador=new Solicitud_controlador();
      int idSolicitud=Integer.parseInt(idFolio);
-     objControlador.modificarStatus(idSolicitud,"Aprobada");
+     objControlador.modificarStatus(idSolicitud,"Aprobada","");
      traerSolicitudes("Solicitada");
     }//GEN-LAST:event_btnAprobarActionPerformed
 

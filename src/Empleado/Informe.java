@@ -6,6 +6,7 @@
 package Empleado;
 
 import Solicitud.Solicitud_controlador;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -13,6 +14,7 @@ import Solicitud.Solicitud_controlador;
  */
 public class Informe extends javax.swing.JPanel {
 int idFolio=0;
+int idEmpleado;
     /**
      * Creates new form Informe
      */
@@ -20,8 +22,9 @@ int idFolio=0;
         initComponents();
     }
     
-    public void cargarCampos(String idFolio)
+    public void cargarCampos(String idFolio,int idEmpleado)
     {
+        this.idEmpleado=idEmpleado;
         lblTitulo.setText("Ingresa el informe de actividades realizadas en la comisión (folio "+idFolio+")");
         this.idFolio=Integer.parseInt(idFolio);
     }
@@ -83,7 +86,15 @@ int idFolio=0;
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
       String actividades=txtActividades.getText();
       Solicitud_controlador objControlador=new Solicitud_controlador();
-      objControlador.insertarActividad(actividades,idFolio);
+      if(!txtActividades.equals(""))
+      {
+       objControlador.insertarActividad(actividades,idFolio,idEmpleado);   
+      } 
+      
+      else
+      {
+       JOptionPane.showMessageDialog(null,"El campo de informe no debe estar vacio");
+      }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
 

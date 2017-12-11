@@ -18,7 +18,7 @@ import javax.swing.JOptionPane;
 public class JefeDpto_interfaz extends javax.swing.JFrame { /**
      * Creates new form JefeDpto_interfaz
      */
-    SolicitudRegistros pantallaRegistrosSolicitud= new SolicitudRegistros();
+    SolicitudRegistros pantallaRegistrosSolicitud;
     SolicitudNueva pantallaNuevaSolicitud;
     boolean actualizarTabla=false;
     int idUsuario;
@@ -32,7 +32,7 @@ public class JefeDpto_interfaz extends javax.swing.JFrame { /**
         pantallaNuevaSolicitud.setVisible(true);
         tbNuevaSolicitud.add("Nueva Solicitud",pantallaNuevaSolicitud);  
         
-        
+        pantallaRegistrosSolicitud= new SolicitudRegistros(idUsuario);
         pantallaRegistrosSolicitud.setVisible(true);
         tbNuevaSolicitud.add("Solicitudes Elaboradas",pantallaRegistrosSolicitud);  
         

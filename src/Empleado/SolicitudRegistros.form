@@ -339,14 +339,15 @@
         <Component class="javax.swing.JComboBox" name="cbFiltroComision">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="4">
-                <StringItem index="0" value="Comisiones  pendientes"/>
+              <StringArray count="2">
+                <StringItem index="0" value="Comisiones pendientes"/>
                 <StringItem index="1" value="Comisiones realizadas"/>
-                <StringItem index="2" value=" "/>
-                <StringItem index="3" value=" "/>
               </StringArray>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cbFiltroComisionItemStateChanged"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>

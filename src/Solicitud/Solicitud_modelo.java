@@ -33,11 +33,11 @@ public class Solicitud_modelo {
      private String actividadViatico;
      private String pernoctado;
      private String statusViatico;
-     private int idUsuario;
+     private int idUsuario;//JEFE DE DEPARTAMENTO QUE HACE LA SOLICITUD
      private int idVehiculo;
      private int idSolicitud;
      private float monto;
-     private int idEmpleado;
+     private int idEmpleado;//EMPLEADO QUE SERA ENVIADO A CUBRIR LA COMISION
      
     
     Conexion con = new Conexion();
@@ -55,11 +55,13 @@ public class Solicitud_modelo {
       this.idSolicitud=idFolio;
         this.statusViatico=statusViatico;
      }
+    
      
-     
-    public Solicitud_modelo(int idEmpleado,Date fechaSalida,String personalViatico, int diasViatico,String lugarViatico,String actividadViatico,
-                            String pernoctado,String statusViatico,int idUsuario,int idVehiculo,float monto) 
-    {   
+    //CONSTRUCTOR PARA INSERTAR UNA NUEVA SOLICITUD
+  public Solicitud_modelo(int idUsuario,Date fechaSalida,String personalViatico,int diasViatico,String lugarViatico,
+                            String actividadViatico,String pernoctado,String statusViatico,float monto,int idEmpleado,int idVehiculo)
+    {
+        this.idUsuario=idUsuario;
         this.fechaSalida = new java.sql.Date(fechaSalida.getTime());
         this.personalViatico=personalViatico;
         this.diasViatico=diasViatico;
@@ -67,14 +69,13 @@ public class Solicitud_modelo {
         this.actividadViatico=actividadViatico;
         this.pernoctado=pernoctado;
         this.statusViatico=statusViatico;
-        this.idUsuario=idUsuario;
-        this.idVehiculo=idVehiculo;
         this.monto=monto;
         this.idEmpleado=idEmpleado;
+        this.idVehiculo=idVehiculo;
     }
     
     public Solicitud_modelo(int idSolicitud,Date fechaSalida,String personalViatico, int diasViatico,String lugarViatico,String actividadViatico,
-                            String pernoctado,String statusViatico,int idUsuario,int idVehiculo,float monto,int na) 
+                            String pernoctado,String statusViatico,int idEmpleado,int idVehiculo,float monto, int na) 
     {   
         this.idSolicitud=idSolicitud;
         this.fechaSalida = new java.sql.Date(fechaSalida.getTime());
@@ -84,7 +85,7 @@ public class Solicitud_modelo {
         this.actividadViatico=actividadViatico;
         this.pernoctado=pernoctado;
         this.statusViatico=statusViatico;
-        this.idUsuario=idUsuario;
+        this.idEmpleado=idEmpleado;
         this.idVehiculo=idVehiculo;
         this.monto=monto;
     }
@@ -222,9 +223,8 @@ public class Solicitud_modelo {
 
         finally 
         {
-            insertaUsuarioViatico();
-            //insertarSolicitudDetalles();
-            //insertarUsuarioDetalle();
+            insertaIdUsuarioJefeViatico();
+            insertarResponsableViatico();
             JOptionPane.showMessageDialog(null,"Solicitud enviada para su revisión");
         }
     }
@@ -271,7 +271,7 @@ public class Solicitud_modelo {
         }
     }
     
-    public boolean modificaStatusSolicitud()
+    public boolean modificaStatusSolicitud(String motivo)
     {
         try
         {
@@ -294,8 +294,35 @@ public class Solicitud_modelo {
 
         finally 
         {
+            cancelarSolicitud(idSolicitud,motivo);
             JOptionPane.showMessageDialog(null,"Solicitud "+statusViatico);
             return true;
+        }
+    }
+    
+    public void cancelarSolicitud(int idSolicitud,String motivo)
+    {
+      try
+        {
+            
+            String sqlModSol="insert into viaticos_cancelada (idViaticos,motivoCancelada) "
+                    + " values(?,?)";
+            
+            PreparedStatement pst = conn.prepareStatement(sqlModSol); 
+            
+            pst.setInt(1,idSolicitud);
+            pst.setString(2,motivo);
+            pst.executeUpdate();
+       }
+
+        catch (SQLException ex) 
+        {
+            JOptionPane.showMessageDialog(null,ex);
+        } 
+
+        finally 
+        {
+         
         }
     }
     
@@ -335,22 +362,22 @@ public class Solicitud_modelo {
         }
     }
     
-    public void insertarUsuarioDetalle()
+    public void insertarResponsableViatico()
     {
         try
         {
-            int idSolicitud=obtenIdSolicitud();
-            String sqlSol="insert into Usr_Solc("
-                    + "Solicitudes_idSolicitudes,"
-                    + "Usuario_idUsuario"
+            int idViatico=obtenIdViatico();
+            String sqlSol="insert into responsable_viaticos("
+                    + "idResponsable,"
+                    + "idViaticos"
                     + ")"
                     + "values(?,?)";
             
             PreparedStatement pst = conn.prepareStatement(sqlSol); 
             
-            pst.setInt(1,idSolicitud);
-            pst.setInt(2,idUsuario);
-           
+            pst.setInt(1,idEmpleado);
+            pst.setInt(2,idViatico);
+            
             pst.executeUpdate();
        }
 
@@ -365,7 +392,7 @@ public class Solicitud_modelo {
         }
     }
     
-     public void insertaUsuarioViatico()
+     public void insertaIdUsuarioJefeViatico()
     {
         try
         {
@@ -512,6 +539,135 @@ public class Solicitud_modelo {
         
       return arregloSolicitudes;
     }
+     
+     
+       public String [][] traerSolicitudesViaticosJefe(String status,int idUsuarioJefe)
+    {
+       int filas=obtenerCantidadSolicitudes(status);
+       
+        String arregloSolicitudes[][]=new String[filas][13];
+        try {
+            Conexion con=new Conexion();
+            Connection conn=con.getConexion();
+            Statement stm=conn.createStatement();
+            
+            String sql="select idViaticos,Fol_Viat,FechaSal_Viat,Personal_Viat," +
+            "Dias_Viat,Lugar_Viat,Act_Viat,Permotado_Viat,Status_Viat," +
+            "usr_viaticos.Usuario_idUsuario,nom_prod,idVehiculo_Viat,monto" +
+            " from Solicitud_Viaticos " +
+            " inner join productos ON productos.idProductos=Solicitud_Viaticos.idVehiculo_Viat" +
+            " inner join usr_viaticos on usr_viaticos.Solicitud_Viaticos_idViaticos=solicitud_viaticos.idViaticos"
+                    + " where Status_Viat='"+status+"' and usr_viaticos.Usuario_idUsuario="+idUsuarioJefe;
+           
+             ResultSet resul=stm.executeQuery(sql);
+             DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+
+               while(resul.next())
+      {        
+               int fila=resul.getRow()-1;
+               int idSolViatico=resul.getInt("idViaticos");
+               String folViatico=resul.getString("Fol_Viat");
+               Date fechaSalidaViatico=resul.getDate("FechaSal_Viat");
+               String personalViatico=resul.getString("Personal_Viat");
+               int diasViatico=resul.getInt("Dias_Viat");
+               String lugarViatico=resul.getString("Lugar_Viat");
+               String actividadViatico=resul.getString("Act_Viat");
+               String pernoctado=resul.getString("Permotado_Viat");
+               String statusViatico=resul.getString("Status_Viat");
+               int idUsuario=resul.getInt("Usuario_idUsuario");
+               String nom_prod=resul.getString("nom_prod");
+               int idVehiculo=resul.getInt("idVehiculo_Viat");
+               float monto=resul.getFloat("monto");
+         
+               arregloSolicitudes[fila][0]=String.valueOf(idSolViatico);
+               arregloSolicitudes[fila][1]=String.valueOf(folViatico);
+               arregloSolicitudes[fila][2]=df.format(fechaSalidaViatico);
+               arregloSolicitudes[fila][3]=personalViatico;
+               arregloSolicitudes[fila][4]=String.valueOf(diasViatico);
+               arregloSolicitudes[fila][5]=lugarViatico;
+               arregloSolicitudes[fila][6]=actividadViatico;
+               arregloSolicitudes[fila][7]=pernoctado;
+               arregloSolicitudes[fila][8]=statusViatico;
+               arregloSolicitudes[fila][9]=String.valueOf(idUsuario);
+               arregloSolicitudes[fila][10]=nom_prod;
+               arregloSolicitudes[fila][11]=String.valueOf(idVehiculo);
+               arregloSolicitudes[fila][12]=String.valueOf(monto);
+            
+      }
+           
+        } catch (SQLException ex) {
+            Logger.getLogger(usuarios_modelo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+      return arregloSolicitudes;
+    }
+     
+     public String [][] traerSolicitudesViaticosSecretaria(String status)
+    {
+       int filas=obtenerCantidadSolicitudes(status);
+       
+        String arregloSolicitudes[][]=new String[filas][14];
+        try {
+            Conexion con=new Conexion();
+            Connection conn=con.getConexion();
+            Statement stm=conn.createStatement();
+            
+            String sql="select idViaticos,Fol_Viat,FechaSal_Viat,Personal_Viat,\n" +
+            "Dias_Viat,Lugar_Viat,Act_Viat,Permotado_Viat,Status_Viat,\n" +
+            "usr_viaticos.Usuario_idUsuario,nom_prod,idVehiculo_Viat,monto,\n" +
+            "concat(persona.Nombre_Per,' ',persona.Ape_Pat_Per,' ',persona.Ape_Mat_Per) as 'solicitado_por'\n" +
+            "from Solicitud_Viaticos\n" +
+            "inner join productos ON productos.idProductos=Solicitud_Viaticos.idVehiculo_Viat\n" +
+            "inner join usr_viaticos on usr_viaticos.Solicitud_Viaticos_idViaticos=solicitud_viaticos.idViaticos\n" +
+            "inner join usuario on usuario.idUsuario=usr_viaticos.Usuario_idUsuario\n" +
+            "inner join empleado on empleado.RFC_Emp=usuario.Empleado_RFC_Emp\n" +
+            "inner join persona on persona.idPersona=empleado.Persona_idPersona"
+                    + " where Status_Viat='"+status+"'";
+           
+             ResultSet resul=stm.executeQuery(sql);
+             DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+
+               while(resul.next())
+      {        
+               int fila=resul.getRow()-1;
+               int idSolViatico=resul.getInt("idViaticos");
+               String folViatico=resul.getString("Fol_Viat");
+               Date fechaSalidaViatico=resul.getDate("FechaSal_Viat");
+               String personalViatico=resul.getString("Personal_Viat");
+               int diasViatico=resul.getInt("Dias_Viat");
+               String lugarViatico=resul.getString("Lugar_Viat");
+               String actividadViatico=resul.getString("Act_Viat");
+               String pernoctado=resul.getString("Permotado_Viat");
+               String statusViatico=resul.getString("Status_Viat");
+               int idUsuario=resul.getInt("Usuario_idUsuario");
+               String nom_prod=resul.getString("nom_prod");
+               int idVehiculo=resul.getInt("idVehiculo_Viat");
+               float monto=resul.getFloat("monto");
+               String solicitadoPor=resul.getString("solicitado_por");
+         
+               arregloSolicitudes[fila][0]=String.valueOf(idSolViatico);
+               arregloSolicitudes[fila][1]=String.valueOf(folViatico);
+               arregloSolicitudes[fila][2]=df.format(fechaSalidaViatico);
+               arregloSolicitudes[fila][3]=personalViatico;
+               arregloSolicitudes[fila][4]=String.valueOf(diasViatico);
+               arregloSolicitudes[fila][5]=lugarViatico;
+               arregloSolicitudes[fila][6]=actividadViatico;
+               arregloSolicitudes[fila][7]=pernoctado;
+               arregloSolicitudes[fila][8]=statusViatico;
+               arregloSolicitudes[fila][9]=String.valueOf(idUsuario);
+               arregloSolicitudes[fila][10]=nom_prod;
+               arregloSolicitudes[fila][11]=String.valueOf(idVehiculo);
+               arregloSolicitudes[fila][12]=String.valueOf(monto);
+               arregloSolicitudes[fila][13]=solicitadoPor;
+            
+      }
+           
+        } catch (SQLException ex) {
+            Logger.getLogger(usuarios_modelo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+      return arregloSolicitudes;
+    }
     
     public int obtenerCantidadSolicitudes(String status)
     {
@@ -588,7 +744,7 @@ public class Solicitud_modelo {
         }
     }
     
-    public String [][] traerComisionesViaticos(String status)
+    public String [][] traerComisionesViaticosEmpleado(String status,int idUsuarioEmpleado)
     {
        int filas=obtenerCantidadComisiones(status);
        
@@ -598,15 +754,15 @@ public class Solicitud_modelo {
             Connection conn=con.getConexion();
             Statement stm=conn.createStatement();
             
-            String sql="select idViaticos,Fol_Viat,FechaSal_Viat,Personal_Viat," +
+            String sql="select Solicitud_Viaticos.idViaticos,Fol_Viat,FechaSal_Viat,Personal_Viat," +
             "Dias_Viat,Lugar_Viat,Act_Viat,Permotado_Viat,realizada," +
             "usr_viaticos.Usuario_idUsuario,nom_prod,idVehiculo_Viat,monto" +
             " from Solicitud_Viaticos " +
             " inner join productos ON productos.idProductos=Solicitud_Viaticos.idVehiculo_Viat" +
-            " inner join usr_viaticos on usr_viaticos.Solicitud_Viaticos_idViaticos=solicitud_viaticos.idViaticos"
-                    + " where realizada='"+status+"'";
+            " inner join usr_viaticos on usr_viaticos.Solicitud_Viaticos_idViaticos=solicitud_viaticos.idViaticos"+
+            " inner join responsable_viaticos on responsable_viaticos.idViaticos=Solicitud_Viaticos.idViaticos"+
+            " where realizada='"+status+"' and status='Aprobada' and responsable_viaticos.idResponsable="+idUsuarioEmpleado;
             
-           
              ResultSet resul=stm.executeQuery(sql);
              DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
 
@@ -626,7 +782,68 @@ public class Solicitud_modelo {
                String nom_prod=resul.getString("nom_prod");
                int idVehiculo=resul.getInt("idVehiculo_Viat");
                float monto=resul.getFloat("monto");
-               
+              
+               arregloSolicitudes[fila][0]=String.valueOf(idSolViatico);
+               arregloSolicitudes[fila][1]=String.valueOf(folViatico);
+               arregloSolicitudes[fila][2]=df.format(fechaSalidaViatico);
+               arregloSolicitudes[fila][3]=personalViatico;
+               arregloSolicitudes[fila][4]=String.valueOf(diasViatico);
+               arregloSolicitudes[fila][5]=lugarViatico;
+               arregloSolicitudes[fila][6]=actividadViatico;
+               arregloSolicitudes[fila][7]=pernoctado;
+               arregloSolicitudes[fila][8]=statusViatico;
+               arregloSolicitudes[fila][9]=String.valueOf(idUsuario);
+               arregloSolicitudes[fila][10]=nom_prod;
+               arregloSolicitudes[fila][11]=String.valueOf(idVehiculo);
+               arregloSolicitudes[fila][12]=String.valueOf(monto);
+            
+      }
+           
+        } catch (SQLException ex) {
+            Logger.getLogger(usuarios_modelo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+      return arregloSolicitudes;
+    }
+    
+     public String [][] traerComisiones(String status)
+    {
+       int filas=obtenerCantidadComisiones(status);
+       
+        String arregloSolicitudes[][]=new String[filas][13];
+        try {
+            Conexion con=new Conexion();
+            Connection conn=con.getConexion();
+            Statement stm=conn.createStatement();
+            
+            String sql="select Solicitud_Viaticos.idViaticos,Fol_Viat,FechaSal_Viat,Personal_Viat," +
+            "Dias_Viat,Lugar_Viat,Act_Viat,Permotado_Viat,realizada," +
+            "usr_viaticos.Usuario_idUsuario,nom_prod,idVehiculo_Viat,monto" +
+            " from Solicitud_Viaticos " +
+            " inner join productos ON productos.idProductos=Solicitud_Viaticos.idVehiculo_Viat" +
+            " inner join usr_viaticos on usr_viaticos.Solicitud_Viaticos_idViaticos=solicitud_viaticos.idViaticos"+
+            " inner join responsable_viaticos on responsable_viaticos.idViaticos=Solicitud_Viaticos.idViaticos";
+            
+             ResultSet resul=stm.executeQuery(sql);
+             DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+
+               while(resul.next())
+      {        
+               int fila=resul.getRow()-1;
+               int idSolViatico=resul.getInt("idViaticos");
+               String folViatico=resul.getString("Fol_Viat");
+               Date fechaSalidaViatico=resul.getDate("FechaSal_Viat");
+               String personalViatico=resul.getString("Personal_Viat");
+               int diasViatico=resul.getInt("Dias_Viat");
+               String lugarViatico=resul.getString("Lugar_Viat");
+               String actividadViatico=resul.getString("Act_Viat");
+               String pernoctado=resul.getString("Permotado_Viat");
+               String statusViatico=resul.getString("realizada");
+               int idUsuario=resul.getInt("Usuario_idUsuario");
+               String nom_prod=resul.getString("nom_prod");
+               int idVehiculo=resul.getInt("idVehiculo_Viat");
+               float monto=resul.getFloat("monto");
+              
                arregloSolicitudes[fila][0]=String.valueOf(idSolViatico);
                arregloSolicitudes[fila][1]=String.valueOf(folViatico);
                arregloSolicitudes[fila][2]=df.format(fechaSalidaViatico);
@@ -668,6 +885,7 @@ public class Solicitud_modelo {
             pst.setString(2,descrip);
             pst.setInt(3,idVehiculo);
             pst.setInt(4,idSolicitud);
+            
             pst.executeUpdate();
        }
 
@@ -738,13 +956,13 @@ public class Solicitud_modelo {
         }
     }
     
-    public void insertarActividad(String actividad)
+    public void insertarActividad(String actividad,int idEmpleado)
     {
         try
         {
             if(existenciaInforme()==0)
             {
-            String sqlSol="insert into informes(Viaticos_idViaticos,Actividad_Infor,Status_Infor,Fecha_Infor)"
+            String sqlSol="insert into informes(Viaticos_idViaticos,Actividad_Infor,Status_Infor,Fecha_Infor,idResponsable)"
                + " values(?,?,?,now())";
             
             PreparedStatement pst = conn.prepareStatement(sqlSol); 
@@ -752,17 +970,19 @@ public class Solicitud_modelo {
             pst.setInt(1,idSolicitud);
             pst.setString(2,actividad);
             pst.setString(3,"Disponible");
+             pst.setInt(4,idEmpleado);
             pst.executeUpdate();
             }
             
             else
             {
-            String sqlSol="update informes set Actividad_Infor=? where Viaticos_idViaticos=?";
+            String sqlSol="update informes set Actividad_Infor=?,idResponsable=? where Viaticos_idViaticos=?";
             
             PreparedStatement pst = conn.prepareStatement(sqlSol); 
             
             pst.setString(1,actividad);
-            pst.setInt(2,idSolicitud);
+            pst.setInt(2,idEmpleado);
+            pst.setInt(3,idSolicitud);
            
             pst.executeUpdate();
             }
@@ -803,6 +1023,41 @@ public class Solicitud_modelo {
        return existencia;
     }
     
+    public String[][] traerInformes(int idUsuarioEmpleado)
+    {
+        int filas=obtenerCantidadInformes();
+        
+        String arregloSolicitudes[][]=new String[filas][3];
+        try {
+            Conexion con=new Conexion();
+            Connection conn=con.getConexion();
+            Statement stm=conn.createStatement();
+            
+            String sql="select Viaticos_IdViaticos,Fecha_Infor,Actividad_Infor from informes where idResponsable="+idUsuarioEmpleado;
+           
+             ResultSet resul=stm.executeQuery(sql);
+             DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+
+               while(resul.next())
+      {        
+               int fila=resul.getRow()-1;
+               int idSolViatico=resul.getInt("Viaticos_IdViaticos");
+               String actividad=resul.getString("Actividad_Infor");
+               Date fechaInfor=resul.getDate("Fecha_Infor");
+              
+         
+               arregloSolicitudes[fila][0]=String.valueOf(idSolViatico);
+               arregloSolicitudes[fila][1]=df.format(fechaInfor);
+               arregloSolicitudes[fila][2]=String.valueOf(actividad);   
+      }
+           
+        } catch (SQLException ex) {
+            Logger.getLogger(usuarios_modelo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+      return arregloSolicitudes;
+    }
+    
     public String[][] traerInformes()
     {
         int filas=obtenerCantidadInformes();
@@ -837,6 +1092,7 @@ public class Solicitud_modelo {
         
       return arregloSolicitudes;
     }
+    
     
     public int obtenerCantidadInformes()
     {

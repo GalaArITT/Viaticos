@@ -55,7 +55,7 @@ String[] arregloDatos=new String [3];
         {
             txtKmInicial.setEnabled(true);
             txtKmFinal.setEnabled(false);
-            txtDescripcion.setEnabled(false);
+            txtDescripcion.setEnabled(true);
             primerMod=true;
             segundaMod=false;
         }
@@ -174,19 +174,30 @@ String[] arregloDatos=new String [3];
        Solicitud_controlador objControlador =new Solicitud_controlador();
        String kmInicial=txtKmInicial.getText();
        String descrip=txtDescripcion.getText();
-       objControlador.insertarKmInicial(idFolio,kmInicial,descrip,idVehiculo);
+       if(!kmInicial.equals(""))
+       {
+         objControlador.insertarKmInicial(idFolio,kmInicial,descrip,idVehiculo);
+       }
+       else
+       {
+        JOptionPane.showMessageDialog(null,"El kilometraje inicial no debe estar vacio");
+       }
     }
     
-    if(!primerMod&&segundaMod)
-    {
-       Solicitud_controlador objControlador =new Solicitud_controlador();
-       String kmInicial=txtKmInicial.getText();
-       objControlador.modificarKmFinal(kmInicial,idDatos);
-    }
-        
-     String kmInicial=txtKmInicial.getText();
-     String kmFinal=txtKmFinal.getText();
-     //String kmInicial=txtKmInicial.getText();
+        if(!primerMod&&segundaMod)
+        {
+           Solicitud_controlador objControlador =new Solicitud_controlador();
+           String kmFinal=txtKmFinal.getText();
+           if(!kmFinal.equals(""))
+           {
+            objControlador.modificarKmFinal(kmFinal,idDatos);
+           }
+
+           else
+           {
+            JOptionPane.showMessageDialog(null,"El kilometraje final no debe estar vacio");
+           }
+        }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
 

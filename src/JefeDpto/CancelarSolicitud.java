@@ -103,7 +103,7 @@ public boolean modificado=false;
       if(!motivoCancelado.equals(""))
       {
           Solicitud_controlador objControlador=new Solicitud_controlador();
-          modificado=objControlador.modificarStatus(idSolicitud,"Cancelada");
+          modificado=objControlador.modificarStatus(idSolicitud,"Cancelada",motivoCancelado);
       }
       
       else
@@ -111,7 +111,7 @@ public boolean modificado=false;
          JOptionPane.showMessageDialog(null,"Debe haber un motivo de cancelación");
       }
     }//GEN-LAST:event_btnCancelarSolActionPerformed
-
+   
     private void txtCancelaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCancelaKeyReleased
         motivoCancelado=txtCancela.getText();
     }//GEN-LAST:event_txtCancelaKeyReleased

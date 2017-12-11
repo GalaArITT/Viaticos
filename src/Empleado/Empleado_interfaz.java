@@ -5,25 +5,30 @@
  */
 package Empleado;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 /**
  *
  * @author oliver
  */
 public class Empleado_interfaz extends javax.swing.JFrame {
-int idUsuario;
+int idUsuarioEmpleado;
+RegistrosInformes pantallaInformes;
     /**
      * Creates new form Empleado_interfaz
      */
-    public Empleado_interfaz(int idUsuario) {
+    public Empleado_interfaz(int idUsuarioEmpleado) {
          initComponents();
-          this.idUsuario=idUsuario;
-        SolicitudRegistros pantallaRegistros=new SolicitudRegistros();
+          this.idUsuarioEmpleado=idUsuarioEmpleado;
+        SolicitudRegistros pantallaRegistros=new SolicitudRegistros(idUsuarioEmpleado);
         pantallaRegistros.setVisible(true);
         tbOficiosInformes.add("Tus comisiones",pantallaRegistros);
         
-        RegistrosInformes pantallaInformes=new RegistrosInformes();
+        pantallaInformes=new RegistrosInformes(idUsuarioEmpleado);
         pantallaInformes.setVisible(true);
         tbOficiosInformes.add("Informes elaborados",pantallaInformes);
+     
  }
 
     /**
@@ -38,6 +43,12 @@ int idUsuario;
         tbOficiosInformes = new javax.swing.JTabbedPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        tbOficiosInformes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbOficiosInformesMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -54,6 +65,10 @@ int idUsuario;
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void tbOficiosInformesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbOficiosInformesMouseClicked
+       pantallaInformes.traerInformes();
+    }//GEN-LAST:event_tbOficiosInformesMouseClicked
 
     /**
      * @param args the command line arguments

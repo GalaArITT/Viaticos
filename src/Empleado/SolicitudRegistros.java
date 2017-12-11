@@ -10,6 +10,7 @@ import java.awt.Component;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.beans.PropertyChangeEvent;
@@ -31,7 +32,7 @@ import javax.swing.table.DefaultTableModel;
 public class SolicitudRegistros extends javax.swing.JPanel {
 
  String[][] arregloSolicitudes;
- 
+ int idUsuarioEmpleado;
  int idResponsable=0;
  int idVehiculo=0;
  String lugar="";
@@ -48,10 +49,10 @@ public class SolicitudRegistros extends javax.swing.JPanel {
     /**
      * Creates new form SolicitudRegistros
      */
-    public SolicitudRegistros() {
+    public SolicitudRegistros(int idUsuarioEmpleado) {
         initComponents();
-        
-        traerComisiones("si");
+        this.idUsuarioEmpleado=idUsuarioEmpleado;
+        traerComisiones("no");
         //        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
         txtFechaSalidaBusqueda.getDateEditor().addPropertyChangeListener(
@@ -210,7 +211,12 @@ public class SolicitudRegistros extends javax.swing.JPanel {
 
         jLabel2.setText("Filtra las comisiones");
 
-        cbFiltroComision.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Comisiones  pendientes", "Comisiones realizadas", " ", " " }));
+        cbFiltroComision.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Comisiones pendientes", "Comisiones realizadas" }));
+        cbFiltroComision.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbFiltroComisionItemStateChanged(evt);
+            }
+        });
 
         btnRealizada.setText("Marcar como realizada");
         btnRealizada.addActionListener(new java.awt.event.ActionListener() {
@@ -325,7 +331,7 @@ public class SolicitudRegistros extends javax.swing.JPanel {
     
     public void traerComisiones(String status){
        Solicitud_controlador objControlador=new Solicitud_controlador();
-       arregloSolicitudes=objControlador.traerComisiones(status); 
+       arregloSolicitudes=objControlador.traerComisionesEmpleado(status,idUsuarioEmpleado); 
          lbLugar.setText("");
          lbActividad.setText("");
          lbDias.setText("");
@@ -355,7 +361,18 @@ public class SolicitudRegistros extends javax.swing.JPanel {
      
      for(int i=0;i<arregloSolicitudes.length;i++)
      {
-         String[] fechaTotal=arregloSolicitudes[i][2].split(" ");
+         String[] fechaTotal = null;
+         try
+         {
+           fechaTotal=arregloSolicitudes[i][2].split(" ");  
+         }
+         
+         catch(Exception e)
+         {
+             fechaTotal=new String [2];
+             fechaTotal[0]="";
+         }
+         
          String folio=arregloSolicitudes[i][1];
          String fechsSalida=fechaTotal[0];
          String responsable=arregloSolicitudes[i][3];
@@ -548,7 +565,7 @@ public void reactivarVentana()
         JDialog jdInforme=new JDialog();
         jdInforme.setSize(575,290);
         Informe ventanaInforme=new Informe();
-        ventanaInforme.cargarCampos(idFolio);
+        ventanaInforme.cargarCampos(idFolio,idUsuarioEmpleado);
         jdInforme.add(ventanaInforme);
         jdInforme.setVisible(true);
         jdInforme.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -577,6 +594,24 @@ public void reactivarVentana()
       Solicitud_controlador objControlador= new Solicitud_controlador();
       objControlador.marcarRealizada(Integer.parseInt(idFolio));
     }//GEN-LAST:event_btnRealizadaActionPerformed
+
+    private void cbFiltroComisionItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbFiltroComisionItemStateChanged
+          if (evt.getStateChange() == ItemEvent.SELECTED) {
+          Object item = evt.getItem();
+          String status="";
+          if(item.equals("Comisiones pendientes"))
+          {
+             status="no";
+          }
+          
+          if(item.equals("Comisiones realizadas"))
+          {
+              status="si"; 
+          }
+          //JOptionPane.showMessageDialog(null,status);
+          traerComisiones(status);
+       }
+    }//GEN-LAST:event_cbFiltroComisionItemStateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

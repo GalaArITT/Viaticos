@@ -107,7 +107,7 @@ public class SolicitudRegistros extends javax.swing.JPanel {
         });
 
         jLabel9.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel9.setText("Solicitudes que has realizado");
+        jLabel9.setText("Solicitudes elaboradas");
 
         txtBusquedaSolicitud.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -120,7 +120,7 @@ public class SolicitudRegistros extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Folio", "Fecha de salida", "Responsable", "Status"
+                "Folio", "Fecha de salida", "Quien solicita", "Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -334,11 +334,7 @@ public class SolicitudRegistros extends javax.swing.JPanel {
             @Override
             public void actionPerformed(ActionEvent arg0) {
                 jdModificarSol.dispose();
-                lbLugar.setText("");
-                lbActividad.setText("");
-                lbDias.setText("");
-                lbTransporte.setText("");
-                lbPernoctado.setText("");
+                jLabel13.setText("");
                 datosModificados=true;
             }
         });
@@ -417,12 +413,8 @@ public class SolicitudRegistros extends javax.swing.JPanel {
     
     public void traerSolicitudes(String status){
        Solicitud_controlador objUsuario=new Solicitud_controlador();
-       arregloSolicitudes=objUsuario.traerSolicitudes(status); 
-         lbLugar.setText("");
-         lbActividad.setText("");
-         lbDias.setText("");
-         lbTransporte.setText("");
-         lbPernoctado.setText("");
+       arregloSolicitudes=objUsuario.traerSolicitudesSecretaria(status); 
+       jLabel13.setText("");
        cargaTabla(arregloSolicitudes);
     }
     
@@ -451,7 +443,7 @@ public class SolicitudRegistros extends javax.swing.JPanel {
          String[] fechaTotal=arregloSolicitudes[i][2].split(" ");
          String folio=arregloSolicitudes[i][1];
          String fechsSalida=fechaTotal[0];
-         String responsable=arregloSolicitudes[i][3];
+         String responsable=arregloSolicitudes[i][13];
          String status=arregloSolicitudes[i][8];
          model.addRow(new Object[]{folio,fechsSalida,responsable,status}); 
      }
@@ -476,6 +468,7 @@ public class SolicitudRegistros extends javax.swing.JPanel {
           jLabel13.setText("<html>Mas detalles...<br>"
 	+"<strong>Lugar: </strong>"+arregloSolicitudes[i][5]+"<br>"+
 	"<strong>Actividad: </strong>"+arregloSolicitudes[i][6]+"<br>"+
+        "<strong>Responsable: </strong>"+arregloSolicitudes[i][13]+"<br>"+
 	"<strong>Dias: </strong>"+arregloSolicitudes[i][4]+"<br>"+
 	"<strong>Transporte: </strong>"+arregloSolicitudes[i][10]+"<br>"+
 	"<strong>Pernoctado: </strong>"+arregloSolicitudes[i][7]+"<br>"+
@@ -510,7 +503,7 @@ public class SolicitudRegistros extends javax.swing.JPanel {
        }
     }
     String[] idsEncontrados=resultadoBusquedaId.split("-");
-     String [][] resultadoBusqueda=new String[idsEncontrados.length][12];
+     String [][] resultadoBusqueda=new String[idsEncontrados.length][14];
     for(int i=0;i<idsEncontrados.length;i++)
     {
       for(int j=0;j<arregloSolicitudes.length;j++)
@@ -529,7 +522,10 @@ public class SolicitudRegistros extends javax.swing.JPanel {
             resultadoBusqueda[i][8]=arregloSolicitudes[j][8];
             resultadoBusqueda[i][9]=arregloSolicitudes[j][9];
             resultadoBusqueda[i][10]=arregloSolicitudes[j][10];
-            resultadoBusqueda[i][11]=arregloSolicitudes[j][11];  
+            resultadoBusqueda[i][11]=arregloSolicitudes[j][11]; 
+            resultadoBusqueda[i][12]=arregloSolicitudes[j][12]; 
+            resultadoBusqueda[i][13]=arregloSolicitudes[j][13];
+            resultadoBusqueda[i][14]=arregloSolicitudes[j][14]; 
           }
         }
     } 

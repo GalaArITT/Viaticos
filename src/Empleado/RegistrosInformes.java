@@ -23,12 +23,14 @@ import javax.swing.table.DefaultTableModel;
  */
 public class RegistrosInformes extends javax.swing.JPanel {
 String[][] arregloSolicitudes;
+int idUsuarioEmpleado;
  boolean datosModificados=false;
     /**
      * Creates new form RegistrosInformes
      */
-    public RegistrosInformes() {
+    public RegistrosInformes(int idUsuarioEmpleado) {
         initComponents();
+        this.idUsuarioEmpleado=idUsuarioEmpleado;
         traerInformes();
          SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         txtFechaSalidaBusqueda.getDateEditor().addPropertyChangeListener(
@@ -247,7 +249,7 @@ String[][] arregloSolicitudes;
 
      public void traerInformes(){
        Solicitud_controlador objControlador=new Solicitud_controlador();
-       arregloSolicitudes=objControlador.traerInformes(); 
+       arregloSolicitudes=objControlador.traerInformes(idUsuarioEmpleado); 
        cargaTabla(arregloSolicitudes);
     }
      public void cargaTabla(String [][] arregloSolicitudes )

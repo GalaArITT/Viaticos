@@ -128,7 +128,7 @@ public String motivoCancelado="";
         if(!motivoCancelado.equals(""))
         {
             Solicitud_controlador objControlador=new Solicitud_controlador();
-            objControlador.modificarStatus(idSolicitud,"No Aprobada");
+            objControlador.modificarStatus(idSolicitud,"No Aprobada","");
         }
 
         else

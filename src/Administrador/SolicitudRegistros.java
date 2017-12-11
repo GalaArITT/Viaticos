@@ -52,7 +52,7 @@ public class SolicitudRegistros extends javax.swing.JPanel {
     public SolicitudRegistros() {
         initComponents();
         
-        traerComisiones("si");
+       traerComisiones("si");
         //        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
         txtFechaSalidaBusqueda.getDateEditor().addPropertyChangeListener(

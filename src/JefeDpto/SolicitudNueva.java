@@ -34,16 +34,16 @@ public class SolicitudNueva extends javax.swing.JPanel {
  String fecha="";
  boolean modificandoSol=false;
  String idFolio;
- int idUsuario;
+ int idUsuarioJefeDpto;
     /**
      * Creates new form SolicitudNueva
      */
-    public SolicitudNueva(int idUsuario) {
+    public SolicitudNueva(int idUsuarioJefeDpto) {
        initComponents();
 //       listaEncargado.setVisible(false);
 //       listaVehiculo.setVisible(false);
 //       listaEncargado.setEnabled(false);
-        this.idUsuario=idUsuario;
+        this.idUsuarioJefeDpto=idUsuarioJefeDpto;
        cargaElementosListaResponsables();
        cargarElementosListaVehiculo();
        
@@ -300,6 +300,7 @@ public class SolicitudNueva extends javax.swing.JPanel {
         txtVehiculo.setText("");
         rbPernoctado.setSelected(true);
         rbNoPernoctado.setSelected(false);
+        txtMonto.setText("");
     }
     
     public void cargaElementosListaResponsables()
@@ -444,7 +445,6 @@ public class SolicitudNueva extends javax.swing.JPanel {
         String actividad=txtActividad.getText();
         String personalViatico=txtResponsable.getText();
         String statusViatico="Solicitado";
-        int idUsuarioJefeDpto=1;
         int diasDuracion=(Integer)txtDias.getValue();
         
         Solicitud_controlador objetoSolicitud=new Solicitud_controlador();
@@ -465,9 +465,9 @@ public class SolicitudNueva extends javax.swing.JPanel {
             
             else
             {
-                objetoSolicitud.insertarSolicitud(idUsuario,fechaSalida,personalViatico,diasDuracion,lugar,actividad,pernoctado,statusViatico,idUsuarioJefeDpto,idVehiculo,monto);
+                objetoSolicitud.insertarSolicitud(idUsuarioJefeDpto,fechaSalida,personalViatico,diasDuracion,lugar,
+                                                  actividad,pernoctado,statusViatico,monto,idResponsable,idVehiculo);
                 limpiarCampos();
-                
             }
     }//GEN-LAST:event_btnEnviarActionPerformed
 
