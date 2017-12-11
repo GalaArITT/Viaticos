@@ -95,7 +95,7 @@
           <Font name="Ubuntu" size="24" style="3"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="Sistema de Control de Inventarios"/>
+        <Property name="text" type="java.lang.String" value="Sistema de Control de Inventarios y Control de Viaticos"/>
       </Properties>
     </Component>
     <Container class="javax.swing.JPanel" name="jPanel1">

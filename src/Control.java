@@ -371,7 +371,7 @@ String a,a2,b,b2,c,c2,d,d2;
     
     
     private void btnSolicitudesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSolicitudesActionPerformed
-        Solicitudes s = new Solicitudes("MACGUSTAVO");
+        Solicitudes s = new Solicitudes(txtusuario.getText());
         s.setVisible(true);
     }//GEN-LAST:event_btnSolicitudesActionPerformed
 

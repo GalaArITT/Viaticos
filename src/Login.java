@@ -92,7 +92,7 @@ Connection cn=cc.conexion();
 
         jLabel3.setFont(new java.awt.Font("Ubuntu", 3, 24)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Sistema de Control de Inventarios");
+        jLabel3.setText("Sistema de Control de Inventarios y Control de Viaticos");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Entrar al sistema", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 3, 18))); // NOI18N
         jPanel1.addFocusListener(new java.awt.event.FocusAdapter() {
